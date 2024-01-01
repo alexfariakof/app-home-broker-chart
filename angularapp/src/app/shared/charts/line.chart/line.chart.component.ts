@@ -10,9 +10,12 @@ import { ChartComponent }  from "ng-apexcharts";
 
 export class LineChartComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
+  public chartOptions: ChartOptions | any;
 
   constructor() {
+
+  }
+  ngOnInit(): void {
     this.chartOptions = {
       series: [
         {
@@ -57,8 +60,5 @@ export class LineChartComponent implements OnInit{
         ]
       }
     };
-  }
-  ngOnInit(): void {
-
   }
 }
