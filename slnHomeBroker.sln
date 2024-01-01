@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBrokerApi", "webapi\Hom
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABA18FA8-B959-4D71-8A80-014E0BAB1D38}"
 	ProjectSection(SolutionItems) = preProject
+		ApexChart.txt = ApexChart.txt
 		.documents\MGLU3.SA.csv = .documents\MGLU3.SA.csv
 		.documents\PBL Corretora ABC (1).pdf = .documents\PBL Corretora ABC (1).pdf
 		run.ps1 = run.ps1
