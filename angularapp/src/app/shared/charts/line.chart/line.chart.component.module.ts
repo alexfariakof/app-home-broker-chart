@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [LineChartComponent ],
-  imports: [BrowserModule, CommonModule, NgApexchartsModule, FormsModule, ReactiveFormsModule,],
+  imports: [BrowserModule, CommonModule, NgApexchartsModule, FormsModule, ReactiveFormsModule],
   exports: [LineChartComponent]
 })
 export class LineChartModule {}

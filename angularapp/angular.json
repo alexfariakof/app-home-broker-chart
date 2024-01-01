@@ -20,6 +20,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash"
+           ],
             "outputPath": "dist/angularapp",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -33,6 +36,7 @@
               "src/styles.css"
             ],
             "scripts": [
+              "node_modules/ng-apexcharts/fesm2020/ng-apexcharts.mjs",
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
           },
@@ -109,6 +113,5 @@
         }
       }
     }
-  },
-  "defaultProject": "HomeBrokerChart"
+  }
 }
