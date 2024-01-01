@@ -36,7 +36,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/ng-apexcharts/fesm2020/ng-apexcharts.mjs",
               "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
           },
