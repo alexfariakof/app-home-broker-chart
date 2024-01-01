@@ -1,6 +1,6 @@
 import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexDataLabels, ApexYAxis, ApexFill, ApexStroke, ApexMarkers, ApexGrid, ApexTitleSubtitle } from "ng-apexcharts";
 
-export type ChartOptions = {
+export type ChartLineOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;

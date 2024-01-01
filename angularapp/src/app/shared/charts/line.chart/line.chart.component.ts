@@ -1,4 +1,4 @@
-import { ChartOptions } from './../chart.options/ChartOptions';
+import { ChartLineOptions } from '../../chart.options/ChartLineOptions';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
 
@@ -10,7 +10,7 @@ import { ChartComponent }  from "ng-apexcharts";
 
 export class LineChartComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: ChartOptions | any;
+  public chartOptions: ChartLineOptions | any;
 
   constructor() {
 
@@ -19,9 +19,22 @@ export class LineChartComponent implements OnInit{
     this.chartOptions = {
       series: [
         {
-          name: "Desktops",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }
+          name: "SMA",
+          color: "#000",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 150, 100, 120]
+        },
+        {
+          name: "EMA 9",
+          data: [10, 30, 20, 80, 50, 74, 65, 88, 159, 150, 142, 190]
+        },
+        {
+          name: "EMA 12",
+          data: [9, 20, 10, 50, 70, 48, 60, 70, 100, 120, 160, 190]
+        },
+        {
+          name: "EMA 26",
+          data: [10, 30, 50, 58, 62, 74, 78, 60, 130, 200, 151, 190]
+        },
       ],
       chart: {
         height: 350,
@@ -37,7 +50,7 @@ export class LineChartComponent implements OnInit{
         curve: "straight"
       },
       title: {
-        text: "Product Trends by Month",
+        text: "MAGAZINE LUIZA S.A.",
         align: "left"
       },
       grid: {
@@ -56,7 +69,10 @@ export class LineChartComponent implements OnInit{
           "Jun",
           "Jul",
           "Aug",
-          "Sep"
+          "Sep",
+          "Out",
+          "Nov",
+          "Dez"
         ]
       }
     };
