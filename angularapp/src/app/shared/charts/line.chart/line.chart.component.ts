@@ -1,7 +1,7 @@
 import { ChartLineOptions } from '../../chart.options/ChartLineOptions';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
-
+import { ChartService } from '../../services/api/chart.service';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
@@ -12,28 +12,31 @@ export class LineChartComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: ChartLineOptions | any;
 
-  constructor() {
+  constructor(public chartService:ChartService) {}
 
-  }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const smaData = await this.chartService.getSMA();
+    const ema9Data = await this.chartService.getEMA();
+    const ema12Data = await this.chartService.getEMA();
+    const ema26Data = await this.chartService.getEMA();
     this.chartOptions = {
       series: [
         {
           name: "SMA",
           color: "#000",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 150, 100, 120]
+          data: this.formatData(smaData)
         },
         {
           name: "EMA 9",
-          data: [10, 30, 20, 80, 50, 74, 65, 88, 159, 150, 142, 190]
+          data: this.formatData(ema9Data)
         },
         {
           name: "EMA 12",
-          data: [9, 20, 10, 50, 70, 48, 60, 70, 100, 120, 160, 190]
+          data: this.formatData(ema12Data)
         },
         {
           name: "EMA 26",
-          data: [10, 30, 50, 58, 62, 74, 78, 60, 130, 200, 151, 190]
+          data: this.formatData(ema26Data)
         },
       ],
       chart: {
@@ -60,21 +63,14 @@ export class LineChartComponent implements OnInit{
         }
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Out",
-          "Nov",
-          "Dez"
-        ]
-      }
+        labels: {
+          show: false,
+        },
+      },
     };
+  }
+
+  private formatData(data: number[]): number[] {
+    return data.map(value => parseFloat(value.toFixed(2)));
   }
 }

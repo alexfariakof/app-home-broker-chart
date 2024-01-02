@@ -1,3 +1,5 @@
+using Business;
+using Business.Interfaces;
 using Repository;
 using Repository.Interfaces;
 
@@ -14,6 +16,7 @@ builder.Services.AddCors(c =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IHomeBrokerBusiness), typeof(HomeBrokerBusiness));
 builder.Services.AddScoped(typeof(IHomeBrokerRepository), typeof(HomeBrokerRepository));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

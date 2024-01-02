@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartCandleOptions, seriesData, seriesDataLinear } from '../../chart.options';
+import { ChartCandleOptions, seriesData } from '../../chart.options';
+import { Period, SeriesDataLinear  } from '../../interfaces';
+import { ChartService } from '../../services/api/chart.service';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-candle-chart',
@@ -10,13 +13,9 @@ import { ChartCandleOptions, seriesData, seriesDataLinear } from '../../chart.op
 
 export class CandleChartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
-
   public chartCandleOptions: ChartCandleOptions | any;
   public chartBarOptions: ChartCandleOptions | any;
 
-  ngOnInit(): void {
-
-  }
 
   randomizeData = (originalData: any[]) => {
     return originalData.map(item => {
@@ -29,8 +28,21 @@ export class CandleChartComponent implements OnInit {
     });
   }
 
-  constructor() {
-    this.chartCandleOptions = {
+  constructor(public chartService:ChartService) {}
+
+  async ngOnInit(): Promise<void> {
+    const period:Period = {
+      StartDate: dayjs().add(-365,'days'),
+      EndDate: dayjs()
+    }
+
+    const magazineLuizaHistoryPrices = await this.chartService.get(period.StartDate, period.EndDate);
+    const seriesDataLinear: SeriesDataLinear[] = magazineLuizaHistoryPrices?.map(item => ({
+      x: item.date,
+      y: item.close >= item.open ? item.open : -item.close
+    })) || [];
+
+      this.chartCandleOptions = {
       series: [
         {
           name: "candle",
@@ -86,13 +98,13 @@ export class CandleChartComponent implements OnInit {
         }
       ],
       chart: {
-        height: 160,
+        height: 400,
         type: "bar",
         selection: {
           enabled: true,
           xaxis: {
-            min: new Date("10 Jan 2023").getTime(),
-            max: new Date("10 Jan 2024").getTime()
+            min: period.StartDate,
+            max: period.EndDate
           },
           fill: {
             color: "#ccc",
@@ -113,13 +125,13 @@ export class CandleChartComponent implements OnInit {
           colors: {
             ranges: [
               {
-                from: -1000,
+                from: -100000,
                 to: 0,
                 color: "#F15B46"
               },
               {
                 from: 1,
-                to: 10000,
+                to: 100000,
                 color: "#5dd55d"
               }
             ]
@@ -127,7 +139,7 @@ export class CandleChartComponent implements OnInit {
         }
       },
       stroke: {
-        width: [0, 1]
+        width: [-2, 5, 6],
       },
       xaxis: {
         type: "datetime",
