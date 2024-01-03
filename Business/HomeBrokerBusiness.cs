@@ -31,6 +31,8 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
 
     public EMA GetEMA(int periodDays)
     {
-        throw new NotImplementedException();
+        List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
+        var ema = new EMA(closeValues, periodDays);
+        return ema;
     }
 }
