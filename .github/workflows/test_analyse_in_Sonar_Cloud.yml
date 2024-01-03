@@ -1,9 +1,7 @@
 name: Test and Analysis Code In Sonar Cloud
 on:
   workflow_call:
-    secrets:
-      GITHUB_TOKEN:
-        required: true
+
   push:
     branches: 
       - hotfix/*
