@@ -1,5 +1,3 @@
-
-
 # Função para matar processos com base no nome do processo
 function Stop-ProcessesByName {
     $processes = Get-Process | Where-Object { $_.ProcessName -like 'dotnet*' } | Where-Object { $_.MainWindowTitle -eq '' }
@@ -11,7 +9,6 @@ function Stop-ProcessesByName {
 # Encerra qualquer processo em segundo plano relacionado ao comando npm run test:watch
 Stop-ProcessesByName
 
-
 # Pasta onde o relatório será gerado
 $reportPath = ".\HomeBrokerXUnit\TestResults"
 
@@ -21,7 +18,7 @@ if (Test-Path $reportPath) {
 }
 
 # Executa o teste e coleta o GUID gerado
-dotnet clean
+dotnet clean > $null 2>&1
 dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
 
 # Encontra o diretório mais recente na pasta TestResults
