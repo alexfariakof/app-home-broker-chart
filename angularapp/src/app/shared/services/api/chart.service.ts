@@ -16,8 +16,8 @@ export class ChartService {
     return result.values;
   }
 
-  async getEMA(): Promise<any> {
-    const result = await this.http.get<any>(`ChartHomeBroker/GetEMA`).toPromise();
+  async getEMA(periodDays: number): Promise<any> {
+    const result = await this.http.get<any>(`ChartHomeBroker/GetEMA/${periodDays}`).toPromise();
     return result.values;
   }
 

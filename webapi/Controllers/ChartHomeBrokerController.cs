@@ -9,11 +9,9 @@ namespace webapi.Controllers;
 [Route("[controller]")]
 public class ChartHomeBrokerController : ControllerBase
 {
-    private readonly ILogger<ChartHomeBrokerController> _logger;
     private IHomeBrokerBusiness _homeBrokerBusiness;
-    public ChartHomeBrokerController(ILogger<ChartHomeBrokerController> logger, IHomeBrokerBusiness homeBrokerBusiness)
+    public ChartHomeBrokerController(IHomeBrokerBusiness homeBrokerBusiness)
     {
-        _logger = logger;
         _homeBrokerBusiness = homeBrokerBusiness;
     }
 
@@ -21,7 +19,7 @@ public class ChartHomeBrokerController : ControllerBase
     public List<MagazineLuizaHistoryPrice> Get([FromQuery] DateTime StartDate, [FromQuery] DateTime EndDate)
     {
         var period = new Period(StartDate, EndDate);
-        return _homeBrokerBusiness.GetHistoryData(period);        
+        return _homeBrokerBusiness.GetHistoryData(period);
     }
 
     [HttpGet("GetSMA")]
@@ -30,16 +28,9 @@ public class ChartHomeBrokerController : ControllerBase
         return _homeBrokerBusiness.GetSMA();
     }
 
-    [HttpGet("GetEMA")]
-    public EMA GetEMA()
+    [HttpGet("GetEMA/{PeriodDays}")]
+    public EMA GetEMA([FromRoute] int PeriodDays)
     {
-        var ema = new EMA();
-        for (int i=1;i<=50;i++)
-        {
-            double randomValue = new Random().NextDouble() * (1000 - 1) + 1;
-            ema.Values.Add((decimal)randomValue);
-
-        }
-        return ema;
+        return _homeBrokerBusiness.GetEMA(PeriodDays);
     }
 }

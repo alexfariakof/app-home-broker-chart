@@ -28,4 +28,11 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
         var sma = new SMA(closeValues);
         return sma;
     }
+
+    public EMA GetEMA(int periodDays)
+    {
+        List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
+        var ema = new EMA(closeValues, periodDays);
+        return ema;
+    }
 }

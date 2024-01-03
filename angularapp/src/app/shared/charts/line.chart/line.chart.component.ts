@@ -16,9 +16,9 @@ export class LineChartComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     const smaData = await this.chartService.getSMA();
-    const ema9Data = await this.chartService.getEMA();
-    const ema12Data = await this.chartService.getEMA();
-    const ema26Data = await this.chartService.getEMA();
+    const ema9Data = await this.chartService.getEMA(9);
+    const ema12Data = await this.chartService.getEMA(12);
+    const ema26Data = await this.chartService.getEMA(26);
     this.chartOptions = {
       series: [
         {
@@ -28,19 +28,19 @@ export class LineChartComponent implements OnInit{
         },
         {
           name: "EMA 9",
-          data: this.formatData(smaData)
+          data: this.formatData(ema9Data)
         },
         {
           name: "EMA 12",
-          data: this.formatData(smaData)
+          data: this.formatData(ema12Data)
         },
         {
           name: "EMA 26",
-          data: this.formatData(smaData)
+          data: this.formatData(ema26Data)
         },
       ],
       chart: {
-        height: 350,
+        height: 260,
         type: "line",
         zoom: {
           enabled: false

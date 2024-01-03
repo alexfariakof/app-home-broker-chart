@@ -98,7 +98,7 @@ export class CandleChartComponent implements OnInit {
         }
       ],
       chart: {
-        height: 400,
+        height: 300,
         type: "bar",
         selection: {
           enabled: true,
