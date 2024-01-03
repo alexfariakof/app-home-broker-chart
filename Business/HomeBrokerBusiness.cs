@@ -28,4 +28,9 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
         var sma = new SMA(closeValues);
         return sma;
     }
+
+    public EMA GetEMA(int periodDays)
+    {
+        throw new NotImplementedException();
+    }
 }

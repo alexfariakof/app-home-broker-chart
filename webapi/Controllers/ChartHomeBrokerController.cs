@@ -21,7 +21,7 @@ public class ChartHomeBrokerController : ControllerBase
     public List<MagazineLuizaHistoryPrice> Get([FromQuery] DateTime StartDate, [FromQuery] DateTime EndDate)
     {
         var period = new Period(StartDate, EndDate);
-        return _homeBrokerBusiness.GetHistoryData(period);        
+        return _homeBrokerBusiness.GetHistoryData(period);
     }
 
     [HttpGet("GetSMA")]
@@ -31,15 +31,8 @@ public class ChartHomeBrokerController : ControllerBase
     }
 
     [HttpGet("GetEMA")]
-    public EMA GetEMA()
+    public EMA GetEMA([FromQuery] int PeriodDays)
     {
-        var ema = new EMA();
-        for (int i=1;i<=50;i++)
-        {
-            double randomValue = new Random().NextDouble() * (1000 - 1) + 1;
-            ema.Values.Add((decimal)randomValue);
-
-        }
-        return ema;
+        return _homeBrokerBusiness.GetEMA(PeriodDays);
     }
 }
