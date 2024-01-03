@@ -2,11 +2,10 @@
 public record EMA
 {
     public List<decimal> Values { get; set; } = new List<decimal>();
-    private EMA() { }
     public EMA(List<decimal> historyPriceData, int periodDays)
     {
         if (historyPriceData == null || historyPriceData.Count == 0 || historyPriceData.Count < periodDays)
-            throw new AggregateException("Não há dados suficientes para gerar uma EMA");
+            throw new ArgumentException("Não há dados suficientes para gerar uma EMA.");
 
         // Passo 1: Calcular a SMA inicial
         decimal sma = historyPriceData.Take(periodDays).Average();
