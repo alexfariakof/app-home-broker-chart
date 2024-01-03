@@ -1,21 +1,20 @@
 using CsvHelper;
 using Domain.Charts.Agreggates;
+using Domain.Charts.ValueObject;
 using Repository.Interfaces;
 using System.Globalization;
 using System.Text;
 
 namespace Repository;
-
 public class HomeBrokerRepository : IHomeBrokerRepository
 {
     public HomeBrokerRepository()  { }
 
-    public async Task<List<MagazineLuizaHistoryPrice>> GetHistoryData(DateTime startDate, DateTime endDate)
+    public async Task<List<MagazineLuizaHistoryPrice>> GetHistoryData(Period period)
     {
-        var downloadLink = $"https://query1.finance.yahoo.com/v7/finance/download/MGLU3.SA?{ToUnixTimestamp(startDate)}&period2={ToUnixTimestamp(endDate)}&amp;interval=1d&amp;events=history&amp;includeAdjustedClose=true";
+        var downloadLink = $"https://query1.finance.yahoo.com/v7/finance/download/MGLU3.SA?period1={ToUnixTimestamp(period.StartDate)}&period2={ToUnixTimestamp(period.EndDate)}&interval=1d&filter=history&frequency=1d";
         string downloadContent = await DownloadContentAsync(downloadLink);                
         return ProcessCsvData(downloadContent);                
-
     }
     private static long ToUnixTimestamp(DateTime date)
     {
@@ -33,7 +32,7 @@ public class HomeBrokerRepository : IHomeBrokerRepository
     private static List<MagazineLuizaHistoryPrice> ProcessCsvData(string csvContent)
     {
         using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(csvContent)))
-        using (var reader = new StreamReader(memoryStream, Encoding.UTF8))
+        using (var reader = new StreamReader(memoryStream, Encoding.ASCII))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
             

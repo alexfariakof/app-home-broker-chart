@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABA18FA8-B959-4D71-8A80-014E0BAB1D38}"
 	ProjectSection(SolutionItems) = preProject
 		ApexChart.txt = ApexChart.txt
+		generate_report.ps1 = generate_report.ps1
 		.documents\MGLU3.SA.csv = .documents\MGLU3.SA.csv
 		.documents\PBL Corretora ABC (1).pdf = .documents\PBL Corretora ABC (1).pdf
 		run.ps1 = run.ps1
@@ -18,6 +19,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{4DF47FB2-8007-4719-B4EE-E14165C600DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{105A43E5-1997-47E1-9433-C4D0E8EBA374}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{555202B9-CD7F-43AE-9E1B-F2D452CAAB91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{105A43E5-1997-47E1-9433-C4D0E8EBA374} = {105A43E5-1997-47E1-9433-C4D0E8EBA374}
+		{4DF47FB2-8007-4719-B4EE-E14165C600DA} = {4DF47FB2-8007-4719-B4EE-E14165C600DA}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeBrokerXUnit", "HomeBrokerXUnit\HomeBrokerXUnit.csproj", "{1525C422-D0AE-49E0-9CB5-1B38C83672C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +52,14 @@ Global
 		{105A43E5-1997-47E1-9433-C4D0E8EBA374}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{105A43E5-1997-47E1-9433-C4D0E8EBA374}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{105A43E5-1997-47E1-9433-C4D0E8EBA374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{555202B9-CD7F-43AE-9E1B-F2D452CAAB91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555202B9-CD7F-43AE-9E1B-F2D452CAAB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555202B9-CD7F-43AE-9E1B-F2D452CAAB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555202B9-CD7F-43AE-9E1B-F2D452CAAB91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1525C422-D0AE-49E0-9CB5-1B38C83672C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1525C422-D0AE-49E0-9CB5-1B38C83672C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1525C422-D0AE-49E0-9CB5-1B38C83672C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1525C422-D0AE-49E0-9CB5-1B38C83672C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
