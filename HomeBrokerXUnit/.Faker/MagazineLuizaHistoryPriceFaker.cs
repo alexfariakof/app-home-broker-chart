@@ -19,7 +19,7 @@ public class MagazineLuizaHistoryPriceFaker
     {
         List<MagazineLuizaHistoryPrice> listFaker = new List<MagazineLuizaHistoryPrice>();
 
-        for(int i=0; i <=count; i++)
+        for(int i=0;i<count;i++)
             listFaker.Add(GetNewFaker());
 
         return listFaker;
