@@ -1,7 +1,9 @@
 ﻿using Domain.Charts.Agreggates;
+using Domain.Charts.ValueObject;
 
 namespace Business.Interfaces;
 public interface IHomeBrokerBusiness
 {
-    public List<MagazineLuizaHistoryPrice> GetHistoryData(DateTime startDate, DateTime endDate);
+    public List<MagazineLuizaHistoryPrice> GetHistoryData(Period period);
+    public SMA GetSMA();
 }

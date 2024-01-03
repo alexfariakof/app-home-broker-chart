@@ -2,7 +2,6 @@ using Business.Interfaces;
 using Domain.Charts.Agreggates;
 using Domain.Charts.ValueObject;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace webapi.Controllers;
 
@@ -19,22 +18,16 @@ public class ChartHomeBrokerController : ControllerBase
     }
 
     [HttpGet]
-    public List<MagazineLuizaHistoryPrice> Get([FromQuery] Period period)
+    public List<MagazineLuizaHistoryPrice> Get([FromQuery] DateTime StartDate, [FromQuery] DateTime EndDate)
     {
-        return _homeBrokerBusiness.GetHistoryData(period.StartDate, period.EndDate);        
+        var period = new Period(StartDate, EndDate);
+        return _homeBrokerBusiness.GetHistoryData(period);        
     }
 
     [HttpGet("GetSMA")]
-    public SMA GetSMA([FromQuery] Period period)
+    public SMA GetSMA()
     {
-        var sma = new SMA(); 
-        for(int i=1;i<=50;i++)
-        {
-            double randomValue = new Random().NextDouble() * (1000 - 1) + 1;
-            sma.Values.Add((decimal)randomValue);
-
-        }
-        return sma;
+        return _homeBrokerBusiness.GetSMA();
     }
 
     [HttpGet("GetEMA")]
@@ -48,13 +41,5 @@ public class ChartHomeBrokerController : ControllerBase
 
         }
         return ema;
-    }
-    public class Period 
-    {
-        [Required]
-        public DateTime StartDate { get; set; } = DateTime.Now.AddYears(-1);
-
-        [Required]
-        public DateTime EndDate { get; set; } = DateTime.Now;
     }
 }

@@ -28,15 +28,15 @@ export class LineChartComponent implements OnInit{
         },
         {
           name: "EMA 9",
-          data: this.formatData(ema9Data)
+          data: this.formatData(smaData)
         },
         {
           name: "EMA 12",
-          data: this.formatData(ema12Data)
+          data: this.formatData(smaData)
         },
         {
           name: "EMA 26",
-          data: this.formatData(ema26Data)
+          data: this.formatData(smaData)
         },
       ],
       chart: {
