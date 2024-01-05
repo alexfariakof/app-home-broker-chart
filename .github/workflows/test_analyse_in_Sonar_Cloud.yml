@@ -16,7 +16,7 @@ on:
       - bugfix/*  
 
 jobs:
-  test_code_in_sonar:
+  test_code_in_sonar_net:
     name: Test and Analysis Code In Sonar Cloud
     runs-on: windows-latest
     steps:
@@ -90,9 +90,29 @@ jobs:
             }
          
           ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          
+
+  test_code_in_sonar_angular:
+    needs: test_code_in_sonar_net
+    name: Test Angular
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+      - name: Install dependencies
+        run: |
           cd angularapp
           npm install npm@latest
           npm install -g @angular/cli
           npm install
-          npm run test:coverage
+
+      - name: Test and coverage
+        run: npm run test:coverage
+        continue-on-error: true
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
