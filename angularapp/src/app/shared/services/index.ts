@@ -1,1 +1,1 @@
-export * from './api/chart.service';
+export * from './charts/chart.service';

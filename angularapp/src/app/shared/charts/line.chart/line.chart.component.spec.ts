@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { seriesData } from '../../chart.options/ohlc';
-import { from } from 'rxjs';
 
 describe('Line.ChartComponent', () => {
   let component: LineChartComponent;

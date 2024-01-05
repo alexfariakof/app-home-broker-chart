@@ -1,4 +1,3 @@
-import { SeriesData } from './../../interfaces/SeriesData';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CandleChartComponent } from './candle.chart.component';
 import { CommonModule } from '@angular/common';

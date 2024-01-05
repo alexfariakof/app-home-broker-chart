@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartCandleOptions, seriesData } from '../../chart.options';
 import { Period, SeriesDataLinear  } from '../../interfaces';
-import { ChartService } from '../../services/api/chart.service';
+import { ChartService } from '../../services';
 import * as dayjs from 'dayjs';
 
 @Component({
@@ -15,7 +15,6 @@ export class CandleChartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartCandleOptions: ChartCandleOptions | any;
   public chartBarOptions: ChartCandleOptions | any;
-
 
   randomizeData = (originalData: any[]) => {
     return originalData.map(item => {
@@ -153,8 +152,5 @@ export class CandleChartComponent implements OnInit {
         }
       }
     };
-
   }
-
-
 }
