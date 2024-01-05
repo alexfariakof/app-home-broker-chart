@@ -58,5 +58,5 @@ jobs:
   trigger_tests_sonarcloud:
     needs: build_and_test
     name: Test and Analysis Code In Sonar Cloud
-    uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
+    uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@develop
     secrets: inherit
