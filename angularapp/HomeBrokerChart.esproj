@@ -7,7 +7,7 @@
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
     <TestCommand>npm run test</TestCommand>
     <!-- Command to run on project build -->
-    <BuildCommand>ng build</BuildCommand>
+    <BuildCommand>npm run build</BuildCommand>
     <!-- Command to create an optimized build of the project that's ready for publishing -->
     <ProductionBuildCommand>npm run build</ProductionBuildCommand>
     <!-- Folder where production build objects will be placed -->
