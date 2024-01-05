@@ -17,7 +17,7 @@ on:
 
 jobs:
   test_code_in_sonar_net:
-    name: Test and Analysis Code In Sonar Cloud
+    name: Test Sonar Cloud .Net
     runs-on: windows-latest
     steps:
       - name: Set up JDK 17
@@ -66,7 +66,7 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |          
-          ./.sonar/scanner/dotnet-sonarscanner begin /k:"alexfariakof_Home_Broker_Chart" /o:"alexfariakof" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.exclusions="HomeBrokerXUnit/**, **/.documents/**, **/Program.cs " /d:sonar.cs.lcov.reportPaths="**/lcov.info"
+          ./.sonar/scanner/dotnet-sonarscanner begin /k:"alexfariakof_Home_Broker_Chart" /o:"alexfariakof" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.exclusions="sonar-project.properties, HomeBrokerXUnit/**, **/.documents/**, **/Program.cs " /d:sonar.cs.lcov.reportPaths="**/lcov.info"
           
           # Executa Build Restore com Teste e coleta o GUID gerado          
           dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
@@ -93,7 +93,7 @@ jobs:
 
   test_code_in_sonar_angular:
     needs: test_code_in_sonar_net
-    name: Test Angular
+    name: Test Sonar Cloud Angular
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
