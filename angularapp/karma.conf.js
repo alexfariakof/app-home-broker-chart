@@ -29,6 +29,7 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [
         { type: 'lcov' },
+        { type: 'clover' },
         { type: 'text-summary' }
       ]
     },
