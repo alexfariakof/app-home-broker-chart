@@ -32,25 +32,28 @@ jobs:
       run: dotnet restore
       continue-on-error: false
 
-    - name: Build
+    - name: Build .Net
       run: dotnet build  --restore
       continue-on-error: false
 
-    - name: Test
+    - name: Test .Net
       run: dotnet test
       continue-on-error: false
 
-    - name: Install dependencies
+    - name: Install Npm dependencies
       run: |
         cd angularapp
         npm install npm@latest
         npm install -g @angular/cli
         npm install
+    
+    - name: Build Angular
+      run: |
 
-    - name: Run Angular Unit Tests
+    - name: Test Angula
       run: |
         cd angularapp
-        npm run test
+        npm run test:coverage
 
   trigger_tests_sonarcloud:
     needs: build_and_test
