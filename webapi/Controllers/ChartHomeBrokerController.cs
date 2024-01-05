@@ -23,13 +23,13 @@ public class ChartHomeBrokerController : ControllerBase
     }
 
     [HttpGet("GetSMA")]
-    public SMA GetSMA()
+    public Sma GetSMA()
     {
         return _homeBrokerBusiness.GetSMA();
     }
 
     [HttpGet("GetEMA/{PeriodDays}")]
-    public EMA GetEMA([FromRoute] int PeriodDays)
+    public Ema GetEMA([FromRoute] int PeriodDays)
     {
         return _homeBrokerBusiness.GetEMA(PeriodDays);
     }

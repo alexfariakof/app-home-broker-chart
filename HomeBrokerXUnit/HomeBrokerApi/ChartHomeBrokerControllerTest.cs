@@ -33,7 +33,7 @@ public class ChartHomeBrokerControllerTest
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
 
-        var expectedSMA = new SMA(MagazineLuizaHistoryPriceFaker.GetListFaker(100).Select(price => price.Close).ToList(), 10);
+        var expectedSMA = new Sma(MagazineLuizaHistoryPriceFaker.GetListFaker(100).Select(price => price.Close).ToList(), 10);
         businessMock.Setup(business => business.GetSMA()).Returns(expectedSMA);
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
@@ -41,7 +41,7 @@ public class ChartHomeBrokerControllerTest
         var result = controller.GetSMA();
 
         // Assert
-        var actionResult = Assert.IsType<SMA>(result);
+        var actionResult = Assert.IsType<Sma>(result);
         Assert.Equal(expectedSMA.Values, actionResult.Values);
     }
 
@@ -51,7 +51,7 @@ public class ChartHomeBrokerControllerTest
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
 
-        var expectedEMA = new EMA(MagazineLuizaHistoryPriceFaker.GetListFaker(200).Select(price => price.Close).ToList(), 10);
+        var expectedEMA = new Ema(MagazineLuizaHistoryPriceFaker.GetListFaker(200).Select(price => price.Close).ToList(), 10);
         businessMock.Setup(business => business.GetEMA(It.IsAny<int>())).Returns(expectedEMA);
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
@@ -59,7 +59,7 @@ public class ChartHomeBrokerControllerTest
         var result = controller.GetEMA(10);
 
         // Assert
-        var actionResult = Assert.IsType<EMA>(result);
+        var actionResult = Assert.IsType<Ema>(result);
         Assert.Equal(expectedEMA.Values, actionResult.Values);
     }
 }

@@ -17,7 +17,7 @@ public class EMATest
         };
 
         // Act
-        var ema = new EMA(historyPriceData, 10);
+        var ema = new Ema(historyPriceData, 10);
 
         // Assert
         for(int i=0;i < ema.Values.Count;i++)
@@ -33,7 +33,7 @@ public class EMATest
         List<decimal> historyPriceData = new List<decimal> { 22.22m, 22.21m, 22.24m, 22.27m, };
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => new EMA(historyPriceData, 10));
+        var exception = Assert.Throws<ArgumentException>(() => new Ema(historyPriceData, 10));
         Assert.Equal("Não há dados suficientes para gerar uma EMA.", exception.Message);
     }
 }

@@ -41,7 +41,7 @@ public class HomeBrokerBusinessTest
 
         // Assert     
         Assert.NotNull(result);
-        Assert.IsType<SMA>(result);
+        Assert.IsType<Sma>(result);
         Assert.Equal(result.Values.Count, fakeHistoryData.Count);
     }
 
@@ -62,7 +62,7 @@ public class HomeBrokerBusinessTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.IsType<EMA>(result);
+        Assert.IsType<Ema>(result);
         Assert.True(fakeHistoryData.Count > result.Values.Count);
     }
 }

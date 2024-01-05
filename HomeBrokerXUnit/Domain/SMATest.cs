@@ -9,7 +9,7 @@ public class SMATest
         List<decimal> historyPriceData = new List<decimal> { 11, 12, 13, 14, 15, 16, 17 };
 
         // Act
-        var sma = new SMA(historyPriceData, 5);
+        var sma = new Sma(historyPriceData, 5);
 
         // Assert
         Assert.Equal(13, sma.Values[0]);
@@ -28,7 +28,7 @@ public class SMATest
         List<decimal> historyPriceData = new List<decimal> { 11, 12, 13, 14 };
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>(() => new SMA(historyPriceData));
+        var exception = Assert.Throws<ArgumentException>(() => new Sma(historyPriceData));
         Assert.Equal("Não há dados suficiente para gerar uma SMA.", exception.Message);
     }
 }

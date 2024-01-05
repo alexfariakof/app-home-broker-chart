@@ -1,8 +1,8 @@
 ﻿namespace Domain.Charts.ValueObject;
-public record EMA
+public record Ema
 {
     public List<decimal> Values { get; set; } = new List<decimal>();
-    public EMA(List<decimal> historyPriceData, int periodDays)
+    public Ema(List<decimal> historyPriceData, int periodDays)
     {
         if (historyPriceData == null || historyPriceData.Count == 0 || historyPriceData.Count < periodDays)
             throw new ArgumentException("Não há dados suficientes para gerar uma EMA.");
