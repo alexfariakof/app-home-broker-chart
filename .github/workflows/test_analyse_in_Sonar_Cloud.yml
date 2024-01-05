@@ -88,12 +88,11 @@ jobs:
               dotnet tool install -g dotnet-reportgenerator-globaltool 
               reportgenerator -reports:$baseDirectory\coverage.cobertura.xml -targetdir:$coverageXmlPath\coveragereport -reporttypes:"lcov;" -sourcedirs:$sourceDirs
             }
-
+         
+          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          
           cd angularapp
           npm install npm@latest
           npm install -g @angular/cli
-          npminstall
+          npm install
           npm run test:coverage
-
-          
-          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
