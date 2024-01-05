@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartService } from './shared/services/api/chart.service';
 import { MagazineLuizaHistoryPrice, Period } from './shared/interfaces';
 import * as dayjs from 'dayjs';
+import { ChartService } from './shared/services';
 
 @Component({
   selector: 'app-root',

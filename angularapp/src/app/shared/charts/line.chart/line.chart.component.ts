@@ -1,7 +1,7 @@
 import { ChartLineOptions } from '../../chart.options/ChartLineOptions';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
-import { ChartService } from '../../services/api/chart.service';
+import { ChartService } from '../../services';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
@@ -14,7 +14,11 @@ export class LineChartComponent implements OnInit{
 
   constructor(public chartService:ChartService) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.initializeComponent();
+  }
+
+  public initializeComponent = async ():Promise<void> =>{
     const smaData = await this.chartService.getSMA();
     const ema9Data = await this.chartService.getEMA(9);
     const ema12Data = await this.chartService.getEMA(12);
@@ -69,7 +73,6 @@ export class LineChartComponent implements OnInit{
       },
     };
   }
-
   private formatData(data: number[]): number[] {
     return data.map(value => parseFloat(value.toFixed(2)));
   }

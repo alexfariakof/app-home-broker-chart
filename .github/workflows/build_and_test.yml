@@ -40,6 +40,18 @@ jobs:
       run: dotnet test
       continue-on-error: false
 
+    - name: Install dependencies
+      run: |
+        cd angularapp
+        npm install npm@latest
+        npm install -g @angular/cli
+        npm install
+
+    - name: Run Angular Unit Tests
+      run: |
+        cd angularapp
+        npm run test
+
   trigger_tests_sonarcloud:
     needs: build_and_test
     name: Test and Analysis Code In Sonar Cloud

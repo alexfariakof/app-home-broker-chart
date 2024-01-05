@@ -23,7 +23,7 @@ dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:
 
 # Encontra o diretório mais recente na pasta TestResults
 $latestDir = Get-ChildItem -Directory -Path .\HomeBrokerXUnit\TestResults | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-$sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "webapi";
+$sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "webapi"; Join-Path -Path (Get-Location) -ChildPath "angularapp";
 
 
 # Verifica se encontrou um diretório e, em caso afirmativo, obtém o nome do diretório (GUID)
