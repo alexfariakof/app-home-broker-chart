@@ -28,9 +28,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\angularapp\HomeBrokerChart.esproj" />
     <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\HomeBrokerApi\HomeBrokerApi.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\webapi\HomeBrokerApi.csproj" />
   </ItemGroup>
 </Project>
