@@ -8,7 +8,7 @@ RUN npm install -g npm@10.2.5 && \
     npm install -g @angular/core@15 @angular/cli@15
 
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install && mv node_modules ../
 COPY . .
+RUN npm install
 EXPOSE 44476
 CMD ["npm", "start"]

@@ -2,8 +2,7 @@ version: '3.4'
 
 services:
   homebroker:
-    container_name: homebrokerapi
-    image: ${DOCKER_REGISTRY-}homebrokerapi
+    image: ${DOCKER_REGISTRY-}homebroker
     build:
       context: .
       dockerfile: HomeBrokerApi/Dockerfile

@@ -8,7 +8,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <SpaRoot>..\HomeBrokerChart\</SpaRoot>
+    <SpaRoot>HomeBrokerChart\</SpaRoot>
     <SpaProxyServerUrl>https://localhost:44476</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -31,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="..\HomeBrokerChart\docker-compose.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -49,7 +53,7 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install " />
-    <!-- Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" /> -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
       
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>

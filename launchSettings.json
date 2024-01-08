@@ -4,7 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "homebrokerapi": "StartDebugging"
+        "homebroker": "StartWithoutDebugging"
       }
     }
   }

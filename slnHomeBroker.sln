@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.documents\MGLU3.SA.csv = .documents\MGLU3.SA.csv
 		.documents\PBL Corretora ABC (1).pdf = .documents\PBL Corretora ABC (1).pdf
 		run.ps1 = run.ps1
+		SSR_config.txt = SSR_config.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{4DF47FB2-8007-4719-B4EE-E14165C600DA}"
@@ -26,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBrokerXUnit", "HomeBrok
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HomeBrokerChart", "HomeBrokerChart\HomeBrokerChart.esproj", "{B929DDF0-B816-452B-9489-9642755CBE0E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBrokerApi", "HomeBrokerApi\HomeBrokerApi.csproj", "{9E926F7D-840A-42A5-B115-9EFDDF1F9031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBrokerSPA", "HomeBrokerApi\HomeBrokerSPA.csproj", "{9E926F7D-840A-42A5-B115-9EFDDF1F9031}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9E1011B3-211B-4ACF-AD4B-CD7E6BE248BD}"
 EndProject
