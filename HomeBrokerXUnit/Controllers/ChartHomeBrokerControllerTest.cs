@@ -1,10 +1,9 @@
 ﻿using Business.Interfaces;
 using Domain.Charts.Agreggates;
 using Domain.Charts.ValueObject;
-using HomeBrokerApi.Controllers;
+using HomeBrokerSPA.Controllers;
 using HomeBrokerXUnit.Faker;
 using Moq;
-
 
 namespace Controllers;
 public class ChartHomeBrokerControllerTest

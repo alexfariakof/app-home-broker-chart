@@ -3,7 +3,7 @@ using Domain.Charts.Agreggates;
 using Domain.Charts.ValueObject;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeBrokerApi.Controllers;
+namespace HomeBrokerSPA.Controllers;
 
 [ApiController]
 [Route("[controller]")]

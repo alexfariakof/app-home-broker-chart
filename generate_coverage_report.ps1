@@ -9,8 +9,9 @@ function Stop-ProcessesByName {
 # Encerra qualquer processo em segundo plano relacionado ao comando npm run test:watch
 Stop-ProcessesByName
 
+dotnet test --project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
 # Pasta onde o relatório será gerado
-$reportPath = ".\HomeBrokerXUnit\TestResults"
+$reportPath = "./HomeBrokerXUnit/TestResults"
 
 # Exclui todo o conteúdo da pasta TestResults, se existir
 if (Test-Path $reportPath) {
@@ -18,12 +19,12 @@ if (Test-Path $reportPath) {
 }
 
 # Executa o teste e coleta o GUID gerado
-dotnet clean > $null 2>&1
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+dotnet clean slnHomeBroker.sln > $null 2>&1
+dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
 
 # Encontra o diretório mais recente na pasta TestResults
 $latestDir = Get-ChildItem -Directory -Path .\HomeBrokerXUnit\TestResults | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-$sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "webapi"; Join-Path -Path (Get-Location) -ChildPath "angularapp";
+$sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "HomeBrokerSPA";
 
 
 # Verifica se encontrou um diretório e, em caso afirmativo, obtém o nome do diretório (GUID)

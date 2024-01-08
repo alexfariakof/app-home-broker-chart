@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
 
-WORKDIR /src/HomeBrokerApi
+WORKDIR /src/HomeBrokerSPA
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
@@ -17,10 +17,10 @@ RUN npm install -g npm@10.2.5 && \
 RUN dotnet build --restore  -c Release -o /app/build
 
 FROM build AS publish
-WORKDIR /src/HomeBrokerApi
+WORKDIR /src/HomeBrokerSPA
 RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
 FROM build AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "HomeBrokerApi.dll"]
+ENTRYPOINT ["dotnet", "HomeBrokerSPA.dll"]

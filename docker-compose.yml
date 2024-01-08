@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  homebroker:
-    image: ${DOCKER_REGISTRY-}homebroker
+  homebrokerspa:
+    image: ${DOCKER_REGISTRY-}homebrokerspa
     build:
       context: .
-      dockerfile: HomeBrokerApi/Dockerfile
+      dockerfile: HomeBrokerSPA/Dockerfile
