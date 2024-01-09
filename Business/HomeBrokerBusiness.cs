@@ -22,17 +22,17 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
         this._period = period;
         return homeBrokerRepository.GetHistoryData(period).Result;
     }
-    public SMA GetSMA()
+    public Sma GetSMA()
     {
         List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
-        var sma = new SMA(closeValues);
+        var sma = new Sma(closeValues);
         return sma;
     }
 
-    public EMA GetEMA(int periodDays)
+    public Ema GetEMA(int periodDays)
     {
         List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
-        var ema = new EMA(closeValues, periodDays);
+        var ema = new Ema(closeValues, periodDays);
         return ema;
     }
 }

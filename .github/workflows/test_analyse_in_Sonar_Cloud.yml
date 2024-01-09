@@ -16,8 +16,8 @@ on:
       - bugfix/*  
 
 jobs:
-  test_code_in_sonar:
-    name: Test and Analysis Code In Sonar Cloud
+  test_code_in_sonar_net:
+    name: Test Code in Sonar Cloud
     runs-on: windows-latest
     steps:
       - name: Set up JDK 17
@@ -66,14 +66,14 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |          
-          ./.sonar/scanner/dotnet-sonarscanner begin /k:"alexfariakof_Home_Broker_Chart" /o:"alexfariakof" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.exclusions="HomeBrokerXUnit/**, **/.documents/**, **/Program.cs " /d:sonar.cs.lcov.reportPaths="**/lcov.info"
+          ./.sonar/scanner/dotnet-sonarscanner begin /k:"alexfariakof_Home_Broker_Chart" /o:"alexfariakof" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.exclusions="HomeBrokerXUnit/**, **/.documents/**, **/Program.cs, **/*.spec.ts, **/main.ts, **/environment.*, **/*.routing.module.ts, **/*.js, **/test.ts" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.cs.lcov.reportPaths="**/coveragereport/lcov.info" /d:sonar.typescript.opencover.reportsPaths="**/clover.xml" /d:sonar.typescript.lcov.reportPaths="**/coverage/lcov.info"
           
           # Executa Build Restore com Teste e coleta o GUID gerado          
-          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+          dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
             
             # Encontra o diretório mais recente na pasta TestResults
             $latestDir = Get-ChildItem -Directory -Path .\HomeBrokerXUnit\TestResults | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-            $sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "webapi";  Join-Path -Path (Get-Location) -ChildPath "angularapp";
+            $sourceDirs = Join-Path -Path (Get-Location) -ChildPath "Business"; Join-Path -Path (Get-Location) -ChildPath "Domain"; Join-Path -Path (Get-Location) -ChildPath "Repository"; Join-Path -Path (Get-Location) -ChildPath "HomeBrokerSPA";
             
             # Verifica se encontrou um diretório e, em caso afirmativo, obtém o nome do diretório (GUID)
             if ($latestDir -ne $null) {
@@ -88,11 +88,13 @@ jobs:
               dotnet tool install -g dotnet-reportgenerator-globaltool 
               reportgenerator -reports:$baseDirectory\coverage.cobertura.xml -targetdir:$coverageXmlPath\coveragereport -reporttypes:"lcov;" -sourcedirs:$sourceDirs
             }
-         
-          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          
-          cd angularapp
-          npm install npm@latest
-          npm install -g @angular/cli
-          npm install
+          cd HomeBrokerSPA/HomeBrokerChart
+          npm install npm@latest > $null 2>&1
+          npm install -g @angular/cli > $null 2>&1
+          npm install > $null 2>&1
           npm run test:coverage
+          cd ..
+          cd ..
+
+          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+  
