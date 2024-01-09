@@ -1,0 +1,50 @@
+name: Deploy Development App
+on:
+  workflow_call:
+
+  push:
+    branches: 
+      - develop-aws
+ 
+permissions:
+    contents: read 
+
+jobs:
+  build_and_test_net:
+    name: Build and Test .Net App
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache .NET packages    
+      uses: actions/cache@v3
+      id: dotnet-cache
+      with:
+        path: ~/.nuget/packages
+        key: dotnet-packages-${{ github.repository }}
+        restore-keys: dotnet-packages-${{ github.repository }}
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      if: steps.dotnet-cache.outputs.cache-hit != 'true'
+      with:
+        dotnet-version: 7.0.x
+    
+    - name: Build and Restore App 
+      run: dotnet build  ./HomeBrokerSPA/HomeBrokerSPA.csproj --restore
+      continue-on-error: false
+
+  trigger_build_and_test:
+    name: Build and Test
+    uses: alexfariakof/Home_Broker_Chart/.github/workflows/build_and_test.yml@main
+    secrets: inherit  
+   
+  deploy:
+    needs: trigger_build_and_test
+    name:  Publish App in AWS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Implementation Deploy
+        run: |
+          echo 'Implementara script de deploy'
+        continue-on-error: false
