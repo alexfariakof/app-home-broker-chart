@@ -4,7 +4,7 @@ import { ChartService } from './chart.service';
 import { Period } from '../../interfaces';
 import * as dayjs from 'dayjs';
 
-describe('Unit Test ChartService', () => {
+describe('Test Unit ChartService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({

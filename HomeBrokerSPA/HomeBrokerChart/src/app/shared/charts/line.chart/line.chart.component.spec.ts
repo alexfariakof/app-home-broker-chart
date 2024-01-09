@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { seriesData } from '../../chart.options/ohlc';
 
-describe('Line.ChartComponent', () => {
+describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;
   let fixture: ComponentFixture<LineChartComponent>;
   let chartService: ChartService;

@@ -8,7 +8,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartService } from '../../services';
 import { seriesData } from '../../chart.options';
 
-describe('CandleChartComponent', () => {
+describe('Test Unit CandleChartComponent', () => {
   let component: CandleChartComponent;
   let fixture: ComponentFixture<CandleChartComponent>;
 

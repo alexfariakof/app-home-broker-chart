@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './pages/home/home.module';
 import { LineChartModule } from './shared/charts/line.chart/line.chart.component.module';
 
-describe('AppComponent', () => {
+describe('Test Unit AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
