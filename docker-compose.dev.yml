@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  homebrokerspa:
+    container_name: dev
+    image: alexfariakof/homebrokerspa-dev-img
+    build:
+      context: .
+      dockerfile: HomeBrokerSPA/Dockerfile-Development
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:44537
+    ports:
+       - 44537:44537
+
+

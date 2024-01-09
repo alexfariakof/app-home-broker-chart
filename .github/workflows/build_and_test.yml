@@ -1,15 +1,23 @@
 name: Build and Test
 on:
+  workflow_call:
+
   push:
     branches: 
       - main 
       - develop
+ 
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:       
+      - main
 
 permissions:
     contents: read 
 
 jobs:
-  build_and_test:
+  build_and_test_net:
+    name: Build and Test .Net App
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -28,20 +36,45 @@ jobs:
       with:
         dotnet-version: 7.0.x
     
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Build and Restore App 
+      run: dotnet build  ./HomeBrokerSPA/HomeBrokerSPA.csproj --restore
       continue-on-error: false
 
-    - name: Build
-      run: dotnet build  --restore
-      continue-on-error: false
+  build_and_test_angular:
+    needs: build_and_test_net
+    name: Build and Test Angular App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Test
-      run: dotnet test
-      continue-on-error: false
+      - name: Test .Net App
+        run: dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
+        continue-on-error: false
+
+      - name: Install Angular dependencies
+        run: |
+          cd HomeBrokerSPA/HomeBrokerChart
+          npm install npm@latest > $null 2>&1
+          npm install -g @angular/cli > $null 2>&1
+          npm install
+        continue-on-error: false
+    
+      - name: Build Angular App
+        run: |
+            cd HomeBrokerSPA/HomeBrokerChart
+            npm run build
+        continue-on-error: false
+
+      - name: Test Angular App
+        run: |
+          cd HomeBrokerSPA/HomeBrokerChart
+          npm run test:coverage
+        continue-on-error: false
 
   trigger_tests_sonarcloud:
-    needs: build_and_test
+    needs: build_and_test_angular
     name: Test and Analysis Code In Sonar Cloud
     uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
     secrets: inherit

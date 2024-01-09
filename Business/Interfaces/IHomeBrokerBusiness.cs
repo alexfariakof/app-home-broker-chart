@@ -5,5 +5,6 @@ namespace Business.Interfaces;
 public interface IHomeBrokerBusiness
 {
     public List<MagazineLuizaHistoryPrice> GetHistoryData(Period period);
-    public SMA GetSMA();
+    public Sma GetSMA();    
+    public Ema GetEMA(int periodDays);
 }
