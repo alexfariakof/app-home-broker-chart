@@ -19,7 +19,7 @@ RUN dotnet build --restore  -c Release -o /app/build
 
 FROM build AS publish
 WORKDIR /src/HomeBrokerSPA
-RUN dotnet publish -c Production -o /app/publish -p:Port=44538 /p:UseAppHost=false
+RUN dotnet publish -c Development -o /app/publish -p:Port=44538 /p:UseAppHost=false
 
 FROM build AS final
 WORKDIR /app
