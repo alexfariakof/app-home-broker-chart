@@ -1,9 +1,3 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS base 
-WORKDIR /app
-EXPOSE 44538
-ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:44538
-
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
@@ -15,13 +9,16 @@ RUN apt-get update && \
     apt-get install -y nodejs
 RUN npm install -g npm@10.2.5 && \
     npm install -g @angular/core@15 @angular/cli@15
-RUN dotnet build --restore  -c Release -o /app/build
+RUN dotnet build --restore -c Release -o /app/build
 
-FROM build AS publish
 WORKDIR /src/HomeBrokerSPA
 RUN dotnet publish -c Release -o /app/publish -p:Port=44538 /p:UseAppHost=false
 
-FROM build AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+EXPOSE 44538
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:44538
+
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "HomeBrokerSPA.dll"]
