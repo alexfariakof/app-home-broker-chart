@@ -8,15 +8,16 @@ import * as dayjs from 'dayjs';
 })
 export class HomeComponent {
   public magazineLuizaHistoryPrices?: MagazineLuizaHistoryPrice[];
+  period: Period;
 
   constructor(public chartService: ChartService) { }
 
   async ngOnInit(): Promise<void> {
-    const period: Period = {
+    this.period = {
       StartDate: dayjs().add(-1, 'year'),
       EndDate: dayjs()
     }
-    this.magazineLuizaHistoryPrices = await this.chartService.get(period.StartDate, period.EndDate);
+    this.magazineLuizaHistoryPrices = await this.chartService.get(this.period.StartDate, this.period.EndDate);
   }
   title = 'Home Broke Magazione Luiza';
 }
