@@ -3,14 +3,13 @@ on:
   push:
     branches: 
       - staging
-      - feature/Implementação-Workflow-to-Deploy-App-in-AWS
  
 permissions:
     contents: read 
 
 jobs:
   trigger_build_and_test:
-    name: Trigger Build and Test
+    name: Triggered Deploy Dev
     uses: alexfariakof/Home_Broker_Chart/.github/workflows/build_and_test.yml@main
     secrets: inherit  
    

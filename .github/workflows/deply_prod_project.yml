@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   trigger_build_and_test:
-    name: Trigger Build and Test
+    name: Triggered Deploy Prod
     uses: alexfariakof/Home_Broker_Chart/.github/workflows/build_and_test.yml@main
     secrets: inherit  
    
