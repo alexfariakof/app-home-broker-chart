@@ -8,13 +8,10 @@
     "start:windows": "ng serve --port 44476 --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\"",
     "start:default": "ng serve --port 44476 --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\"",
     "build": "ng build",
-    "build:ssr": "ng build && ng run Home_Broker:server",
+    "build:ssr": "ng build && ng run HomeBrokerSPA:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:coverage": "ng test --code-coverage --browsers=ChromeHeadless --no-watch",
-    "dev:ssr": "ng run Home_Broker:serve-ssr",
-    "serve:ssr": "node dist-server/main.js",
-    "prerender": "ng run Home_Broker:prerender"
+    "test:coverage": "ng test --code-coverage --browsers=ChromeHeadless --no-watch"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +20,7 @@
     "@angular/compiler": "^15.2.10",
     "@angular/core": "^15.2.10",
     "@angular/forms": "^15.2.10",
+    "@angular/material-moment-adapter": "^15.2.9",
     "@angular/platform-browser": "^15.2.10",
     "@angular/platform-browser-dynamic": "^15.2.10",
     "@angular/platform-server": "^15.2.10",
@@ -34,6 +32,7 @@
     "dayjs": "^1.11.10",
     "express": "^4.15.2",
     "jquery": "^3.6.3",
+    "mdb-ui-kit": "^7.1.0",
     "ng-apexcharts": "^1.8.0",
     "oidc-client": "^1.11.5",
     "run-script-os": "^1.1.6",

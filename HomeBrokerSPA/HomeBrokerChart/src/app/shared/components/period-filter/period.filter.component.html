@@ -1,1 +1,33 @@
-<p>period.filter works!</p>
+<div class="d-flex flex-row justify-content-between">
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" style="width: auto;">
+    <label class="form-label" for="filterStart">Inicial</label>
+    <input
+      autofocus
+      id="filterStart"
+      name="filterStart"
+      type="date"
+      min="1900"
+      mask="DD/MM/YYYY"
+      style="width: auto"
+      class="form-control"
+      [(ngModel)]="StartDate"
+      (change)="onChangePeriod()"
+
+    />
+  </div>
+
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" style="width: auto;">
+    <label class="form-label" for="filterEnd">Final</label>
+    <input
+      autofocus
+      id="filterEnd"
+      name="filterEnd"
+      type="date"
+      min="1900"
+      style="width: auto"
+      class="form-control"
+      [(ngModel)]="EndDate"
+      (change)="onChangePeriod()"
+    />
+  </div>
+</div>

@@ -29,11 +29,7 @@
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\HomeBrokerChart\docker-compose.yml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
