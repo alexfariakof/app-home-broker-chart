@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartCandleOptions, seriesData } from '../../chart.options';
-import { Period, SeriesDataLinear  } from '../../interfaces';
-import { ChartService } from '../../services';
+import { ChartCandleOptions, seriesData } from '../chart.options';
+import { Period, SeriesDataLinear } from 'src/app/shared/interfaces';
+import { ChartService } from 'src/app/shared/services';
 import * as dayjs from 'dayjs';
 
 @Component({

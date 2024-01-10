@@ -1,7 +1,7 @@
-import { ChartLineOptions } from '../../chart.options/ChartLineOptions';
+import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
-import { ChartService } from '../../services';
+import { ChartService } from '../../../services';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
