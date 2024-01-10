@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   trigger_build_and_test:
-    needs: build_and_test_net
     name: Build and Test/Test Code in Sonar Cloud  
     uses: alexfariakof/Home_Broker_Chart/.github/workflows/build_and_test.yml@main
     secrets: inherit  
