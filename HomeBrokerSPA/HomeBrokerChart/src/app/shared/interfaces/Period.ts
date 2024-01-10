@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-export interface Period  {
-  StartDate: Dayjs,
-  EndDate: Dayjs
+export interface IPeriod  {
+  StartDate: Dayjs | string,
+  EndDate: Dayjs | string
 }

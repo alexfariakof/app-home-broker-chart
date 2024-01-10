@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-export interface MagazineLuizaHistoryPrice {
+export interface IMagazineLuizaHistoryPrice {
   date: Dayjs;
   open: number;
   high: number;

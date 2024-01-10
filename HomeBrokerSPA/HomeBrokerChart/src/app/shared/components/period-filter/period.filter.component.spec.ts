@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PeriodFilterComponent } from './period.filter.component';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../observables';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('PeriodFilterComponent', () => {
   let component: PeriodFilterComponent;
@@ -8,7 +10,8 @@ describe('PeriodFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PeriodFilterComponent ]
+      imports: [CommonModule, FormsModule, ReactiveFormsModule],
+      providers: [PeriodStartDateObservable, PeriodEndDateObservable]
     })
     .compileComponents();
 

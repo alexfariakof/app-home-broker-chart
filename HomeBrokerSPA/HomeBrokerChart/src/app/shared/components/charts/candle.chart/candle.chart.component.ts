@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartCandleOptions, seriesData } from '../chart.options';
-import { Period, SeriesDataLinear } from 'src/app/shared/interfaces';
+import { IPeriod, ISeriesDataLinear } from 'src/app/shared/interfaces';
 import { ChartService } from 'src/app/shared/services';
 import * as dayjs from 'dayjs';
 
@@ -15,9 +15,9 @@ export class CandleChartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartCandleOptions: ChartCandleOptions | any;
   public chartBarOptions: ChartCandleOptions | any;
-  public period:Period = {
-    StartDate: dayjs().add(-365,'days'),
-    EndDate: dayjs()
+  public period:IPeriod = {
+    StartDate: dayjs().add(-365,'days').format("YYYY-MM-DD"),
+    EndDate: dayjs().format("YYYY-MM-DD")
   }
 
   randomizeData = (originalData: any[]) => {
@@ -41,7 +41,7 @@ export class CandleChartComponent implements OnInit {
   async ngOnInit(): Promise<void> {
 
     const magazineLuizaHistoryPrices = await this.chartService.get(this.period.StartDate, this.period.EndDate);
-    const seriesDataLinear: SeriesDataLinear[] = magazineLuizaHistoryPrices?.map(item => ({
+    const seriesDataLinear: ISeriesDataLinear[] = magazineLuizaHistoryPrices?.map(item => ({
       x: item.date,
       y: item.close >= item.open ? item.open : -item.close
     })) || [];

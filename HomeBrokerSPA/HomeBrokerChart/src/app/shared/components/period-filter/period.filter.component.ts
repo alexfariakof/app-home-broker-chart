@@ -1,34 +1,20 @@
-import * as dayjs from 'dayjs';
-
-import { PeriodObservable } from './../../observables/period/period.observable';
+import { PeriodStartDateObservable } from './../../observables/period/period.startDate.observable';
 import { Component, OnInit } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { PeriodEndDateObservable } from '../../observables';
 @Component({
   selector: 'app-period-filter',
+  standalone: true,
   templateUrl: './period.filter.component.html',
-  styleUrls: ['./period.filter.component.css']
+  styleUrls: ['./period.filter.component.css'],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class PeriodFilterComponent implements OnInit{
-  StartDate: string = dayjs().add(-365,'days').format("YYYY-MM-DD");
-  EndDate: string = dayjs().format("YYYY-MM-DD");
+  constructor(public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) { }
+  ngOnInit(): void {}
 
-
-  constructor(public periodObservable: PeriodObservable) {
-
+  onUpdateClick: Function = ():void => {
+    location.reload();
   }
-
-  ngOnInit(): void {
-    this.StartDate = this.periodObservable.startDate;
-    this.EndDate = this.periodObservable.endDate;
-
-  }
-
-  onChangePeriod: Function = () => {
-    this.periodObservable.period = {
-      StartDate:  dayjs(this.StartDate),
-      EndDate: dayjs(this.EndDate)
-    };
-  };
-
-
 }

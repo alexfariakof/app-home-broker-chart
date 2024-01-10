@@ -1,6 +1,6 @@
-<div class="d-flex flex-row justify-content-between">
+<form class="d-flex flex-row justify-content-between" (ngSubmit)="onUpdateClick()">
   <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" style="width: auto;">
-    <label class="form-label" for="filterStart">Inicial</label>
+    <label class="form-label" for="filterEnd">Período Inicial</label>
     <input
       autofocus
       id="filterStart"
@@ -10,24 +10,27 @@
       mask="DD/MM/YYYY"
       style="width: auto"
       class="form-control"
-      [(ngModel)]="StartDate"
-      (change)="onChangePeriod()"
+      [(ngModel)]="obsStartDate.startDate"
 
     />
   </div>
-
   <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" style="width: auto;">
-    <label class="form-label" for="filterEnd">Final</label>
+    <label class="form-label" for="filterEnd">Período Final</label>
     <input
       autofocus
       id="filterEnd"
       name="filterEnd"
       type="date"
       min="1900"
+      mask="DD/MM/YYYY"
       style="width: auto"
       class="form-control"
-      [(ngModel)]="EndDate"
-      (change)="onChangePeriod()"
+      [(ngModel)]="obsEndDate.endDate"
+
     />
   </div>
-</div>
+  <div class="input-group mt-3 d-flex flex-column align-items-center justify-content-center">
+    <button type="submit"class="btn btn-primary w-responsive" >Atualizar</button>
+  </div>
+</form>
+

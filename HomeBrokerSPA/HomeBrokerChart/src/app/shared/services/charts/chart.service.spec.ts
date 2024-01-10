@@ -1,7 +1,7 @@
 import { TestBed, fakeAsync, flush, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ChartService } from './chart.service';
-import { Period } from '../../interfaces';
+import { IPeriod } from '../../interfaces';
 import * as dayjs from 'dayjs';
 
 describe('Test Unit ChartService', () => {
@@ -18,7 +18,7 @@ describe('Test Unit ChartService', () => {
 
   it('should send a get request to the ChartHomeBroker', inject([ChartService, HttpTestingController],  fakeAsync((service: ChartService, httpMock: HttpTestingController) => {
       // Arrange
-      const period:Period = {
+      const period:IPeriod = {
         StartDate: dayjs().add(-1,'year'),
         EndDate: dayjs()
       }
