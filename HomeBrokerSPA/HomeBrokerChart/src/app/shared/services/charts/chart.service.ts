@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Dayjs } from "dayjs";
-import { MagazineLuizaHistoryPrice } from "../../interfaces";
+import { IMagazineLuizaHistoryPrice } from "../../interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class ChartService {
   constructor(public http: HttpClient) {
   }
 
-  async get(startDate:Dayjs, endDate: Dayjs): Promise<MagazineLuizaHistoryPrice[]> {
-    const result:MagazineLuizaHistoryPrice[] = await this.http.get<any>(`${ this.routeUrl }?StartDate=${startDate}&EndDate=${endDate}`).toPromise();
+  async get(startDate:Dayjs| string, endDate: Dayjs | string): Promise<IMagazineLuizaHistoryPrice[]> {
+    const result:IMagazineLuizaHistoryPrice[] = await this.http.get<any>(`${ this.routeUrl }?StartDate=${startDate}&EndDate=${endDate}`).toPromise();
     return result;
   }
 

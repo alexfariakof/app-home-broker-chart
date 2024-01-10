@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-export interface SeriesData {
+export interface ISeriesData {
   x: Dayjs,
   y: number[]
 }
