@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LineChartComponent } from './line.chart.component';
-import { ChartService } from '../../services';
+import { ChartService } from '../../../services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { seriesData } from '../../chart.options/ohlc';
+import { seriesData } from '../chart.options/ohlc';
 
 describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;

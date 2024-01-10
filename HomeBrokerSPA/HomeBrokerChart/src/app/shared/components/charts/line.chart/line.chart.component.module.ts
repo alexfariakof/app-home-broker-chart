@@ -4,7 +4,7 @@ import { LineChartComponent } from "./line.chart.component";
 import { CommonModule } from "@angular/common";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ChartService } from "../../services";
+import { ChartService } from "../../../services";
 
 @NgModule({
   declarations: [LineChartComponent ],

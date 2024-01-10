@@ -18,7 +18,7 @@ public class ChartHomeBrokerController : ControllerBase
 
     [HttpGet]
     public List<MagazineLuizaHistoryPrice> Get([FromQuery] DateTime StartDate, [FromQuery] DateTime EndDate)
-    {
+ {
         var period = new Period(StartDate, EndDate);
         var result = _homeBrokerBusiness.GetHistoryData(period);
         return result;

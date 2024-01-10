@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './pages/home/home.module';
-import { LineChartModule } from './shared/charts/line.chart/line.chart.component.module';
+import { LineChartModule } from './shared/components/charts';
 
 describe('Test Unit AppComponent', () => {
   beforeEach(async () => {

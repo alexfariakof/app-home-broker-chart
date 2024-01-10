@@ -4,5 +4,27 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Chrome Attach Debugger",
+        "type": "chrome",
+        "request": "launch",
+        "url": "https://localhost:44437",
+        "webRoot": "${workspaceFolder}",
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "webpack:///./*": "${webRoot}/*"
+        },
+        "sourceMapPathOverrides": {
+          "webpack:/*": "${webRoot}/*"
+        },
+        "userDataDir": "${workspaceFolder}/.vscode/chrome",
+        "disableNetworkCache": true,
+        "diagnosticLogging": true
+      }
+    ]
+  }
 }

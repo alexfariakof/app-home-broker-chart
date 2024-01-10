@@ -10,7 +10,4 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\HomeBrokerChart</BuildOutputFolder>
   </PropertyGroup>
-  <ItemGroup>
-    <TypeScriptConfiguration Include="tsconfig.server.json" />
-  </ItemGroup>
 </Project>

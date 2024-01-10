@@ -5,8 +5,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { ChartService } from '../../services';
-import { seriesData } from '../../chart.options';
+import { ChartService } from '../../../services';
+import { seriesData } from '../chart.options';
 
 describe('Test Unit CandleChartComponent', () => {
   let component: CandleChartComponent;
