@@ -1,10 +1,9 @@
-name: Deploy Development App
+name: Deploy Production App
 on:
   push:
-    branches: 
-      - staging
-      - feature/Implementação-Workflow-to-Deploy-App-in-AWS
- 
+    tags:
+      - v*.*.*
+         
 permissions:
     contents: read 
 
@@ -26,7 +25,7 @@ jobs:
         env:
           DOCKER_CLI_AGGREGATE: 1  
         run: |          
-            docker-compose -f docker-compose.dev.yml build
+            docker-compose -f docker-compose.prod.yml build
         continue-on-error: false
 
       - name: Push Docker image to Docker Hub
@@ -36,7 +35,7 @@ jobs:
           DOCKER_CLI_AGGREGATE: 1  
         run: |
             docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}    
-            docker push alexfariakof/homebrokerspa-dev-img
+            docker push alexfariakof/homebrokerspa-prod-img
         continue-on-error: false
         
       - name: Execute SSH Commands into EC2 
@@ -51,5 +50,5 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           port: 22
           script: |            
-            ./scripts/hb-spa.dev.sh
+            ./scripts/hb-spa.prod.sh
 
