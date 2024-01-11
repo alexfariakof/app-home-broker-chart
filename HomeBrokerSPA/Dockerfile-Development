@@ -18,7 +18,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 as final
 WORKDIR /app
 EXPOSE 44538
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_URLS=http://+
+ASPNETCORE_URLS=http://+44537
 
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "HomeBrokerSPA.dll"]
