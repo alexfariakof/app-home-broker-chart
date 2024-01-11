@@ -1,6 +1,7 @@
 .chart-box {
   max-width: auto;
   margin: 35px auto;
+  max-height: 50%;
 }
 #chart-candlestick,
 #chart-bar {

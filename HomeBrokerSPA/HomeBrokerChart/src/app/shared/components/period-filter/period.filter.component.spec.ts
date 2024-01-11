@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PeriodFilterComponent } from './period.filter.component';
-import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../observables';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PeriodFilterComponent } from './period.filter.component';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../observables';
 
 describe('PeriodFilterComponent', () => {
   let component: PeriodFilterComponent;
@@ -23,4 +23,5 @@ describe('PeriodFilterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

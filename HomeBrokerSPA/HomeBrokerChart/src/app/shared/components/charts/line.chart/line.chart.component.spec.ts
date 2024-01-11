@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LineChartComponent } from './line.chart.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChartService } from '../../../services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { FormsModule } from '@angular/forms';
 import { seriesData } from '../chart.options/ohlc';
 
 describe('Test Unit LineChartComponent', () => {
@@ -80,6 +80,30 @@ describe('Test Unit LineChartComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should format an array of numbers with two decimal places', () => {
+    // Arrange
+    const testData = [1.234, 5.678, 9.999];
+
+    // Act
+    const formattedData = component.formatData(testData);
+
+    // Assert
+    formattedData.forEach((value, index) => {
+      expect(value).toEqual(parseFloat(testData[index].toFixed(2)));
+    });
+  });
+
+  it('should handle an empty array', () => {
+    // Arrange
+    const emptyArray: number[] = [];
+
+    // Act
+    const formattedData = component.formatData(emptyArray);
+
+    // Assert
+    expect(formattedData).toEqual([]);
   });
 
 });

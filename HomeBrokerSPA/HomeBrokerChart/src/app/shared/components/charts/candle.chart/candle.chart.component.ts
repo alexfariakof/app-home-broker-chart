@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartCandleOptions, seriesData } from '../chart.options';
-import { IPeriod, ISeriesDataLinear } from 'src/app/shared/interfaces';
-import { ChartService } from 'src/app/shared/services';
 import * as dayjs from 'dayjs';
-
+import { ChartCandleOptions, seriesData } from '../chart.options';
+import { IMagazineLuizaHistoryPrice, IPeriod, ISeriesDataLinear } from '../../../../shared/interfaces';
+import { ChartService } from '../../../../shared/services';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../../../shared/observables';
 @Component({
   selector: 'app-candle-chart',
   templateUrl: './candle.chart.component.html',
@@ -15,11 +15,7 @@ export class CandleChartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartCandleOptions: ChartCandleOptions | any;
   public chartBarOptions: ChartCandleOptions | any;
-  public period:IPeriod = {
-    StartDate: dayjs().add(-365,'days').format("YYYY-MM-DD"),
-    EndDate: dayjs().format("YYYY-MM-DD")
-  }
-
+  public magazineLuizaHistoryPrices?: IMagazineLuizaHistoryPrice[];
   randomizeData = (originalData: any[]) => {
     return originalData.map(item => {
       const newItem = { ...item };
@@ -31,21 +27,14 @@ export class CandleChartComponent implements OnInit {
     });
   }
 
-  constructor(public chartService:ChartService) {
-    this.period = {
-      StartDate: dayjs().add(-365,'days'),
-      EndDate: dayjs()
-    };
-  }
+  constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
 
   async ngOnInit(): Promise<void> {
-
-    const magazineLuizaHistoryPrices = await this.chartService.get(this.period.StartDate, this.period.EndDate);
-    const seriesDataLinear: ISeriesDataLinear[] = magazineLuizaHistoryPrices?.map(item => ({
+    this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const seriesDataLinear: ISeriesDataLinear[] = this.magazineLuizaHistoryPrices?.map(item => ({
       x: item.date,
       y: item.close >= item.open ? item.open : -item.close
     })) || [];
-
       this.chartCandleOptions = {
       series: [
         {
@@ -55,7 +44,7 @@ export class CandleChartComponent implements OnInit {
       ],
       chart: {
         type: "candlestick",
-        height: 290,
+        height: (innerHeight/3)-16,
         id: "candles",
         toolbar: {
           autoSelected: "pan",
@@ -107,8 +96,8 @@ export class CandleChartComponent implements OnInit {
         selection: {
           enabled: true,
           xaxis: {
-            min: this.period.StartDate,
-            max: this.period.EndDate
+            min: this.obsStartDate.startDate,
+            max: this.obsEndDate.endDate
           },
           fill: {
             color: "#ccc",

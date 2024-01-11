@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeriodEndDateObservable {
-  private _endDate: BehaviorSubject<string>;
+  private _endDate: BehaviorSubject<string | Dayjs>;
 
   constructor() {
-    const storedEndDate:string | null = localStorage.getItem('endDate');
+    const storedEndDate:string | Dayjs | null = localStorage.getItem('endDate');
     const initialEndDate = storedEndDate || dayjs().format("YYYY-MM-DD");
-    this._endDate = new BehaviorSubject<string>(initialEndDate);
+    this._endDate = new BehaviorSubject<string | Dayjs>(initialEndDate);
   }
 
   get endDate$() {
@@ -19,12 +20,12 @@ export class PeriodEndDateObservable {
   }
 
 
-  get endDate(): string {
+  get endDate(): string | Dayjs {
     return this._endDate.getValue();
   }
 
-  set endDate(value: string) {
+  set endDate(value: string | Dayjs) {
     this._endDate.next(value);
-    localStorage.setItem('endDate', value);
+    localStorage.setItem('endDate', value.toString());
   }
 }

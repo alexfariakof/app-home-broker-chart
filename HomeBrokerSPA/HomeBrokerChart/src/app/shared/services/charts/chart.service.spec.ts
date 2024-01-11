@@ -1,8 +1,8 @@
 import { TestBed, fakeAsync, flush, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import * as dayjs from 'dayjs';
 import { ChartService } from './chart.service';
 import { IPeriod } from '../../interfaces';
-import * as dayjs from 'dayjs';
 
 describe('Test Unit ChartService', () => {
 
