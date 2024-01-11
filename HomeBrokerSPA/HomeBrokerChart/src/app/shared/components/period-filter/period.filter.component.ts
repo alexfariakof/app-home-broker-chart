@@ -1,7 +1,7 @@
-import { PeriodStartDateObservable } from './../../observables/period/period.startDate.observable';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PeriodStartDateObservable } from './../../observables/period/period.startDate.observable';
 import { PeriodEndDateObservable } from '../../observables';
 @Component({
   selector: 'app-period-filter',

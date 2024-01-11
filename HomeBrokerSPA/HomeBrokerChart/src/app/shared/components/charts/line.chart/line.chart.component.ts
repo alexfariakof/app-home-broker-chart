@@ -1,6 +1,6 @@
-import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
+import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { ChartService } from '../../../services';
 @Component({
   selector: 'app-line-chart',
@@ -23,6 +23,7 @@ export class LineChartComponent implements OnInit{
     const ema9Data = await this.chartService.getEMA(9);
     const ema12Data = await this.chartService.getEMA(12);
     const ema26Data = await this.chartService.getEMA(26);
+    const height = (innerHeight/3)-16
     this.chartOptions = {
       series: [
         {
@@ -44,7 +45,7 @@ export class LineChartComponent implements OnInit{
         },
       ],
       chart: {
-        height: 260,
+        height: height,
         type: "line",
         zoom: {
           enabled: false
@@ -73,7 +74,8 @@ export class LineChartComponent implements OnInit{
       },
     };
   }
-  private formatData(data: number[]): number[] {
+
+  formatData(data: number[]): number[] {
     return data.map(value => parseFloat(value.toFixed(2)));
   }
 }

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CandleChartComponent } from './candle.chart.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartService } from '../../../services';
+import { CandleChartComponent } from './candle.chart.component';
 import { seriesData } from '../chart.options';
 
 describe('Test Unit CandleChartComponent', () => {
@@ -107,4 +107,42 @@ describe('Test Unit CandleChartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should randomize the "y" values in the data array', () => {
+    // Arrange
+    const originalData = [{ x: 1, y: 10 }, { x: 2, y: [20, 30, 40] }, { x: 3, y: 50 }];
+
+    // Act
+    const randomizedData = component.randomizeData(originalData);
+
+    // Assert
+    randomizedData.forEach((item, index) => {
+      if (Array.isArray(item.y)) {
+        item.y.forEach((value: number) => {
+          // Assert
+          expect(value).toBeGreaterThanOrEqual(1);
+          expect(value).toBeLessThanOrEqual(100);
+        });
+      } else {
+        // Assert
+        expect(item.y).toBeGreaterThanOrEqual(1);
+        expect(item.y).toBeLessThanOrEqual(100);
+      }
+
+      // Assert
+      expect(item.x).toEqual(originalData[index].x);
+    });
+  });
+
+  it('should handle empty data array', () => {
+    // Arrange
+    const originalData: any[] = [];
+
+    // Act
+    const randomizedData = component.randomizeData(originalData);
+
+    // Assert
+    expect(randomizedData).toEqual([]);
+  });
+
 });

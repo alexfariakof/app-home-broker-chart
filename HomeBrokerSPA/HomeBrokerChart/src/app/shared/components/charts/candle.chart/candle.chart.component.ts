@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { ChartCandleOptions, seriesData } from '../chart.options';
-import { IPeriod, ISeriesDataLinear } from 'src/app/shared/interfaces';
-import { ChartService } from 'src/app/shared/services';
 import * as dayjs from 'dayjs';
-
+import { ChartCandleOptions, seriesData } from '../chart.options';
+import { IPeriod, ISeriesDataLinear } from '../../../../shared/interfaces';
+import { ChartService } from '../../../../shared/services';
 @Component({
   selector: 'app-candle-chart',
   templateUrl: './candle.chart.component.html',
@@ -39,13 +38,12 @@ export class CandleChartComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-
     const magazineLuizaHistoryPrices = await this.chartService.get(this.period.StartDate, this.period.EndDate);
     const seriesDataLinear: ISeriesDataLinear[] = magazineLuizaHistoryPrices?.map(item => ({
       x: item.date,
       y: item.close >= item.open ? item.open : -item.close
     })) || [];
-
+      const height = (innerHeight/3)-16
       this.chartCandleOptions = {
       series: [
         {
@@ -55,7 +53,7 @@ export class CandleChartComponent implements OnInit {
       ],
       chart: {
         type: "candlestick",
-        height: 290,
+        height: height,
         id: "candles",
         toolbar: {
           autoSelected: "pan",
