@@ -12,13 +12,13 @@ RUN npm install -g npm@10.2.5 && \
 RUN dotnet build --restore -c Release -o /app/build
 
 WORKDIR /src/HomeBrokerSPA
-RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish -c Release -o /app/publish  /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 as final
 WORKDIR /app
-EXPOSE 42538
+EXPOSE 3002
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_URLS=http://+42538
+ENV ASPNETCORE_URLS=http://+:3002
 
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "HomeBrokerSPA.dll"]
