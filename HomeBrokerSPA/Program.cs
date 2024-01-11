@@ -24,7 +24,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHsts();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
