@@ -9,8 +9,8 @@ services:
       dockerfile: HomeBrokerSPA/Dockerfile-Development
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:44537
+      ASPNETCORE_URLS: http://+:3002
     ports:
-       - 44537:44537
+       - 3002:3002
 
 
