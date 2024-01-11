@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
@@ -7,10 +7,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartService } from '../../../services';
 import { CandleChartComponent } from './candle.chart.component';
 import { seriesData } from '../chart.options';
+import * as dayjs from 'dayjs';
+import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
 
 describe('Test Unit CandleChartComponent', () => {
   let component: CandleChartComponent;
   let fixture: ComponentFixture<CandleChartComponent>;
+  let chartService: ChartService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,6 +24,7 @@ describe('Test Unit CandleChartComponent', () => {
     .compileComponents();
     fixture = TestBed.createComponent(CandleChartComponent);
     component = fixture.componentInstance;
+    chartService = TestBed.inject(ChartService);
     component.chartBarOptions ={
       series: [
         {
@@ -144,5 +148,26 @@ describe('Test Unit CandleChartComponent', () => {
     // Assert
     expect(randomizedData).toEqual([]);
   });
+
+  it('should fetch magazineLuizaHistoryPrices on ngOnInit', waitForAsync(() => {
+    // Arrange
+    const fakeResponse: IMagazineLuizaHistoryPrice[] = [
+      { date: dayjs(), open: 100, high: 110, low: 90, close: 105, adjClose: 105, volume: 1000000 },
+      { date: dayjs().add(1, 'day'), open: 110, high: 120, low: 100, close: 115, adjClose: 115, volume: 1200000 },
+      { date: dayjs().add(2, 'days'), open: 120, high: 130, low: 110, close: 125, adjClose: 125, volume: 1500000 },
+    ];
+    spyOn(chartService, 'get').and.returnValue(Promise.resolve(fakeResponse));
+
+    // Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+    component.ngOnInit();
+
+    // Assert
+    fixture.whenStable().then(() => {
+      expect(component.magazineLuizaHistoryPrices).toEqual(fakeResponse);
+    });
+  }));
+
 
 });

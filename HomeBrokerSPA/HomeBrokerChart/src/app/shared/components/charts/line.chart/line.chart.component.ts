@@ -23,7 +23,6 @@ export class LineChartComponent implements OnInit{
     const ema9Data = await this.chartService.getEMA(9);
     const ema12Data = await this.chartService.getEMA(12);
     const ema26Data = await this.chartService.getEMA(26);
-    const height = (innerHeight/3)-16
     this.chartOptions = {
       series: [
         {
@@ -45,7 +44,7 @@ export class LineChartComponent implements OnInit{
         },
       ],
       chart: {
-        height: height,
+        height: (innerHeight/3)-16,
         type: "line",
         zoom: {
           enabled: false
