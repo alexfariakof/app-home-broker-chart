@@ -1,23 +1,17 @@
 import { Component } from '@angular/core';
-import { MagazineLuizaHistoryPrice, Period } from '../../shared/interfaces';
+import { IMagazineLuizaHistoryPrice  } from '../../shared/interfaces';
 import { ChartService } from '../../shared/services';
-import * as dayjs from 'dayjs';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  public magazineLuizaHistoryPrices?: MagazineLuizaHistoryPrice[];
-  period: Period;
-
-  constructor(public chartService: ChartService) { }
+  public magazineLuizaHistoryPrices?: IMagazineLuizaHistoryPrice[];
+  constructor(public chartService: ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) { }
 
   async ngOnInit(): Promise<void> {
-    this.period = {
-      StartDate: dayjs().add(-1, 'year'),
-      EndDate: dayjs()
-    }
-    this.magazineLuizaHistoryPrices = await this.chartService.get(this.period.StartDate, this.period.EndDate);
+    this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
   }
-  title = 'Home Broke Magazione Luiza';
 }

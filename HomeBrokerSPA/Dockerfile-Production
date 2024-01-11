@@ -12,9 +12,9 @@ RUN npm install -g npm@10.2.5 && \
 RUN dotnet build --restore -c Release -o /app/build
 
 WORKDIR /src/HomeBrokerSPA
-RUN dotnet publish -c Release -o /app/publish -p:Port=44538 /p:UseAppHost=false
+RUN dotnet publish -c Release -o /app/publish  /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 as final
 WORKDIR /app
 EXPOSE 44538
 ENV ASPNETCORE_ENVIRONMENT=Production

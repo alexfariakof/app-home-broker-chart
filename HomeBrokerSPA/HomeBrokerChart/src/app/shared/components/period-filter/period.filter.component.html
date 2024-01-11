@@ -1,0 +1,35 @@
+<form class="d-flex flex-row-reverse  justify-content-around" (ngSubmit)="onUpdateClick()">
+  <div class="input-group mt-4 d-flex flex-column align-items-center justify-content-center">
+    <button type="submit"class="btn btn-primary w-responsive" >Atualizar</button>
+  </div>
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2">
+    <label class="form-label" for="filterEnd">Período Final</label>
+    <input
+      autofocus
+      id="filterEnd"
+      name="filterEnd"
+      type="date"
+      min="1900"
+      mask="DD/MM/YYYY"
+      style="width: auto"
+      class="form-control"
+      [(ngModel)]="obsEndDate.endDate"
+    />
+  </div>
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" >
+    <label class="form-label" for="filterEnd">Período Inicial</label>
+    <input
+      autofocus
+      id="filterStart"
+      name="filterStart"
+      type="date"
+      min="1900"
+      mask="DD/MM/YYYY"
+      style="width: auto"
+      class="form-control"
+      [(ngModel)]="obsStartDate.startDate"
+
+    />
+  </div>
+</form>
+

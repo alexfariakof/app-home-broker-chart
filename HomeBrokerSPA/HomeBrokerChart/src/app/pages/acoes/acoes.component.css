@@ -1,0 +1,28 @@
+a {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+a:visited {
+  color: #6610f2;
+}
+
+.table-content {
+  overflow-y: auto;
+  max-height: 80%;
+}
+
+
+@media (min-width: 768px) {
+  .table-content {
+    overflow-y: auto;
+    max-height: 90dvh;
+  }
+  }
+
+@media screen and (max-width: 667px) {
+  .table-content {
+    overflow-y: auto;
+    height: 72vh;
+  }
+}

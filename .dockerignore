@@ -20,6 +20,9 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-**/HomeBrokerXUnit
 LICENSE
 README.md
+./HomeBrokerXUnit
+**/.angular
+./.documents
+./.github

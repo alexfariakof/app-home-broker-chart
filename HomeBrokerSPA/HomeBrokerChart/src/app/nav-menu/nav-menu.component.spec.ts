@@ -7,32 +7,39 @@ describe('Test Unit NavMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NavMenuComponent]
+      declarations: [NavMenuComponent],
     });
 
     fixture = TestBed.createComponent(NavMenuComponent);
     component = fixture.componentInstance;
   });
 
-  it('should create the component', () => {
+  it('should create NavMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize isExpanded to false', () => {
-    expect(component.isExpanded).toBeFalse();
-  });
-
-  it('should toggle isExpanded correctly', () => {
-    expect(component.isExpanded).toBeFalse();
-    component.toggle();
-    expect(component.isExpanded).toBeTrue();
-    component.toggle();
-    expect(component.isExpanded).toBeFalse();
-  });
-
-  it('should collapse isExpanded correctly', () => {
-    component.isExpanded = true;
+  it('should collapse', () => {
+    // Act
     component.collapse();
-    expect(component.isExpanded).toBeFalse();
+
+    // Assert
+    expect(component.isExpanded).toBeFalsy();
+  });
+
+  it('should toggle', () => {
+    // Arrange
+    component.isExpanded = false;
+
+    // Act
+    component.toggle();
+
+    // Assert
+    expect(component.isExpanded).toBeTruthy();
+
+    // Act
+    component.toggle();
+
+    // Assert
+    expect(component.isExpanded).toBeFalsy();
   });
 });

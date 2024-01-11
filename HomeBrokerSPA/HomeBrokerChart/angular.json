@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Home_Broker": {
+    "HomeBrokerSPA": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -33,12 +33,17 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "scripts": [
-                "node_modules/apexcharts/dist/apexcharts.min.js",
-                "node_modules/dayjs/dayjs.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/dayjs/dayjs.min.js"
             ]
           },
           "configurations": {
@@ -78,10 +83,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Home_Broker:build:production"
+              "browserTarget": "HomeBrokerSPA:build:production"
             },
             "development": {
-              "browserTarget": "Home_Broker:build:development",
+              "browserTarget": "HomeBrokerSPA:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -90,7 +95,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Home_Broker:build"
+            "browserTarget": "HomeBrokerSPA:build"
           }
         },
         "test": {
@@ -104,6 +109,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -139,12 +145,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "Home_Broker:build:development",
-              "serverTarget": "Home_Broker:server:development"
+              "browserTarget": "HomeBrokerSPA:build:development",
+              "serverTarget": "HomeBrokerSPA:server:development"
             },
             "production": {
-              "browserTarget": "Home_Broker:build:production",
-              "serverTarget": "Home_Broker:server:production"
+              "browserTarget": "HomeBrokerSPA:build:production",
+              "serverTarget": "HomeBrokerSPA:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -158,12 +164,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "Home_Broker:build:production",
-              "serverTarget": "Home_Broker:server:production"
+              "browserTarget": "HomeBrokerSPA:build:production",
+              "serverTarget": "HomeBrokerSPA:server:production"
             },
             "development": {
-              "browserTarget": "Home_Broker:build:development",
-              "serverTarget": "Home_Broker:server:development"
+              "browserTarget": "HomeBrokerSPA:build:development",
+              "serverTarget": "HomeBrokerSPA:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -173,5 +179,6 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "defaultProject": "HomeBrokerSPA"
 }
