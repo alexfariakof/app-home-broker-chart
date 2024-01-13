@@ -44,7 +44,7 @@ export class LineChartComponent implements OnInit{
         },
       ],
       chart: {
-        height: (innerHeight/3)-16,
+        height: (document.body.clientHeight/3)-16,
         type: "line",
         zoom: {
           enabled: false
