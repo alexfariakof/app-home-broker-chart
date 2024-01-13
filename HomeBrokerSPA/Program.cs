@@ -26,7 +26,13 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors();
 app.UseHsts();
-app.UseHttpsRedirection();
+
+if (app.Environment.IsStaging()) {
+    app.Urls.Add("http://0.0.0.0:3002");
+    app.Urls.Add("https://0.0.0.0:3003");
+}
+else
+    app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.UseDefaultFiles();
