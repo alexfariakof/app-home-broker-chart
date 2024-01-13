@@ -1,16 +1,14 @@
 version: '3.4'
-
 services:
-  homebrokerspa:
+  homebrokerspa-dev:
     container_name: dev
     image: alexfariakof/homebrokerspa-dev-img
     build:
       context: .
       dockerfile: HomeBrokerSPA/Dockerfile-Development
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:3002
+      ASPNETCORE_ENVIRONMENT: Staging
+      ASPNETCORE_URLS: http://+3002;https://+3003;
     ports:
        - 3002:3002
-
-
+       - 3003:3003

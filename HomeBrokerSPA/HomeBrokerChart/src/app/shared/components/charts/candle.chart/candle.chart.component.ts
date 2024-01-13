@@ -44,7 +44,7 @@ export class CandleChartComponent implements OnInit {
       ],
       chart: {
         type: "candlestick",
-        height: (innerHeight/3)-16,
+        height: (document.body.clientHeight/3)-16,
         id: "candles",
         toolbar: {
           autoSelected: "pan",
