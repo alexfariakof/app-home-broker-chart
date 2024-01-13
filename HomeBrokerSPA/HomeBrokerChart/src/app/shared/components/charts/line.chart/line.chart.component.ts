@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
 import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { ChartService } from '../../../services';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
@@ -12,17 +13,17 @@ export class LineChartComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: ChartLineOptions | any;
 
-  constructor(public chartService:ChartService) {}
+  constructor(public chartService:ChartService,public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
 
   ngOnInit(): void {
     this.initializeComponent();
   }
 
   public initializeComponent = async ():Promise<void> =>{
-    const smaData = await this.chartService.getSMA();
-    const ema9Data = await this.chartService.getEMA(9);
-    const ema12Data = await this.chartService.getEMA(12);
-    const ema26Data = await this.chartService.getEMA(26);
+    const smaData = await this.chartService.getSMA(this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema9Data = await this.chartService.getEMA(9,this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema12Data = await this.chartService.getEMA(12,this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema26Data = await this.chartService.getEMA(26,this.obsStartDate.startDate, this.obsEndDate.endDate);
     this.chartOptions = {
       series: [
         {
@@ -71,6 +72,12 @@ export class LineChartComponent implements OnInit{
           show: false,
         },
       },
+      yaxis: [
+        {
+          opposite: true,
+
+        },
+      ]
     };
   }
 

@@ -1,0 +1,12 @@
+.chart-box {
+  max-width: auto;
+  margin: 35px auto;
+  max-height: 50%;
+}
+#chart-bar {
+  max-width: auto;
+}
+
+#chart-bar {
+  margin-top: -30px;
+}

@@ -7,32 +7,32 @@ namespace Business;
 public class HomeBrokerBusiness : IHomeBrokerBusiness
 { 
     private readonly IHomeBrokerRepository homeBrokerRepository;
-    private Period _period;
     public List<MagazineLuizaHistoryPrice> homeBrokerHistory;
-
     public HomeBrokerBusiness(IHomeBrokerRepository _repo)
     {
         homeBrokerRepository = _repo;
-        this._period = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
-        this.homeBrokerHistory = homeBrokerRepository.GetHistoryData(_period).Result;
+        this.homeBrokerHistory = new List<MagazineLuizaHistoryPrice>();
     }
 
     public List<MagazineLuizaHistoryPrice> GetHistoryData(Period period)
     {
-        this._period = period;
         return homeBrokerRepository.GetHistoryData(period).Result;
     }
-    public Sma GetSMA()
+    public Sma GetSMA(Period period)
     {
-        List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
+        List<decimal> closeValues = this.GetHistoryData(period).Select(price => price.Close).ToList();
         var sma = new Sma(closeValues);
         return sma;
     }
-
-    public Ema GetEMA(int periodDays)
+    public Ema GetEMA(int periodDays, Period period)
     {
-        List<decimal> closeValues = homeBrokerHistory.Select(price => price.Close).ToList();
+        List<decimal> closeValues = this.GetHistoryData(period).Select(price => price.Close).ToList();
         var ema = new Ema(closeValues, periodDays);
         return ema;
+    }
+    public MACD GetMACD(Period period)
+    {
+        var macd = new MACD(this.GetHistoryData(period));
+        return macd;
     }
 }
