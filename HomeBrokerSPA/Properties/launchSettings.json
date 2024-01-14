@@ -16,6 +16,18 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "workingDirectory": "./",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "publishAllPorts": true,
+      "useSSL": true,
+      "DockerfileRunArguments": "-v \"{ProjectDir}/HomeBrokerChart/dist:/app/wwwroot\""
     }
   },
   "iisSettings": {
