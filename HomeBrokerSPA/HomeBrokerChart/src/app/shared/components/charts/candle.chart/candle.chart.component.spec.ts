@@ -9,6 +9,7 @@ import { CandleChartComponent } from './candle.chart.component';
 import { seriesData } from '../chart.options';
 import * as dayjs from 'dayjs';
 import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 
 describe('Test Unit CandleChartComponent', () => {
   let component: CandleChartComponent;
@@ -19,7 +20,7 @@ describe('Test Unit CandleChartComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CandleChartComponent ],
       imports: [HttpClientTestingModule, BrowserModule, CommonModule, NgApexchartsModule, FormsModule],
-      providers: [ChartService]
+      providers: [ ChartService, PeriodStartDateObservable,   PeriodEndDateObservable ]
     })
     .compileComponents();
     fixture = TestBed.createComponent(CandleChartComponent);

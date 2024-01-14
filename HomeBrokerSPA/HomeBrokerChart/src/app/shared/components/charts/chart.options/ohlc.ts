@@ -57,3 +57,9 @@ export const seriesData = [
   },
 
 ];
+
+export const mockMACD =   {
+    histogram: [51.98, 56.29, 51.59, 53.85],
+    macdLine: [53.66, 54.99, 51.35, 52.95],
+    signal: [53.66, 54.99, 51.35, 52.95]
+};

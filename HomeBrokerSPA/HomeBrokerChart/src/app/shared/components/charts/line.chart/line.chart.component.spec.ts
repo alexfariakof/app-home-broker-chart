@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
 import { seriesData } from '../chart.options/ohlc';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 
 describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;
@@ -17,7 +18,7 @@ describe('Test Unit LineChartComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LineChartComponent],
       imports: [HttpClientTestingModule, BrowserModule, CommonModule, NgApexchartsModule, FormsModule],
-      providers: [ChartService]
+      providers: [ ChartService, PeriodStartDateObservable, PeriodEndDateObservable ]
     })
     .compileComponents();
   });
