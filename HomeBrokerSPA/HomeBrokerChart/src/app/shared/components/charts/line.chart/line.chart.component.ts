@@ -3,6 +3,8 @@ import { ChartComponent }  from "ng-apexcharts";
 import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { ChartService } from '../../../services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
+import * as e from 'express';
+import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
@@ -24,6 +26,15 @@ export class LineChartComponent implements OnInit{
     const ema9Data = await this.chartService.getEMA(9,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema12Data = await this.chartService.getEMA(12,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema26Data = await this.chartService.getEMA(26,this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const labelXAxis: any[] = [];
+    const dates: any[] = magazineLuizaHistoryPrices.map(item =>  item.date);
+    const maxDate: any  = Math.max(...dates);
+    smaData.forEach((value: any, index: number) => {
+      labelXAxis.push(magazineLuizaHistoryPrices[index].date);
+    });
+    labelXAxis.push(maxDate);
+
     this.chartOptions = {
       series: [
         {
@@ -49,12 +60,13 @@ export class LineChartComponent implements OnInit{
         type: "line",
         zoom: {
           enabled: false
-        }
+        },
       },
       dataLabels: {
         enabled: false
       },
       stroke: {
+        width: [2],
         curve: "straight"
       },
       title: {
@@ -68,6 +80,8 @@ export class LineChartComponent implements OnInit{
         }
       },
       xaxis: {
+        type: "datetime",
+        categories: labelXAxis,
         labels: {
           show: false,
         },

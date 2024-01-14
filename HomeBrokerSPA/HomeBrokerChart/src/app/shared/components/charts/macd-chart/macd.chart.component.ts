@@ -13,14 +13,20 @@ import { ChartCandleOptions } from '../chart.options';
 export class MacdChartComponent {
   @ViewChild("chart") chart!: ChartComponent;
   public chartMacdOptions: ChartCandleOptions |  any;
-    public magazineLuizaHistoryPrices?: IMagazineLuizaHistoryPrice[];
+  public magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = [];
 
   constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
 
   async ngOnInit(): Promise<void> {
     this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const labelXAxis: any[] = this.magazineLuizaHistoryPrices?.map(item =>  item.date) || [];
     const macd = await this.chartService.getMACD(this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const labelXAxis: any[] = [];
+    const dates: any[] = this.magazineLuizaHistoryPrices.map(item =>  item.date);
+    const maxDate: any  = Math.max(...dates);
+    macd.macdLine.forEach((value: any, index: number) => {
+      labelXAxis.push(this.magazineLuizaHistoryPrices[index].date);
+    });
+    labelXAxis.push(maxDate);
     this.chartMacdOptions = {
       series: [
         {
@@ -45,15 +51,15 @@ export class MacdChartComponent {
         selection: {
           enabled: true,
           xaxis: {
-            min: this.obsStartDate.startDate,
-            max: this.obsEndDate.endDate
+            min: Math.min(...labelXAxis),
+            max: Math.max(...labelXAxis)
           },
           fill: {
             color: "#ccc",
             opacity: 0.4
           },
           stroke: {
-            width: [2, 2, 4]
+            width: [6, 2, 4]
           }
         }
       },
@@ -81,7 +87,7 @@ export class MacdChartComponent {
         }
       },
       stroke: {
-        width: [4, 2, 2]
+        width: [12, 2, 2]
       },
       grid: {
         row: {
@@ -106,7 +112,7 @@ export class MacdChartComponent {
           },
           labels: {
             show: false
-          }
+          },
         },
         {
           seriesName: "MACD Line",
