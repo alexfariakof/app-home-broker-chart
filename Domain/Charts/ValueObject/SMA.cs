@@ -9,7 +9,7 @@ public record Sma
 
         var count = historyPriceData.Count;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count-periodDays; i++)
         {
             decimal sum = 0;
             for (int j = 0; j < periodDays; j++)
