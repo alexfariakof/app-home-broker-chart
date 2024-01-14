@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  homebrokerspa:
+  homebrokerspa-prod:
     container_name: prod
     image: alexfariakof/homebrokerspa-prod-img
     build:
@@ -9,8 +9,9 @@ services:
       dockerfile: HomeBrokerSPA/Dockerfile-Production
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: http://+:4202
+      ASPNETCORE_URLS: http://+:80;https://+:443
     ports:
-       - 4202:4202
+       - 80:80
+       - 443:443
 
 
