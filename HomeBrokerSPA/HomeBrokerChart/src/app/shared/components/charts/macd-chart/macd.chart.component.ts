@@ -47,7 +47,7 @@ export class MacdChartComponent {
       ],
       chart: {
         height: (document.body.clientHeight/2)-16,
-        type: "bar",
+        type: "line",
         selection: {
           enabled: true,
           xaxis: {
@@ -59,13 +59,13 @@ export class MacdChartComponent {
             opacity: 0.4
           },
           stroke: {
-            width: [6, 2, 4]
+            width: [4, 2, 4]
           }
         }
       },
       dataLabels: {
         enabled: false,
-        enabledOnSeries: [0]
+        enabledOnSeries: [0, 0, 0]
       },
       plotOptions: {
         bar: {
@@ -73,13 +73,13 @@ export class MacdChartComponent {
           colors: {
             ranges: [
               {
-                from: -100000,
+                from: -1000,
                 to: 0,
                 color: "#F15B46"
               },
               {
                 from: 1,
-                to: 1000000,
+                to: 100,
                 color: "#FEB019"
               }
             ]
@@ -87,7 +87,9 @@ export class MacdChartComponent {
         }
       },
       stroke: {
-        width: [12, 2, 2]
+        width: [12, 2, 2],
+        curve: "straight"
+
       },
       grid: {
         row: {
@@ -109,6 +111,9 @@ export class MacdChartComponent {
             style: {
               color: "#000"
             }
+          },
+          axisTicks: {
+            show: true
           },
           labels: {
             show: false

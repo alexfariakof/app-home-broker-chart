@@ -20,12 +20,12 @@ export class ChartService {
 
   async getSMA(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
     const result = await this.http.get<any>(`${ this.routeUrl }/GetSMA/${startDate}/${endDate}`).toPromise();
-    return result.values;
+    return result;
   }
 
   async getEMA(periodDays: number, startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
     const result = await this.http.get<any>(`${ this.routeUrl }/GetEMA/${periodDays}/${startDate}/${endDate}`).toPromise();
-    return result.values;
+    return result;
   }
 
   async getMACD(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {

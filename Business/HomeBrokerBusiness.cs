@@ -20,14 +20,12 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
     }
     public Sma GetSMA(Period period)
     {
-        List<decimal> closeValues = this.GetHistoryData(period).Select(price => price.Close).ToList();
-        var sma = new Sma(closeValues);
+        var sma = new Sma(this.GetHistoryData(period));
         return sma;
     }
     public Ema GetEMA(int periodDays, Period period)
     {
-        List<decimal> closeValues = this.GetHistoryData(period).Select(price => price.Close).ToList();
-        var ema = new Ema(closeValues, periodDays);
+        var ema = new Ema(this.GetHistoryData(period), periodDays);
         return ema;
     }
     public MACD GetMACD(Period period)

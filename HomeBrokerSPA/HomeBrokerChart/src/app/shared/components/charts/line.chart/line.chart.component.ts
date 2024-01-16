@@ -26,41 +26,50 @@ export class LineChartComponent implements OnInit{
     const ema9Data = await this.chartService.getEMA(9,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema12Data = await this.chartService.getEMA(12,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema26Data = await this.chartService.getEMA(26,this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const labelXAxis: any[] = [];
-    const dates: any[] = magazineLuizaHistoryPrices.map(item =>  item.date);
-    const maxDate: any  = Math.max(...dates);
-    smaData.forEach((value: any, index: number) => {
-      labelXAxis.push(magazineLuizaHistoryPrices[index].date);
-    });
-    labelXAxis.push(maxDate);
-
     this.chartOptions = {
       series: [
         {
-          name: "SMA",
-          color: "#000",
-          data: this.formatData(smaData)
-        },
-        {
           name: "EMA 9",
-          data: this.formatData(ema9Data)
+          data: this.formatData(ema9Data.values)
         },
         {
           name: "EMA 12",
-          data: this.formatData(ema12Data)
+          data: this.formatData(ema12Data.values)
         },
         {
           name: "EMA 26",
-          data: this.formatData(ema26Data)
+          data: this.formatData(ema26Data.values)
+        },
+        {
+          name: "SMA",
+          color: "#000",
+          data: this.formatData(smaData.values)
         },
       ],
       chart: {
         height: (document.body.clientHeight/3)-16,
-        type: "line",
+        type: "area",
         zoom: {
-          enabled: false
+          type: "x",
+          enabled: true,
+          autoScaleYaxis: true
         },
+        toolbar: {
+          autoSelected: "zoom"
+        },
+        markers: {
+          size: 0
+        },
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [1, 2, 4, 8 ]
+        }
       },
       dataLabels: {
         enabled: false
@@ -80,8 +89,6 @@ export class LineChartComponent implements OnInit{
         }
       },
       xaxis: {
-        type: "datetime",
-        categories: labelXAxis,
         labels: {
           show: false,
         },

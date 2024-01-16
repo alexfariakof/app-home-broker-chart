@@ -16,8 +16,8 @@ public record MACD
         if (historyData == null || historyData.Count == 0 || historyData.Count < MIN_AMOUNT_DATA)
             throw new ArgumentException("Não há dados suficientes para gerar um MACD.");
 
-        var ema12 = new Ema(historyData.Select(price => price.Close).ToList(), EMA12_VALUE);
-        var ema26 = new Ema(historyData.Select(price => price.Close).ToList(), EMA26_VALUE);
+        var ema12 = new Ema(historyData, EMA12_VALUE);
+        var ema26 = new Ema(historyData, EMA26_VALUE);
 
         //MACD Line: (12-day EMA - 26-day EMA)
         for (var i = 0; i < ema12.Values.Count; i++)
