@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <Configurations>Debug;Release;DebugRunWatch</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".Faker\MagazineLuizaHistoryPriceFaker.cs" />

@@ -85,6 +85,10 @@
             "production": {
               "browserTarget": "HomeBrokerSPA:build:production"
             },
+            "watchmode": {
+              "browserTarget": "HomeBrokerSPA:build:development",
+              "proxyConfig": "proxy.watch.conf.js"
+            },
             "development": {
               "browserTarget": "HomeBrokerSPA:build:development",
               "proxyConfig": "proxy.conf.js"

@@ -8,6 +8,7 @@
     "start:windows": "ng serve --port 44437 --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\"",
     "start:default": "ng serve --port 44437 --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\"",
     "build": "ng build",
+    "start:watch": "run-script-os -- --configuration watchmode",
     "build:ssr": "ng build && ng run HomeBrokerSPA:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
