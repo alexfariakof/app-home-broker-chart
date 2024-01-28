@@ -8,7 +8,6 @@
   margin: 35px auto;
 }
 
-#chart-line {
-  position: relative;
-  margin-top: -40px;
+#chart {
+  max-height: 50%;
 }

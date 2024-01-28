@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 RUN dotnet dev-certs https -ep ${HOME}/.aspnet/https/HomeBrokerSPA.pfx -p ${HOME}/.aspnet/https
 RUN dotnet dev-certs https --trust
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as publish
 WORKDIR /src
 COPY . .
 
@@ -18,7 +18,7 @@ RUN npm install -g npm@10.2.5 && \
     npm install -g @angular/core@15 @angular/cli@15
 RUN dotnet publish -c Release -o /app/publish  /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://+80;https://+443;

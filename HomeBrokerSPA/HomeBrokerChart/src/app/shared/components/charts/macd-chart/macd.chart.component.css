@@ -1,9 +1,5 @@
-.chart-box {
+#chartMacd {
   max-width: auto;
-  margin: 35px auto;
-  max-height: 50%;
-}
-#chart-bar {
-  max-width: auto;
-  margin-top: -30px;
+  margin-top: -16px;
+  margin-bottom: 16px;
 }

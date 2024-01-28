@@ -22,12 +22,29 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "publishAllPorts": true,
       "useSSL": true,
       "DockerfileRunArguments": "-v \"{ProjectDir}/HomeBrokerChart/dist:/app/wwwroot\""
+    },
+    "Watch Debug": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "WatchMode",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "nativeDebugging": true,
+      "dotnetWatchProfile": true,
+      "workingDirectory": "./",
+      "hotReloadEnabled": true,
+      "leaveRunningOnClose": false,
+      "jsWebView2Debugging": true,
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "https://localhost:5001;http://localhost:5000"
     },
     "Run Test In Watch Mode": {
       "workingDirectory": "../",

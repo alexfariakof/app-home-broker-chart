@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.74-alpha">
   <PropertyGroup>
-    <StartupCommand>npm start</StartupCommand>
+    <StartupCommand Condition="'$(WatchMode)' == 'true'">npm run start:watch</StartupCommand>
+    <StartupCommand Condition="'$(WatchMode)' != 'true'">npm start</StartupCommand>
+
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
     <!-- Command to run on project build  -->
     <BuildCommand Condition=" '$(Configuration)' == 'Debug'" >npm run build"</BuildCommand> 
