@@ -5,7 +5,7 @@ EXPOSE 3003
 RUN dotnet dev-certs https -ep ${HOME}/.aspnet/https/HomeBrokerSPA.pfx -p ${HOME}/.aspnet/https
 RUN dotnet dev-certs https --trust
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as publish
 WORKDIR /src
 COPY . .
 

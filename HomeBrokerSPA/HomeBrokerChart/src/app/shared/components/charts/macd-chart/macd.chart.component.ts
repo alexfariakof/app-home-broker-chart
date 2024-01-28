@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import { IMagazineLuizaHistoryPrice, ISeriesDataLinear } from 'src/app/shared/interfaces';
+import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import { ChartService } from 'src/app/shared/services';
 import { ChartCandleOptions } from '../chart.options';

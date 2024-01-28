@@ -3,8 +3,8 @@ import { ChartComponent }  from "ng-apexcharts";
 import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { ChartService } from '../../../services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
-import * as e from 'express';
-import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
+
+
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line.chart.component.html',
