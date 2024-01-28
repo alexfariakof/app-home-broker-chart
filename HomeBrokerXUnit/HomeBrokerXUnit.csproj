@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Configurations>Debug;Release;DebugRunWatch</Configurations>
+    <Watch>true</Watch>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".Faker\MagazineLuizaHistoryPriceFaker.cs" />
@@ -34,4 +35,13 @@
     <ProjectReference Include="..\HomeBrokerSPA\HomeBrokerSPA.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <TestDependsOn>
+      AfterTest;
+    </TestDependsOn>
+  </PropertyGroup>
+  <Target Name="Test" AfterTargets="Build;Rebuild" DependsOnTargets="$(TestDependsOn)"  />
+  <Target Name="AfterTest">
+    <Exec Command="powershell -File .\coverage_report.ps1" />
+  </Target>
 </Project>

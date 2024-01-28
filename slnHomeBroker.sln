@@ -19,8 +19,21 @@ EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HomeBrokerChart", "HomeBrokerSPA\HomeBrokerChart\HomeBrokerChart.esproj", "{53E0F59C-02F8-456F-B868-CA1EB61C4347}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8C57B59-6BE7-4797-9BF4-FAAA12CDC4A2}"
+	ProjectSection(SolutionItems) = preProject
+		HomeBrokerSPA\coverage_report.ps1 = HomeBrokerSPA\coverage_report.ps1
+		dotnet_test_watch_mode.ps1 = dotnet_test_watch_mode.ps1
+		generate_coverage_report.ps1 = generate_coverage_report.ps1
+	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{60A38F40-4323-4861-B68E-5AE27E87CC12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".documents", ".documents", "{3AE1F879-D7E1-41D1-B9E1-B68180624802}"
+	ProjectSection(SolutionItems) = preProject
+		.documents\ApexChart.txt = .documents\ApexChart.txt
+		.documents\MGLU3.SA.csv = .documents\MGLU3.SA.csv
+		.documents\PBL Corretora ABC (1).pdf = .documents\PBL Corretora ABC (1).pdf
+		.documents\SSR_config.txt = .documents\SSR_config.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +85,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3AE1F879-D7E1-41D1-B9E1-B68180624802} = {C8C57B59-6BE7-4797-9BF4-FAAA12CDC4A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B7835A1-4215-4642-BE00-23B170F5EFA8}

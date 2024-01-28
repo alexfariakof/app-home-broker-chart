@@ -22,37 +22,29 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       },
       "publishAllPorts": true,
       "useSSL": true,
       "DockerfileRunArguments": "-v \"{ProjectDir}/HomeBrokerChart/dist:/app/wwwroot\""
     },
-    "Watch": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "WatchMode",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
-      "nativeDebugging": true,
-      "dotnetWatchProfile": true,
-      "workingDirectory": "./",
-      "hotReloadEnabled": true,
-      "leaveRunningOnClose": false,
-      "jsWebView2Debugging": true,
-      "remoteDebugEnabled": true,
-      "remoteDebugMachine": "https://localhost:5001;http://localhost:5000"
+    "Run Test In Watch Mode": {
+      "workingDirectory": "../",
+      "commandName": "Executable",
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "powershell -File \".\\dotnet_test_watch_mode.ps1\"",
+      "launchBrowser": false,
+      "debugType": "",
+      "leaveRunningOnClose": false
     }
-    },
-    "iisSettings": {
-      "windowsAuthentication": false,
-      "anonymousAuthentication": true,
-      "iisExpress": {
-        "applicationUrl": "http://localhost:30656",
-        "sslPort": 44391
-      }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:30656",
+      "sslPort": 44391
     }
   }
+}
