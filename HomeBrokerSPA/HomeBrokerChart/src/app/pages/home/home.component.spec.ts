@@ -15,11 +15,7 @@ describe('Test Unit HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
       imports: [HttpClientTestingModule],
-      providers: [
-        ChartService,
-        PeriodStartDateObservable,
-        PeriodEndDateObservable,
-      ],
+      providers: [ ChartService, PeriodStartDateObservable, PeriodEndDateObservable ],
     });
 
     fixture = TestBed.createComponent(HomeComponent);

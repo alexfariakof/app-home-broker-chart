@@ -6,6 +6,7 @@ using Moq;
 namespace Business;
 public class HomeBrokerBusinessTest
 {
+
     [Fact]
     public void Should_Returns_HistoryData_GetHistoryData()
     {
@@ -37,7 +38,7 @@ public class HomeBrokerBusinessTest
         var business = new HomeBrokerBusiness(mockRepository.Object);
 
         // Act
-        var result = business.GetSMA();
+        var result = business.GetSMA(fakePeriod);
 
         // Assert     
         Assert.NotNull(result);
@@ -58,11 +59,34 @@ public class HomeBrokerBusinessTest
         var business = new HomeBrokerBusiness(mockRepository.Object);
 
         // Act
-        var result = business.GetEMA(10);
+        var result = business.GetEMA(10, fakePeriod);
 
         // Assert
         Assert.NotNull(result);
         Assert.IsType<Ema>(result);
         Assert.True(fakeHistoryData.Count > result.Values.Count);
+    }
+
+    [Fact]
+    public void Should_Returns_MACD_GetMACD()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var fakeHistoryData = MagazineLuizaHistoryPriceFaker.GetListFaker(34);
+
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Returns(Task.FromResult(fakeHistoryData));
+
+        var business = new HomeBrokerBusiness(mockRepository.Object);
+
+        // Act
+        var result = business.GetMACD(fakePeriod);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<MACD>(result);
+        Assert.NotEmpty(result.MACDLine);
+        Assert.NotEmpty(result.Signal);
+        Assert.NotEmpty(result.Histogram);
     }
 }

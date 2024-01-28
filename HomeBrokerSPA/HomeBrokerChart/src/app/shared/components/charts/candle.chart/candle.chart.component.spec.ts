@@ -9,6 +9,7 @@ import { CandleChartComponent } from './candle.chart.component';
 import { seriesData } from '../chart.options';
 import * as dayjs from 'dayjs';
 import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
+import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 
 describe('Test Unit CandleChartComponent', () => {
   let component: CandleChartComponent;
@@ -17,15 +18,15 @@ describe('Test Unit CandleChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CandleChartComponent ],
+      declarations: [CandleChartComponent],
       imports: [HttpClientTestingModule, BrowserModule, CommonModule, NgApexchartsModule, FormsModule],
-      providers: [ChartService]
+      providers: [ChartService, PeriodStartDateObservable, PeriodEndDateObservable]
     })
-    .compileComponents();
+      .compileComponents();
     fixture = TestBed.createComponent(CandleChartComponent);
     component = fixture.componentInstance;
     chartService = TestBed.inject(ChartService);
-    component.chartBarOptions ={
+    component.chartBarOptions = {
       series: [
         {
           name: "Candle",
@@ -112,7 +113,7 @@ describe('Test Unit CandleChartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should randomize the "y" values in the data array', () => {
+  it('should randomize the y values in the data array' , () => {
     // Arrange
     const originalData = [{ x: 1, y: 10 }, { x: 2, y: [20, 30, 40] }, { x: 3, y: 50 }];
 

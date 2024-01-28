@@ -16,23 +16,32 @@ public class ChartHomeBrokerController : ControllerBase
         _homeBrokerBusiness = homeBrokerBusiness;
     }
 
-    [HttpGet]
-    public List<MagazineLuizaHistoryPrice> Get([FromQuery] DateTime StartDate, [FromQuery] DateTime EndDate)
- {
+    [HttpGet("{StartDate}/{EndDate}")]
+    public List<MagazineLuizaHistoryPrice> Get([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
+    {
         var period = new Period(StartDate, EndDate);
         var result = _homeBrokerBusiness.GetHistoryData(period);
         return result;
     }
 
-    [HttpGet("GetSMA")]
-    public Sma GetSMA()
+    [HttpGet("GetSMA/{StartDate}/{EndDate}")]
+    public Sma GetSMA([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
     {
-        return _homeBrokerBusiness.GetSMA();
+        var period = new Period(StartDate, EndDate);
+        return _homeBrokerBusiness.GetSMA(period);
     }
 
-    [HttpGet("GetEMA/{PeriodDays}")]
-    public Ema GetEMA([FromRoute] int PeriodDays)
+    [HttpGet("GetEMA/{PeriodDays}/{StartDate}/{EndDate}")]
+    public Ema GetEMA([FromRoute] int PeriodDays, [FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
     {
-        return _homeBrokerBusiness.GetEMA(PeriodDays);
+        var period = new Period(StartDate, EndDate);
+        return _homeBrokerBusiness.GetEMA(PeriodDays, period);
+    }
+
+    [HttpGet("GetMACD/{StartDate}/{EndDate}")]
+    public MACD GetMACD([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
+    {
+        var period = new Period(StartDate, EndDate);
+        return _homeBrokerBusiness.GetMACD(period);
     }
 }
