@@ -50,7 +50,9 @@ jobs:
           fetch-depth: 0
 
       - name: Test .Net App
-        run: dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
+        run: | 
+            dotnet tool install -g dotnet-reportgenerator-globaltool 
+            dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
         continue-on-error: false
 
       - name: Install Angular dependencies
