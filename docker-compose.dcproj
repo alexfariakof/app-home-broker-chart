@@ -3,17 +3,18 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>ebf4510d-bc87-423b-85f0-37160425e835</ProjectGuid>
+    <DockerPublishLocally>False</DockerPublishLocally>
+    <ProjectGuid>60a38f40-4323-4861-b68e-5ae27e87cc12</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>homebrokerspa</DockerServiceName>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="docker-compose.dev.yml" />
+  <ItemGroup>    
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
     <None Include="docker-compose.prod.yml" />
+    <None Include="docker-compose.dev.yml" />
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>

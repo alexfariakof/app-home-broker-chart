@@ -19,7 +19,7 @@ describe('Test Unit AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Home Broker Chart'`, () => {
+  it('should have as title Home Broker Chart', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Home Broker Chart');

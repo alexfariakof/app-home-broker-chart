@@ -31,6 +31,11 @@ if (app.Environment.IsStaging()) {
     app.Urls.Add("http://0.0.0.0:3002");
     app.Urls.Add("https://0.0.0.0:3003");
 }
+else if (app.Environment.IsEnvironment("WatchMode"))
+{
+    app.Urls.Add("http://127.0.0.1:5000");
+    app.Urls.Add("https://127.0.0.1:5001");
+}
 else
     app.UseHttpsRedirection();
 app.UseAuthorization();
