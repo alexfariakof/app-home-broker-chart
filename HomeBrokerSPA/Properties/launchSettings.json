@@ -16,6 +16,27 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+      },
+      "publishAllPorts": true,
+      "useSSL": true,
+      "DockerfileRunArguments": "-v \"{ProjectDir}/HomeBrokerChart/dist:/app/wwwroot\""
+    },
+    "Run Test In Watch Mode": {
+      "workingDirectory": "../",
+      "commandName": "Executable",
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "powershell -File \".\\dotnet_test_watch_mode.ps1\"",
+      "launchBrowser": false,
+      "debugType": "",
+      "leaveRunningOnClose": false
     }
   },
   "iisSettings": {

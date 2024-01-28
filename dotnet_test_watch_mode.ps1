@@ -5,7 +5,7 @@ $baseDirectory = Join-Path -Path (Get-Location) -ChildPath ""
 $projectTestPath = Join-Path -Path (Get-Location) -ChildPath "HomeBrokerXUnit"
 $sourceDirs = "$baseDirectory\Business;$baseDirectory\Domain;$baseDirectory\Repository;$baseDirectory\HomeBrokerSPA"
 $reportPath = Join-Path -Path (Get-Location) -ChildPath "HomeBrokerXUnit\TestResults"
-$coverageXmlPath = Join-Path -Path $reportPath -ChildPath "coveragereport"
+$coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath "TestResults") -ChildPath "coveragereport"
 
 # Função para matar processos com base no nome do processo que estajam em execução 
 function Stop-ProcessesByName {
@@ -41,25 +41,12 @@ function Remove-TestResults {
 
  } 
 
-# Encerra qualquer processo em segundo plano relacionado
 Stop-ProcessesByName
-# Exclui todo o conteúdo da pasta TestResults, se existir
 Remove-TestResults
-
 dotnet clean slnPixCharge.sln > $null 2>&1
-if ($args -contains "-w") {
-
-    $watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
-    Wait-TestResults
-    Invoke-Item $coverageXmlPath\index.html
-
-    $watchProcess.WaitForExit()
-}
-else {
-    dotnet test ./PixCharge.Test/PixCharge.Test.csproj --results-directory $reportPath  /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
-    Wait-TestResults
-    Invoke-Item $coverageXmlPath\index.html
-}  
-
- Stop-ProcessesByName; 
- Exit 
+$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
+ Wait-TestResults
+ Invoke-Item $coverageXmlPath\index.html
+$watchProcess.WaitForExit()
+Stop-ProcessesByName; 
+Exit 

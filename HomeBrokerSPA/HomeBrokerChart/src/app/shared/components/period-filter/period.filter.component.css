@@ -1,19 +1,21 @@
+#filterStart {
+  width: auto;
+ }
+
+#filterEnd {
+  width: auto;
+}
+
 @media screen and (max-width: 667px) {
   button{
     width: auto;
-    font-size: 0.8rem;
-  }
-
-  .btn-barra-ferramenta button {
-    width: auto;
-    height: auto;
-    margin-right: 0.4rem;
-    padding: 4px;
+    margin-top: 4px;
+    font-size: 0.6rem;
   }
 
   #filterStart {
     width: auto;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 
   #filterEnd {

@@ -14,17 +14,22 @@ export class ChartService {
   }
 
   async get(startDate:Dayjs| string, endDate: Dayjs | string): Promise<IMagazineLuizaHistoryPrice[]> {
-    const result:IMagazineLuizaHistoryPrice[] = await this.http.get<any>(`${ this.routeUrl }?StartDate=${startDate}&EndDate=${endDate}`).toPromise();
+    const result:IMagazineLuizaHistoryPrice[] = await this.http.get<any>(`${ this.routeUrl }/${startDate}/${endDate}`).toPromise();
     return result;
   }
 
-  async getSMA(): Promise<any> {
-    const result = await this.http.get<any>(`${ this.routeUrl }/GetSMA`).toPromise();
-    return result.values;
+  async getSMA(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
+    const result = await this.http.get<any>(`${ this.routeUrl }/GetSMA/${startDate}/${endDate}`).toPromise();
+    return result;
   }
 
-  async getEMA(periodDays: number): Promise<any> {
-    const result = await this.http.get<any>(`${ this.routeUrl }/GetEMA/${periodDays}`).toPromise();
-    return result.values;
+  async getEMA(periodDays: number, startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
+    const result = await this.http.get<any>(`${ this.routeUrl }/GetEMA/${periodDays}/${startDate}/${endDate}`).toPromise();
+    return result;
+  }
+
+  async getMACD(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
+    const result = await this.http.get<any>(`${ this.routeUrl }/GetMACD/${startDate}/${endDate}`).toPromise();
+    return result;
   }
 }

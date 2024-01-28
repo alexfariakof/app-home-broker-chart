@@ -23,7 +23,7 @@ describe('Test Unit ChartService', () => {
         EndDate: dayjs()
       }
       const mockResult = [{}];
-      const expectedUrl = `${service.routeUrl}?StartDate=${period.StartDate}&EndDate=${period.EndDate}`;
+      const expectedUrl = `${service.routeUrl}/${period.StartDate}/${period.EndDate}`;
 
       // Act
       const result = service.get(period.StartDate, period.EndDate);
@@ -40,10 +40,14 @@ describe('Test Unit ChartService', () => {
   it('should send a getSMA request to the ChartHomeBroker', inject([ChartService, HttpTestingController], fakeAsync((service: ChartService, httpMock: HttpTestingController) => {
       //Arrange
       const mockResult= {};
-      const expectedUrl = `${service.routeUrl}/GetSMA`;
+      const period:IPeriod = {
+        StartDate: dayjs().add(-1,'year'),
+        EndDate: dayjs()
+      }
+      const expectedUrl = `${service.routeUrl}/GetSMA/${period.StartDate}/${period.EndDate}`;
 
       // Act
-      const result = service.getSMA();
+      const result = service.getSMA(period.StartDate, period.EndDate);
       flush();
 
       // Assert
@@ -57,10 +61,14 @@ describe('Test Unit ChartService', () => {
   it('should send a getEMA request to the ChartHomeBroker', inject([ChartService, HttpTestingController], fakeAsync((service: ChartService, httpMock: HttpTestingController) => {
     // Arrange
     const mockResult= {};
-    const expectedUrl = `${service.routeUrl}/GetEMA/9`;
+    const period:IPeriod = {
+      StartDate: dayjs().add(-1,'year'),
+      EndDate: dayjs()
+    }
+    const expectedUrl = `${service.routeUrl}/GetEMA/9/${period.StartDate}/${period.EndDate}`;
 
     // Act
-    const result = service.getEMA(9);
+    const result = service.getEMA(9, period.StartDate,period.EndDate);
     flush();
 
     // Assert

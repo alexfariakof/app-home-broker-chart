@@ -3,13 +3,13 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgApexchartsModule } from "ng-apexcharts";
-import { CandleChartComponent } from './candle.chart.component';
-import { ChartService } from '../../../../shared/services';
+import { ChartService } from '../../../services';
+import { MacdChartComponent } from "./macd.chart.component";
 @NgModule({
-  declarations: [CandleChartComponent],
+  declarations: [MacdChartComponent],
   imports: [BrowserModule, CommonModule, NgApexchartsModule, FormsModule, ReactiveFormsModule],
   providers: [ChartService],
-  exports: [CandleChartComponent]
+  exports: [MacdChartComponent]
 })
 
-export class CandleChartModule {}
+export class MacdChartModule {}
