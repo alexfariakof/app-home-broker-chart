@@ -10,7 +10,7 @@ public class MACDTest
     public void Should_Create_MACD_Correctly()
     {
         // Arrange
-        var faker = MagazineLuizaHistoryPriceFaker.GetListFaker(MIN_AMOUNT_DATA);
+        var faker = MagazineLuizaHistoryPriceFaker.GetListFaker(MIN_AMOUNT_DATA).Select(price => price.Close).ToList();
 
         // Act
         var macd = new MACD(faker);
@@ -27,7 +27,7 @@ public class MACDTest
     {
         // Arrange
         int ERRO_MIN_DATA = 33;
-        var faker = MagazineLuizaHistoryPriceFaker.GetListFaker(ERRO_MIN_DATA);
+        var faker = MagazineLuizaHistoryPriceFaker.GetListFaker(ERRO_MIN_DATA).Select(price => price.Close).ToList();
 
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() => new MACD(faker));

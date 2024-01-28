@@ -68,7 +68,7 @@ public class ChartHomeBrokerControllerTest
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
-        var expectedMACD = new MACD(MagazineLuizaHistoryPriceFaker.GetListFaker(200));
+        var expectedMACD = new MACD(MagazineLuizaHistoryPriceFaker.GetListFaker(200).Select(price => price.Close).ToList());
         businessMock.Setup(business => business.GetMACD(It.IsAny<Period>())).Returns(expectedMACD);
         var controller = new ChartHomeBrokerController(businessMock.Object);
 

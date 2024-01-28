@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
-import * as dayjs from 'dayjs';
 import { ChartCandleOptions, seriesData } from '../chart.options';
 import { IMagazineLuizaHistoryPrice, IPeriod, ISeriesDataLinear } from '../../../../shared/interfaces';
 import { ChartService } from '../../../../shared/services';
@@ -27,7 +26,7 @@ export class CandleChartComponent implements OnInit {
     });
   }
 
-  constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
+  constructor(public chartService: ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) { }
 
   async ngOnInit(): Promise<void> {
     this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
@@ -35,7 +34,7 @@ export class CandleChartComponent implements OnInit {
       x: item.date,
       y: item.close >= item.open ? item.open : -item.close
     })) || [];
-      this.chartCandleOptions = {
+    this.chartCandleOptions = {
       series: [
         {
           name: "candle",
@@ -44,7 +43,7 @@ export class CandleChartComponent implements OnInit {
       ],
       chart: {
         type: "candlestick",
-        height: (document.body.clientHeight/3)-16,
+        height: (document.body.clientHeight / 3) - 16,
         id: "candles",
         toolbar: {
           autoSelected: "pan",

@@ -8,5 +8,7 @@
     <ProductionBuildCommand>npm run build</ProductionBuildCommand>
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\HomeBrokerChart</BuildOutputFolder>
+    <JavaScriptTestRunnerCommand>npm run test</JavaScriptTestRunnerCommand>
+    <JavaScriptTestFilePattern>**\*.spec.ts</JavaScriptTestFilePattern>
   </PropertyGroup>
 </Project>
