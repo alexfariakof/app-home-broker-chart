@@ -2,7 +2,7 @@
 public record Sma
 {
     public List<decimal> Values { get; set; } = new List<decimal>();
-    public Sma(List<decimal>  historyPriceData, int periodDays = 5)
+    public Sma(List<decimal> historyPriceData, int periodDays = 5)
     {
         if (historyPriceData == null || historyPriceData.Count == 0 || historyPriceData.Count < periodDays)
             throw new ArgumentException("Não há dados suficiente para gerar uma SMA.");
@@ -21,10 +21,10 @@ public record Sma
                     }
                     break;
                 }
-                sum += historyPriceData[i +j];
+                sum += historyPriceData[i + j];
             }
-            decimal average = sum/periodDays;
-            Values.Add(average);                  
+            decimal average = sum / periodDays;
+            Values.Add(average);
         }
     }
 }
