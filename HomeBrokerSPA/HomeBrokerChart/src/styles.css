@@ -28,3 +28,12 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.cdk-overlay-container {
+  z-index: 1999;
+}
+
+.loading-modal .modal-content {
+  background-color: transparent;
+  text-align: center;
+}
