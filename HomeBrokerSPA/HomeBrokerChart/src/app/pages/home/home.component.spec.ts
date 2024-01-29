@@ -21,6 +21,8 @@ describe('Test Unit HomeComponent', () => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     chartService = TestBed.inject(ChartService);
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
   });
 
   it('should create HomeComponent', () => {
@@ -37,8 +39,6 @@ describe('Test Unit HomeComponent', () => {
     spyOn(chartService, 'get').and.returnValue(Promise.resolve(fakeResponse));
 
     // Act
-    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
     component.ngOnInit();
 
     // Assert

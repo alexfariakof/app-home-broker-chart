@@ -6,6 +6,15 @@
   width: auto;
 }
 
+.error-bi-input {
+  display: inline;
+
+}
+
+.not-error-input {
+  display: none;
+}
+
 @media screen and (max-width: 667px) {
   button{
     width: auto;

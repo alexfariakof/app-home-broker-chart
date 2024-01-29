@@ -1,5 +1,13 @@
 #chartMacd {
   max-width: auto;
-  margin-top: -16px;
+  max-height: 50vh;
   margin-bottom: 16px;
+}
+
+@media screen and (max-width: 667px) {
+  #chartMacd {
+    max-width: auto;
+    max-height: 50vh;
+    margin-top: -20px;
+  }
 }

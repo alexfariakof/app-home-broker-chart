@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Dayjs } from "dayjs";
 import { IMagazineLuizaHistoryPrice } from "../../interfaces";
-
 @Injectable({
   providedIn: 'root'
 })

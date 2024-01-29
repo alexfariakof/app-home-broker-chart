@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;DebugRunWatch</Configurations>
+    <EnableHotReload>true</EnableHotReload>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj" />
