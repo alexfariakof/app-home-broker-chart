@@ -89,4 +89,43 @@ public class HomeBrokerBusinessTest
         Assert.NotEmpty(result.Signal);
         Assert.NotEmpty(result.Histogram);
     }
+
+    [Fact]
+    public void GetSMA_With_Exception_Should_Throw_Exception()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var business = new HomeBrokerBusiness(mockRepository.Object);
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetSMA_WithException_ShouldThrowException"));
+
+        // Act & Assert
+        Assert.Throws<Exception>(() => business.GetSMA(fakePeriod));
+    }
+
+    [Fact]
+    public void GetEMA_With_Exception_Should_Throw_Exception()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var business = new HomeBrokerBusiness(mockRepository.Object);
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetEMA_WithException_ShouldThrowException"));
+
+        // Act & Assert
+        Assert.Throws<Exception >(() => business.GetEMA(10, fakePeriod));
+    }
+
+    [Fact]
+    public void GetMACD_With_Exception_Should_Throw_Exception()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var business = new HomeBrokerBusiness(mockRepository.Object);
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetMACD_WithException_ShouldThrowException"));
+
+        // Act & Assert
+        Assert.Throws<Exception >(() => business.GetMACD(fakePeriod));
+    }
 }

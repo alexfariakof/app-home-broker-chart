@@ -56,7 +56,7 @@ if ($args -contains "-w") {
     $watchProcess.WaitForExit()
 }
 else {
-    dotnet test ./PixCharge.Test/PixCharge.Test.csproj --results-directory $reportPath  /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+    dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj --results-directory $reportPath  /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
     Wait-TestResults
     Invoke-Item $coverageXmlPath\index.html
 }  
