@@ -60,6 +60,7 @@ jobs:
         run: |
           npm install npm@latest > /dev/null 2>&1
           npm install -g @angular/cli > /dev/null 2>&1
+          npm install 
         continue-on-error: false
     
       - name: Build Angular App
