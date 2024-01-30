@@ -32,6 +32,7 @@ public class ChartHomeBrokerController : ControllerBase
     [HttpGet("{StartDate}/{EndDate}")]
     [ProducesResponseType((200), Type = typeof(List<MagazineLuizaHistoryPrice>))]
     [ProducesResponseType((400), Type = typeof(string))]
+    [ProducesResponseType((401))]
     public IActionResult Get([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
     {
         try
@@ -40,9 +41,9 @@ public class ChartHomeBrokerController : ControllerBase
             var result = _homeBrokerBusiness.GetHistoryData(period);
             return Ok(result);
         }
-        catch (Exception ex)
+        catch 
         {
-            return BadRequest(new { message = "Erro desconhecido, tente novamente mais tarde." });
+            return NoContent();
         }
     }
 

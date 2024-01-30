@@ -92,12 +92,12 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Return_BadRequest_Get()
+    public void Should_Return_NoContentResult_Get()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
         var businessMock = new Mock<IHomeBrokerBusiness>();
-        businessMock.Setup(business => business.GetHistoryData(It.IsAny<Period>())).Throws(new Exception("Erro desconhecido, tente novamente mais tarde."));
+        businessMock.Setup(business => business.GetHistoryData(It.IsAny<Period>())).Throws(new Exception("Erro desconhecido Nenhum resultado é retornado."));
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
@@ -105,10 +105,7 @@ public class ChartHomeBrokerControllerTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.IsType<BadRequestObjectResult>(result);
-        var value = Assert.IsType<BadRequestObjectResult>(result).Value;
-        var message = value.GetType().GetProperty("message").GetValue(value, null) as string;
-        Assert.Equal("Erro desconhecido, tente novamente mais tarde.", message);
+        Assert.IsType<NoContentResult>(result);
     }
 
     [Fact]

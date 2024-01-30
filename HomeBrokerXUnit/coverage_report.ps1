@@ -6,8 +6,8 @@ $reportPath = Join-Path -Path $projectTestPath -ChildPath "TestResults"
 $coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath "TestResults") -ChildPath "coveragereport"
 
 # Excuta Teste Unitarios sem restore e build e gera o relatório de cobertura do Backend
-dotnet test ./HomeBrokerXUnit.csproj --results-directory $reportPath /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover" --no-restore --no-build > $null 2>&1
-reportgenerator -reports:$projectTestPath\coverage.cobertura.xml -targetdir:$coverageXmlPath -reporttypes:"Html;lcov;" -sourcedirs:$sourceDirs
+dotnet test ./HomeBrokerXUnit.csproj --results-directory $reportPath /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover" --no-restore --no-build 
+reportgenerator -reports:$projectTestPath\coverage.cobertura.xml -targetdir:$coverageXmlPath -reporttypes:"Html;lcov;" -sourcedirs:$sourceDirs > $null 2>&1
 
 
 cd $projectAngular
@@ -19,4 +19,4 @@ if (-not (Test-Path $projectAngular\node_modules)) {
 
 # Executa Teste Unitários e gera o relatório de cobertura do Frontend 
 npm run test:coverage
-cd $projectTestPath
+#cd $projectTestPath
