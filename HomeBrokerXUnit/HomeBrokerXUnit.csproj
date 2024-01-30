@@ -63,6 +63,6 @@
     <!-- Check if OS is Windows -->
     <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -File .\coverage_report.ps1" />
     <!-- Check if OS is Linux -->
-    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="bash ./coverage_report.sh" />
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="bash .\coverage_report.sh" />
   </Target>
 </Project>
