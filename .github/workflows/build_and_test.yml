@@ -49,19 +49,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Angular dependencies
+        run: |
+          npm install npm@latest > /dev/null 2>&1
+          npm install -g @angular/cli > /dev/null 2>&1
+        continue-on-error: false
+
       - name: Test .Net App
         run: | 
             dotnet tool install -g dotnet-reportgenerator-globaltool 
             dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
         continue-on-error: false
 
-      - name: Install Angular dependencies
-        run: |
-          cd HomeBrokerSPA/HomeBrokerChart
-          npm install npm@latest > /dev/null 2>&1
-          npm install -g @angular/cli > /dev/null 2>&1
-          npm install
-        continue-on-error: false
     
       - name: Build Angular App
         run: |
