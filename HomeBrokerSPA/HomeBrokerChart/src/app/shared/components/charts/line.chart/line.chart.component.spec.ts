@@ -8,6 +8,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
 import { seriesData } from '../chart.options/ohlc';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
+import * as dayjs from 'dayjs';
 
 describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;
@@ -80,6 +81,20 @@ describe('Test Unit LineChartComponent', () => {
   });
 
   it('should create', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
+
+    // Assert
+    expect(component).toBeTruthy();
+  });
+
+  it('should create Empty Chart ', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+
+    // Assert
     expect(component).toBeTruthy();
   });
 
@@ -101,6 +116,9 @@ describe('Test Unit LineChartComponent', () => {
     const emptyArray: number[] = [];
 
     // Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+
     const formattedData = component.formatData(emptyArray);
 
     // Assert
