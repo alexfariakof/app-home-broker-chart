@@ -1,7 +1,21 @@
 ﻿namespace Domain.Charts.ValueObject;
+
+/// <summary>
+/// Representa o Object Value Exponential Moving Average (EMA) para análise financeira.
+/// </summary>
 public record Ema
 {
+    /// <summary>
+    /// Obtém ou define a lista de valores EMA.
+    /// </summary>
     public List<decimal> Values { get; set; } = new List<decimal>();
+
+    /// <summary>
+    /// Inicializa uma nova instância da classe <see cref="Ema"/>.
+    /// </summary>
+    /// <param name="historyPriceData">Os dados históricos de preço usados para o cálculo da EMA.</param>
+    /// <param name="periodDays">O número de dias usados no cálculo da EMA.</param>
+    /// <exception cref="ArgumentException">Lançada quando há dados insuficientes para o cálculo da EMA.</exception>
     public Ema(List<decimal> historyPriceData, int periodDays)
     {
         if (historyPriceData == null || historyPriceData.Count == 0 || historyPriceData.Count < periodDays)

@@ -5,13 +5,12 @@ using HomeBrokerSPA.Controllers;
 using HomeBrokerXUnit.Faker;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Xunit.Sdk;
 
 namespace Controllers;
 public class ChartHomeBrokerControllerTest
 {
     [Fact]
-    public void Get_Should_Returns_Correct_Results()
+    public void Should_Returns_List_MagazineLuizaHistoryPrice_Get()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
@@ -31,7 +30,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetSMA_Should_Returns_SMA()
+    public void Should_Returns_SMA_GetSMA()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
@@ -51,7 +50,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetEMA_Should_Returns_EMA()
+    public void Should_Returns_EMA_GetEMA()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
@@ -71,7 +70,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetEMA_Should_Returns_MACD()
+    public void Should_Returns_MACD_GETMACD()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
@@ -93,7 +92,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Get_With_Exception_Should_Return_BadRequest()
+    public void Should_Return_BadRequest_Get()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -113,7 +112,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetSMA_With_Exception_Should_Return_BadRequest()
+    public void Should_Return_BadRequest_GetSMA()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -133,7 +132,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetEMA_With_Exception_Should_Return_BadRequest()
+    public void Should_Return_BadRequest_GetEMA()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -153,7 +152,7 @@ public class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void GetMACD_With_Exception_Should_Return_BadRequest()
+    public void Should_Return_BadRequest_GetMACD()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
