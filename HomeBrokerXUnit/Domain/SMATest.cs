@@ -29,6 +29,6 @@ public class SMATest
 
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() => new Sma(historyPriceData));
-        Assert.Equal("Não há dados suficiente para gerar uma SMA.", exception.Message);
+        Assert.Equal("Não há dados suficientes para gerar uma SMA.", exception.Message);
     }
 }

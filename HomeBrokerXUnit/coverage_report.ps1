@@ -1,6 +1,6 @@
 $projectTestPath = Get-Location
 $projectPath =  (Resolve-Path -Path ..).Path
-$projectAngular = "$projectPath\HomeBrokerSPA\HomeBrokerChart";
+$projectAngular = (Resolve-Path -Path "$projectPath\HomeBrokerSPA\HomeBrokerChart");
 $sourceDirs = "$projectPath\Business;$projectPath\Domain;$projectPath\Repository;$projectPath\HomeBrokerSPA;$projectPath\HomeBrokerSPA\HomeBrokerChart"
 $reportPath = Join-Path -Path $projectTestPath -ChildPath "TestResults"
 $coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath "TestResults") -ChildPath "coveragereport"
@@ -19,5 +19,4 @@ if (-not (Test-Path $projectAngular\node_modules)) {
 
 # Executa Teste Unitários e gera o relatório de cobertura do Frontend 
 npm run test:coverage
-
 cd $projectTestPath
