@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing.module';
 import { FormsModule } from '@angular/forms';
@@ -14,8 +14,9 @@ import { PeriodFilterComponent } from './shared/components';
 
 @NgModule({
     declarations: [AppComponent, NavMenuComponent],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true, }
+      { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true, },
     ],
     bootstrap: [AppComponent],
     imports: [BrowserModule, HttpClientModule, FormsModule, HomeModule, Acoesodule,
