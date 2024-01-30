@@ -58,6 +58,7 @@ jobs:
 
       - name: Install Angular dependencies
         run: |
+          cd HomeBrokerSPA/HomeBrokerChart
           npm install npm@latest > /dev/null 2>&1
           npm install -g @angular/cli > /dev/null 2>&1
           npm install 
