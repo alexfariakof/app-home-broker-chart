@@ -51,14 +51,14 @@ jobs:
             path: .\.sonar\scanner
             key: ${{ runner.os }}-sonar-scanner
             restore-keys: ${{ runner.os }}-sonar-scanner      
-      
+     
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path ./.sonar/scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
-     
+
       - name: Build and analyze
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,8 +67,8 @@ jobs:
         run: |                    
           ./.sonar/scanner/dotnet-sonarscanner begin /k:"alexfariakof_Home_Broker_Chart" /o:"alexfariakof" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.exclusions="HomeBrokerXUnit/**, **/.documents/**, **/Program.cs, **/*.spec.ts, **/main.ts, **/environment.*, **/*.routing.module.ts, **/*.js, **/test.ts" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.cs.lcov.reportPaths="**/coveragereport/lcov.info" /d:sonar.typescript.opencover.reportsPaths="**/clover.xml" /d:sonar.typescript.lcov.reportPaths="**/coverage/lcov.info"          
           
-            dotnet tool install -g dotnet-reportgenerator-globaltool
+          dotnet tool install -g dotnet-reportgenerator-globaltool
             # Executa Build/Restore das  configurações do projeto executando automaticamente a geração do report Genetator do Backend e Frontend
-            dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+          dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
   
