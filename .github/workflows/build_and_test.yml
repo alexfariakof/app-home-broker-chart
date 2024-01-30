@@ -40,6 +40,13 @@ jobs:
       run: dotnet build  ./HomeBrokerSPA/HomeBrokerSPA.csproj --restore
       continue-on-error: false
 
+    - name: Test .Net App
+      run: | 
+          dotnet tool install -g dotnet-reportgenerator-globaltool 
+          dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
+      continue-on-error: false
+
+
   build_and_test_angular:
     needs: build_and_test_net
     name: Build and Test Angular App
@@ -54,13 +61,6 @@ jobs:
           npm install npm@latest > /dev/null 2>&1
           npm install -g @angular/cli > /dev/null 2>&1
         continue-on-error: false
-
-      - name: Test .Net App
-        run: | 
-            dotnet tool install -g dotnet-reportgenerator-globaltool 
-            dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
-        continue-on-error: false
-
     
       - name: Build Angular App
         run: |
