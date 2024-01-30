@@ -136,6 +136,20 @@ describe('MacdChartComponent', () => {
   });
 
   it('should create', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
+
+    // Assert
+    expect(component).toBeTruthy();
+  });
+
+  it('should create With Empty Chart', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+
+    // Assert
     expect(component).toBeTruthy();
   });
 });

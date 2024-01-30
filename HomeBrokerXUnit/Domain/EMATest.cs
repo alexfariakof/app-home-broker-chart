@@ -27,7 +27,7 @@ public class EMATest
     }
 
     [Fact]
-    public void Should_Throws_Erro_when_Calculates_EMA()
+    public void Should_Throws_Exception_When_Calculates_EMA()
     {
         // Arrange
         List<decimal> historyPriceData = new List<decimal> { 22.22m, 22.21m, 22.24m, 22.27m, };
