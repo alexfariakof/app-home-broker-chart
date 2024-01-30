@@ -20,7 +20,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HomeBrokerChart", "HomeBrok
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8C57B59-6BE7-4797-9BF4-FAAA12CDC4A2}"
 	ProjectSection(SolutionItems) = preProject
-		HomeBrokerSPA\coverage_report.ps1 = HomeBrokerSPA\coverage_report.ps1
+		HomeBrokerXUnit\coverage_report.ps1 = HomeBrokerXUnit\coverage_report.ps1
+		HomeBrokerXUnit\coverage_report.sh = HomeBrokerXUnit\coverage_report.sh
 		dotnet_test_watch_mode.ps1 = dotnet_test_watch_mode.ps1
 		generate_coverage_report.ps1 = generate_coverage_report.ps1
 	EndProjectSection
