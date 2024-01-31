@@ -44,7 +44,7 @@ describe('Test Unit ChartService', () => {
         StartDate: dayjs().add(-1,'year'),
         EndDate: dayjs()
       }
-      const expectedUrl = `${service.routeUrl}/GetSMA/${period.StartDate}/${period.EndDate}`;
+      const expectedUrl = `${service.routeUrl}/getsma/${period.StartDate}/${period.EndDate}`;
 
       // Act
       const result = service.getSMA(period.StartDate, period.EndDate);
@@ -65,10 +65,32 @@ describe('Test Unit ChartService', () => {
       StartDate: dayjs().add(-1,'year'),
       EndDate: dayjs()
     }
-    const expectedUrl = `${service.routeUrl}/GetEMA/9/${period.StartDate}/${period.EndDate}`;
+    const expectedUrl = `${service.routeUrl}/getema/9/${period.StartDate}/${period.EndDate}`;
 
     // Act
     const result = service.getEMA(9, period.StartDate,period.EndDate);
+    flush();
+
+    // Assert
+    expect(result).toBeTruthy();
+    const req = httpMock.expectOne(expectedUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResult);
+    httpMock.verify();
+  })));
+
+
+  it('should send a getMACD request to the ChartHomeBroker', inject([ChartService, HttpTestingController], fakeAsync((service: ChartService, httpMock: HttpTestingController) => {
+    // Arrange
+    const mockResult= {};
+    const period:IPeriod = {
+      StartDate: dayjs().add(-1,'year'),
+      EndDate: dayjs()
+    }
+    const expectedUrl = `${service.routeUrl}/getmacd/${period.StartDate}/${period.EndDate}`;
+
+    // Act
+    const result = service.getMACD(period.StartDate,period.EndDate);
     flush();
 
     // Assert

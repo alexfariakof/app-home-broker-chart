@@ -28,6 +28,6 @@ export class ChartCommonOptions {
   }
 
   static formatData(data: number[]): number[] {
-    return data.map((value) => parseFloat(value.toFixed(2)));
+    return data.map((value) => parseFloat(value.toFixed(2))) || [];
   }
 }
