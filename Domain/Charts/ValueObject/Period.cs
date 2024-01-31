@@ -10,11 +10,6 @@ public record Period
     /// Converte implicitamente um valor de tupla (Data de início, Data de término) para um objeto Periodo.
     /// </summary>
     public static implicit operator Period((DateTime start, DateTime end) value) => new Period { StartDate = value.start, EndDate = value.end };
-    /// <summary>
-    /// Converte implicitamente um objeto Periodo para uma tupla (Data de início, Data de término).
-    /// </summary>
-    public static implicit operator (DateTime start, DateTime end)(Period period) => (period.StartDate, period.EndDate);
-
 
     /// <summary>
     /// Obtém ou define a data de início do período.

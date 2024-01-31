@@ -50,4 +50,6 @@ public class PeriodTest
         // Act & Assert
         Assert.Throws<ArgumentException>(() => new Period(new DateTime(2022, 1, 1), new DateTime(2022, 1, 4)));
     }
+
+    
 }
