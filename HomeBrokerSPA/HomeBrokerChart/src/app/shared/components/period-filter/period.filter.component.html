@@ -2,7 +2,7 @@
   <div class="input-group mt-4 d-flex flex-column align-items-center justify-content-center">
     <button type="submit"class="btn btn-primary w-responsive" >Atualizar</button>
   </div>
-  <mdb-form-control class="md-form md-outline always-active-label input-with-post-icon datepicker m-2">
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2">
     <label class="form-label" for="filterEnd">Período Final</label>
     <input
       autofocus
@@ -18,8 +18,8 @@
         'is-valid': !periodForm.errors || periodForm.get('filterEnd')?.touched
       }"
     />
-  </mdb-form-control>
-  <mdb-form-control class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" >
+  </div>
+  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" >
     <label class="form-label" for="filterStart">Período Inicial</label>
     <input
       autofocus
@@ -35,6 +35,6 @@
         'is-valid': !periodForm.errors || periodForm.get('filterStart')?.touched
       }"
     />
-  </mdb-form-control>
+  </div>
 </form>
 
