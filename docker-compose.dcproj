@@ -9,13 +9,12 @@
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>homebrokerspa</DockerServiceName>
   </PropertyGroup>
-  <ItemGroup>    
+  <ItemGroup>
+    <None Include=".dockerignore" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
-    <None Include="docker-compose.prod.yml" />
     <None Include="docker-compose.dev.yml" />
-    <None Include="docker-compose.yml" />
-    <None Include=".dockerignore" />
+    <None Include="docker-compose.prod.yml" />        
   </ItemGroup>
 </Project>

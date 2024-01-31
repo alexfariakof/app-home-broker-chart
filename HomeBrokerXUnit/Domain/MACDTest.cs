@@ -23,7 +23,7 @@ public class MACDTest
     }
 
     [Fact]
-    public void Should_Throws_Erro_when_Calculates_MCAD()
+    public void Should_Throws_Exception_When_Calculates_MCAD()
     {
         // Arrange
         int ERRO_MIN_DATA = 33;

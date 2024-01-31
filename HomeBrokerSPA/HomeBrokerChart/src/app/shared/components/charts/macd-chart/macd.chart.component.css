@@ -1,9 +1,13 @@
-.chart-box {
+#chartMacd {
   max-width: auto;
-  margin: 35px auto;
-  max-height: 50%;
+  max-height: 50vh;
+  margin-bottom: 16px;
 }
-#chart-bar {
-  max-width: auto;
-  margin-top: -30px;
+
+@media screen and (max-width: 667px) {
+  #chartMacd {
+    max-width: auto;
+    max-height: 50vh;
+    margin-top: -20px;
+  }
 }

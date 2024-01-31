@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as base
 WORKDIR /app
 EXPOSE 3002
 EXPOSE 3003
@@ -18,7 +18,7 @@ RUN npm install -g npm@10.2.5 && \
     npm install -g @angular/core@15 @angular/cli@15
 RUN dotnet publish -c Release -o /app/publish  /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
 WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT=Staging
 ENV ASPNETCORE_URLS=http://+3002;https://+3003;

@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Dayjs } from "dayjs";
 import { IMagazineLuizaHistoryPrice } from "../../interfaces";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,17 +18,17 @@ export class ChartService {
   }
 
   async getSMA(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
-    const result = await this.http.get<any>(`${ this.routeUrl }/GetSMA/${startDate}/${endDate}`).toPromise();
+    const result = await this.http.get<any>(`${ this.routeUrl }/getsma/${startDate}/${endDate}`).toPromise();
     return result;
   }
 
   async getEMA(periodDays: number, startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
-    const result = await this.http.get<any>(`${ this.routeUrl }/GetEMA/${periodDays}/${startDate}/${endDate}`).toPromise();
+    const result = await this.http.get<any>(`${ this.routeUrl }/getema/${periodDays}/${startDate}/${endDate}`).toPromise();
     return result;
   }
 
   async getMACD(startDate:Dayjs| string, endDate: Dayjs | string): Promise<any> {
-    const result = await this.http.get<any>(`${ this.routeUrl }/GetMACD/${startDate}/${endDate}`).toPromise();
+    const result = await this.http.get<any>(`${ this.routeUrl }/getmacd/${startDate}/${endDate}`).toPromise();
     return result;
   }
 }

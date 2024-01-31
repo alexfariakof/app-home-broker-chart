@@ -3,8 +3,8 @@ import { ChartComponent } from 'ng-apexcharts';
 import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import { ChartService } from 'src/app/shared/services';
-import { ChartCandleOptions } from '../chart.options';
-
+import { CustomValidators } from 'src/app/shared/validators';
+import { ChartOptions, ChartCommonOptions } from '../chart.options';
 @Component({
   selector: 'app-macd-chart',
   templateUrl: './macd.chart.component.html',
@@ -12,39 +12,33 @@ import { ChartCandleOptions } from '../chart.options';
 })
 export class MacdChartComponent {
   @ViewChild("chart") chart!: ChartComponent;
-  public chartMacdOptions: ChartCandleOptions |  any;
+  public chartMacdOptions: ChartOptions | any;
   public magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = [];
 
-  constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
+  constructor( public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
 
   async ngOnInit(): Promise<void> {
+    if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString())) {
+      this.initializeComponent();
+    } else {
+      ChartCommonOptions.initializeChartOptions(this.chartMacdOptions, (document.body.clientHeight / 3) - 16);
+    }
+  }
+
+  public initializeComponent = async ():Promise<void> =>{
     this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
     const macd = await this.chartService.getMACD(this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const data = [
+      { name: "Histograma", type: "bar", data: macd.histogram },
+      { name: "MACD Line", type: "line", data: macd.macdLine },
+      { name: "Signal", type: "line", data: macd.signal },
+    ];
+
     const labelXAxis: any[] = [];
-    const dates: any[] = this.magazineLuizaHistoryPrices.map(item =>  item.date);
-    const maxDate: any  = Math.max(...dates);
     macd.macdLine.forEach((value: any, index: number) => {
       labelXAxis.push(this.magazineLuizaHistoryPrices[index].date);
     });
-    labelXAxis.push(maxDate);
     this.chartMacdOptions = {
-      series: [
-        {
-          name: "Histograma",
-          type: "bar",
-          data:  macd.histogram,
-        },
-        {
-          name: "MACD Line",
-          type: "line",
-          data: macd.macdLine
-        },
-        {
-          name: "Signal",
-          type: "line",
-          data: macd.signal
-        },
-      ],
       chart: {
         height: (document.body.clientHeight/2)-16,
         type: "line",
@@ -140,5 +134,6 @@ export class MacdChartComponent {
       ],
 
     };
+    ChartCommonOptions.initializeChartData(this.chartMacdOptions, data, labelXAxis);
   }
 }

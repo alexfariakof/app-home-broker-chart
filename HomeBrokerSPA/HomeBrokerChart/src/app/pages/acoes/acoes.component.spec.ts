@@ -44,7 +44,7 @@ describe('AcoesComponent', () => {
 
     // Act
     component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
     component.ngOnInit();
 
     // Assert

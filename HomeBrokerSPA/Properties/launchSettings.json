@@ -22,14 +22,27 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "publishAllPorts": true,
       "useSSL": true,
       "DockerfileRunArguments": "-v \"{ProjectDir}/HomeBrokerChart/dist:/app/wwwroot\""
     },
-    "Run Test In Watch Mode": {
+    "Swagger": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Swagger"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "dotnetWatchProfile": true,
+      "workingDirectory": "./",
+      "hotReloadEnabled": true,
+      "leaveRunningOnClose": false,
+      "remoteDebugMachine": "https://localhost:5001;http://localhost:5000"
+    },
+    "Unit Tests in Watch Mode": {
       "workingDirectory": "../",
       "commandName": "Executable",
       "executablePath": "powershell.exe",

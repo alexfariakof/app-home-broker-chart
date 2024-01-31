@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { ChartService } from '../../shared/services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../shared/observables';
 import { IMagazineLuizaHistoryPrice } from '../../shared/interfaces';
+import { LineChartModule, MacdChartModule } from 'src/app/shared/components';
 
 describe('Test Unit HomeComponent', () => {
   let component: HomeComponent;
@@ -14,13 +15,15 @@ describe('Test Unit HomeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, LineChartModule, MacdChartModule ],
       providers: [ ChartService, PeriodStartDateObservable, PeriodEndDateObservable ],
     });
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     chartService = TestBed.inject(ChartService);
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
   });
 
   it('should create HomeComponent', () => {
@@ -37,8 +40,6 @@ describe('Test Unit HomeComponent', () => {
     spyOn(chartService, 'get').and.returnValue(Promise.resolve(fakeResponse));
 
     // Act
-    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
     component.ngOnInit();
 
     // Assert
