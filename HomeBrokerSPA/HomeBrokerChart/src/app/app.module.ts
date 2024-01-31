@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app.routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -13,10 +13,8 @@ import { CustomInterceptor } from './shared/interceptors/http.interceptor.servic
 import { PeriodFilterComponent } from './shared/components';
 
 @NgModule({
-    declarations: [AppComponent, NavMenuComponent],
-    providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true, }
-    ],
+    declarations: [AppComponent, NavMenuComponent ],
+    providers: [ { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true, } ],
     bootstrap: [AppComponent],
     imports: [BrowserModule, HttpClientModule, FormsModule, HomeModule, Acoesodule,
         AppRoutingModule, BrowserAnimationsModule, PeriodFilterComponent, NgbModule]

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavMenuComponent } from './nav-menu.component';
+import { PeriodFilterComponent } from '../shared/components';
 
 describe('Test Unit NavMenuComponent', () => {
   let component: NavMenuComponent;
@@ -7,7 +8,8 @@ describe('Test Unit NavMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NavMenuComponent],
+      declarations: [NavMenuComponent, ],
+      imports:[PeriodFilterComponent]
     });
 
     fixture = TestBed.createComponent(NavMenuComponent);

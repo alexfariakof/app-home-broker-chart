@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { ChartService } from '../../shared/services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../shared/observables';
 import { IMagazineLuizaHistoryPrice } from '../../shared/interfaces';
+import { LineChartModule, MacdChartModule } from 'src/app/shared/components';
 
 describe('Test Unit HomeComponent', () => {
   let component: HomeComponent;
@@ -14,7 +15,7 @@ describe('Test Unit HomeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, LineChartModule, MacdChartModule ],
       providers: [ ChartService, PeriodStartDateObservable, PeriodEndDateObservable ],
     });
 

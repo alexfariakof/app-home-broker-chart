@@ -1,14 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HomeModule } from './pages/home/home.module';
-import { LineChartModule } from './shared/components/charts';
+import {  LineChartModule, MacdChartModule, PeriodFilterComponent } from './shared/components';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 describe('Test Unit AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [HttpClientModule, HomeModule, LineChartModule]
+      declarations: [AppComponent, NavMenuComponent],
+      imports: [HttpClientModule, RouterTestingModule, HomeModule, LineChartModule, MacdChartModule, PeriodFilterComponent]
 
     }).compileComponents();
   });

@@ -7,8 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../../../shared/observables';
 import { ChartService } from '../../../../shared/services';
-import { mockMACD } from '../chart.options';
 import * as dayjs from 'dayjs';
+import { mockMACD } from '../chart.options';
 
 describe('MacdChartComponent', () => {
   let component: MacdChartComponent;
@@ -136,6 +136,22 @@ describe('MacdChartComponent', () => {
   });
 
   it('should create', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
+    component.ngOnInit();
+
+    // Assert
+    expect(component).toBeTruthy();
+  });
+
+  it('should create With Empty Chart', () => {
+    // Arrange & Act
+    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+    component.ngOnInit();
+
+    // Assert
     expect(component).toBeTruthy();
   });
 });

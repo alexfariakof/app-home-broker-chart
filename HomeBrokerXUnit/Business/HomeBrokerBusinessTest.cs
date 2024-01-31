@@ -91,7 +91,7 @@ public class HomeBrokerBusinessTest
     }
 
     [Fact]
-    public void GetSMA_With_Exception_Should_Throw_Exception()
+    public void Should_Throw_Exception_GetSMA()
     {
         // Arrange
         var mockRepository = new Mock<IHomeBrokerRepository>();
@@ -104,7 +104,7 @@ public class HomeBrokerBusinessTest
     }
 
     [Fact]
-    public void GetEMA_With_Exception_Should_Throw_Exception()
+    public void Should_Throw_Exception_GetEMA()
     {
         // Arrange
         var mockRepository = new Mock<IHomeBrokerRepository>();
@@ -117,7 +117,7 @@ public class HomeBrokerBusinessTest
     }
 
     [Fact]
-    public void GetMACD_With_Exception_Should_Throw_Exception()
+    public void Should_Throw_Exception_GetMACD()
     {
         // Arrange
         var mockRepository = new Mock<IHomeBrokerRepository>();

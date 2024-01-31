@@ -22,13 +22,13 @@ public class SMATest
     }
 
     [Fact]
-    public void Should_Throws_Erro_when_Calculates_SMA()
+    public void Should_Throws_ArgumentException_When_Calculates_SMA()
     {
         // Arrange
         List<decimal> historyPriceData = new List<decimal> { 11, 12, 13, 14 };
 
         // Act & Assert
         var exception = Assert.Throws<ArgumentException>(() => new Sma(historyPriceData));
-        Assert.Equal("Não há dados suficiente para gerar uma SMA.", exception.Message);
+        Assert.Equal("Não há dados suficientes para gerar uma SMA.", exception.Message);
     }
 }
