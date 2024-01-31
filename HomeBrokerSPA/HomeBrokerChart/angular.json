@@ -35,12 +35,14 @@
             "styles": [
               "@angular/material/prebuilt-themes/purple-green.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/mdb-ui-kit/css/mdb.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/mdb-ui-kit/js/mdb.umd.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/dayjs/dayjs.min.js"
@@ -83,14 +85,14 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "HomeBrokerSPA:build:production"
+              "buildTarget": "HomeBrokerSPA:build:production"
             },
             "watchmode": {
-              "browserTarget": "HomeBrokerSPA:build:development",
+              "buildTarget": "HomeBrokerSPA:build:development",
               "proxyConfig": "proxy.watch.conf.js"
             },
             "development": {
-              "browserTarget": "HomeBrokerSPA:build:development",
+              "buildTarget": "HomeBrokerSPA:build:development",
               "proxyConfig": "proxy.conf.js"
             }
           },
@@ -99,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "HomeBrokerSPA:build"
+            "buildTarget": "HomeBrokerSPA:build"
           }
         },
         "test": {
@@ -133,7 +135,8 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": true
+              "vendorChunk": true,
+              "buildOptimizer": true
             },
             "production": {
               "optimization": true,
@@ -141,26 +144,27 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
           }
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "HomeBrokerSPA:build:development",
+              "buildTarget": "HomeBrokerSPA:build:development",
               "serverTarget": "HomeBrokerSPA:server:development"
             },
             "production": {
-              "browserTarget": "HomeBrokerSPA:build:production",
+              "buildTarget": "HomeBrokerSPA:build:production",
               "serverTarget": "HomeBrokerSPA:server:production"
             }
           },
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/"
@@ -168,11 +172,11 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "HomeBrokerSPA:build:production",
+              "buildTarget": "HomeBrokerSPA:build:production",
               "serverTarget": "HomeBrokerSPA:server:production"
             },
             "development": {
-              "browserTarget": "HomeBrokerSPA:build:development",
+              "buildTarget": "HomeBrokerSPA:build:development",
               "serverTarget": "HomeBrokerSPA:server:development"
             }
           },
@@ -183,6 +187,5 @@
   },
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "HomeBrokerSPA"
+  }
 }

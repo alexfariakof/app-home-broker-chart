@@ -21,7 +21,7 @@ describe('CustomValidators', () => {
 
     const result = CustomValidators.dateRange(formGroup);
 
-    expect(result).toEqual({ dateRange: 'A data final deve ser maior ou igual à data inicial' });
+    expect(result).toEqual({ invalidDateRange: true, message: 'A data final deve ser maior ou igual à data inicial.' });
   });
 
   it('should return error for a date range with less than 5 days interval', () => {
@@ -32,7 +32,7 @@ describe('CustomValidators', () => {
 
     const result = CustomValidators.dateRange(formGroup);
 
-    expect(result).toEqual({ dateDifference: 'O intervalo entre as datas deve ser de pelo menos 5 dias' });
+    expect(result).toEqual({ invalidDateRange: true, message:'O intervalo entre as datas deve ser de pelo menos 5 dias.' });
   });
 
   it('should return error for a start date earlier than "2011-05-02"', () => {
@@ -43,7 +43,7 @@ describe('CustomValidators', () => {
 
     const result = CustomValidators.dateRange(formGroup);
 
-    expect(result).toEqual({ minDate: 'A data não deve ser anterior a 02/05/2011' });
+    expect(result).toEqual({ invalidDateRange: true, message: 'A data não deve ser anterior a 02/05/2011.' });
   });
 
   it('should return true for a valid period using IsValidPeriod', () => {
@@ -69,4 +69,5 @@ describe('CustomValidators', () => {
 
     expect(isValid).toBe(false);
   });
+
 });

@@ -16,7 +16,6 @@ import { PeriodFilterComponent } from './shared/components';
     declarations: [AppComponent, NavMenuComponent ],
     providers: [ { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true, } ],
     bootstrap: [AppComponent],
-    imports: [BrowserModule, HttpClientModule, FormsModule, HomeModule, Acoesodule,
-        AppRoutingModule, BrowserAnimationsModule, PeriodFilterComponent, NgbModule]
+    imports: [BrowserModule, HttpClientModule, FormsModule, HomeModule, Acoesodule, AppRoutingModule, BrowserAnimationsModule, PeriodFilterComponent, NgbModule ],
 })
 export class AppModule { }

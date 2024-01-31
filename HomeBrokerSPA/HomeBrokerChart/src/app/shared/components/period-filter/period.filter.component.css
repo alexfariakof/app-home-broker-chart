@@ -1,9 +1,9 @@
 #filterStart {
-  width: auto;
- }
+  width: 100%;
+}
 
 #filterEnd {
-  width: auto;
+  width: 100%;
 }
 
 .error-bi-input {
