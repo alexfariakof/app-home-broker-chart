@@ -12,8 +12,7 @@
     "build:ssr": "ng build && ng run HomeBrokerSPA:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:coverage": "ng test --code-coverage --browsers=ChromeHeadless --no-watch",
-    "test:debug": "set BROWSER=Chrome && ng test --browsers=Chrome"
+    "test:coverage": "ng test --code-coverage --browsers=ChromeHeadless --no-watch"
   },
   "private": true,
   "dependencies": {
