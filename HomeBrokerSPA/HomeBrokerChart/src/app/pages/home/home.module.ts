@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { ChartService } from '../../shared/services';
-import { LineChartModule, MacdChartModule } from 'src/app/shared/components';
+import { CandleChartModule, LineChartModule, MacdChartModule } from 'src/app/shared/components';
 @NgModule({
   declarations: [HomeComponent],
-  imports: [ BrowserModule,CommonModule, LineChartModule, MacdChartModule,  HttpClientModule],
+  imports: [ BrowserModule, CommonModule, LineChartModule, MacdChartModule,  HttpClientModule, CandleChartModule],
   providers: [ChartService],
   exports: [HomeComponent]
 })

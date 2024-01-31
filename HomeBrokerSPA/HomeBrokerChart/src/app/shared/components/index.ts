@@ -1,4 +1,5 @@
 export *  from './charts/candle.chart/candle.chart.component';
+export *  from './charts/candle.chart/candle.chart.module';
 export *  from './charts/line.chart/line.chart.component';
 export *  from './charts/line.chart/line.chart.module';
 export *  from './charts/macd-chart/macd.chart.component';

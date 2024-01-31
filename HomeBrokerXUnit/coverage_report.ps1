@@ -7,7 +7,7 @@ $coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath 
 
 # Excuta Teste Unitarios sem restore e build e gera o relatório de cobertura do Backend
 dotnet test ./HomeBrokerXUnit.csproj --results-directory $reportPath /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover" --no-restore --no-build 
-reportgenerator -reports:$projectTestPath\coverage.cobertura.xml -targetdir:$coverageXmlPath -reporttypes:"Html;lcov;" -sourcedirs:$sourceDirs > $null 2>&1
+reportgenerator -reports:$projectTestPath\coverage.cobertura.xml -targetdir:$coverageXmlPath -reporttypes:"Html;lcov;" -sourcedirs:$sourceDirs 
 
 
 cd $projectAngular
