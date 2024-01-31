@@ -1,5 +1,5 @@
 import { LineChartComponent } from './line.chart.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { ChartService } from '../../../services';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,11 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { seriesData } from '../chart.options/mock.chart.data';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import * as dayjs from 'dayjs';
+import { ChartCommonOptions } from '../chart.options';
 
 describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;
   let fixture: ComponentFixture<LineChartComponent>;
-  let chartService: ChartService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -76,7 +76,6 @@ describe('Test Unit LineChartComponent', () => {
         },
       },
     };
-    chartService = TestBed.inject(ChartService);
     fixture.detectChanges();
   });
 
@@ -99,4 +98,34 @@ describe('Test Unit LineChartComponent', () => {
     // Assert
     expect(component).toBeTruthy();
   });
+
+  it('should initialize component successfully', fakeAsync(() => {
+    // Arrange
+    const smaData = { values: [1, 2, 3] };
+    const ema9Data = { values: [4, 5, 6] };
+    const ema12Data = { values: [7, 8, 9] };
+    const ema26Data = { values: [10, 11, 12] };
+    const startDate = dayjs().format("YYYY-MM-DD");
+    const endDate = dayjs().add(30, 'days').format("YYYY-MM-DD");
+
+    spyOn(component.chartService, 'getSMA').and.returnValue(Promise.resolve(smaData));
+    spyOn(component.chartService, 'getEMA')
+    .withArgs(9, startDate, endDate).and.returnValue(Promise.resolve(ema9Data))
+    .withArgs(12, startDate, endDate).and.returnValue(Promise.resolve(ema12Data))
+    .withArgs(26, startDate, endDate).and.returnValue(Promise.resolve(ema26Data));
+
+    // Act
+    component.obsStartDate.startDate = startDate;
+    component.obsEndDate.endDate = endDate;
+    flush();
+    component.initializeComponent();
+    tick();
+
+    // Assert
+    expect(component.chartService.getSMA).toHaveBeenCalled();
+    expect(component.chartService.getSMA).toHaveBeenCalledTimes(1);
+    expect(component.chartService.getEMA).toHaveBeenCalled();
+    expect(component.chartService.getEMA).toHaveBeenCalledTimes(3);
+    expect(component.chartOptions).toBeDefined();
+  }));
 });
