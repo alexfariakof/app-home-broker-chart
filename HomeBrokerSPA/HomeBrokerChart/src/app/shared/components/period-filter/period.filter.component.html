@@ -1,8 +1,8 @@
-<form class="d-flex flex-row-reverse  justify-content-around" [formGroup]="periodForm" (ngSubmit)="onUpdateClick()">
+<form class="d-flex flex-row-reverse  justify-content-around" [formGroup]="periodForm" (ngSubmit)="onUpdateClick()" no-validate >
   <div class="input-group mt-4 d-flex flex-column align-items-center justify-content-center">
     <button type="submit"class="btn btn-primary w-responsive" >Atualizar</button>
   </div>
-  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2">
+  <mdb-form-control class="md-form md-outline always-active-label input-with-post-icon datepicker m-2">
     <label class="form-label" for="filterEnd">Período Final</label>
     <input
       autofocus
@@ -12,17 +12,14 @@
       min="1900"
       mask="DD/MM/YYYY"
       class="form-control"
-      [(ngModel)]="obsEndDate.endDate"
       formControlName="filterEnd"
       [ngClass]="{
-        'is-invalid':
-        (periodForm.get('filterEnd')?.errors?.['required'] ||
-        periodForm.get('filterEnd')?.errors?.['dateRange']) &&
-        periodForm.get('filterEnd')?.touched
+        'is-invalid': periodForm.get('filterEnd')?.touched || periodForm.errors,
+        'is-valid': !periodForm.errors || periodForm.get('filterEnd')?.touched
       }"
     />
-  </div>
-  <div class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" >
+  </mdb-form-control>
+  <mdb-form-control class="md-form md-outline always-active-label input-with-post-icon datepicker m-2" >
     <label class="form-label" for="filterStart">Período Inicial</label>
     <input
       autofocus
@@ -33,15 +30,11 @@
       min="1900"
       mask="DD/MM/YYYY"
       class="form-control"
-      [(ngModel)]="obsStartDate.startDate"
       [ngClass]="{
-        'is-invalid':
-        (periodForm.get('filterStart')?.errors?.['required'] ||
-        periodForm.get('filterStart')?.errors?.['dateRange']) &&
-        periodForm.get('filterStart')?.touched
+        'is-invalid': periodForm.get('filterStart')?.touched || periodForm.errors,
+        'is-valid': !periodForm.errors || periodForm.get('filterStart')?.touched
       }"
-
     />
-  </div>
+  </mdb-form-control>
 </form>
 

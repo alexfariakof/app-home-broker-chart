@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PeriodStartDateObservable } from './../../observables/period/period.startDate.observable';
 import { PeriodEndDateObservable } from '../../observables';
 import { CustomValidators } from '../../validators';
+import { Dayjs } from 'dayjs';
 @Component({
   selector: 'app-period-filter',
   standalone: true,
@@ -11,29 +12,33 @@ import { CustomValidators } from '../../validators';
   styleUrls: ['./period.filter.component.css'],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
-export class PeriodFilterComponent implements OnInit{
-  periodForm:FormGroup;
+export class PeriodFilterComponent implements OnInit {
+  periodForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private builder: FormBuilder,
     public obsStartDate: PeriodStartDateObservable,
-    public obsEndDate: PeriodEndDateObservable)
-  {
-    this.periodForm = this.fb.group(
+    public obsEndDate: PeriodEndDateObservable) {
+
+    this.periodForm = this.builder.group(
       {
-        filterStart: [obsStartDate.startDate, [Validators.required, CustomValidators.dateRange]],
-        filterEnd: [obsEndDate.endDate, [Validators.required, CustomValidators.dateRange]],
+        filterStart: new FormControl(obsStartDate.startDate, Validators.required),
+        filterEnd: new FormControl(obsEndDate.endDate, Validators.required),
       },
       {
         validators: [CustomValidators.dateRange],
       }
     );
 
-
+    this.periodForm.valueChanges.subscribe(form => {
+      this.obsStartDate.startDate = form.filterStart;
+      this.obsEndDate.endDate = form.filterEnd;
+    });
   }
-  ngOnInit(): void {}
 
-  onUpdateClick: Function = ():void => {
+  ngOnInit(): void { }
+
+  onUpdateClick: Function = (): void => {
     if (this.periodForm.valid)
       location.reload();
   }

@@ -1,5 +1,3 @@
-import * as dayjs from "dayjs";
-
 export const seriesData = [
   {
     x: new Date(2023, 1, 1),
