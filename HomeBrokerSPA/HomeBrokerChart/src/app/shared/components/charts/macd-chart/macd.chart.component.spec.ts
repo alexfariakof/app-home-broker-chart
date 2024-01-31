@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { MacdChartComponent } from './macd.chart.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -9,6 +9,7 @@ import { PeriodStartDateObservable, PeriodEndDateObservable } from '../../../../
 import { ChartService } from '../../../../shared/services';
 import * as dayjs from 'dayjs';
 import { mockMACD } from '../chart.options';
+import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
 
 describe('MacdChartComponent', () => {
   let component: MacdChartComponent;
@@ -148,10 +149,67 @@ describe('MacdChartComponent', () => {
   it('should create With Empty Chart', () => {
     // Arrange & Act
     component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD");
     component.ngOnInit();
 
     // Assert
     expect(component).toBeTruthy();
   });
+
+  it('should initialize component successfully', fakeAsync(() => {
+    // Arrange
+    const startDate = dayjs().format("YYYY-MM-DD");
+    const endDate = dayjs().add(10, 'days').format("YYYY-MM-DD");
+
+    const historyPrices: any[] = [
+      {
+        date: dayjs(),
+        open: 100,
+        high: 120,
+        low: 90,
+        close: 110,
+        adjClose: 108,
+        volume: 100000,
+      },
+      {
+        date: dayjs().add(15, 'days'),
+        open: 110,
+        high: 130,
+        low: 95,
+        close: 120,
+        adjClose: 118,
+        volume: 110000,
+      },
+      {
+        date: dayjs().add(30, 'days'),
+        open: 110,
+        high: 130,
+        low: 95,
+        close: 120,
+        adjClose: 118,
+        volume: 110000,
+      },
+    ];
+    const macdData = { histogram: [1, 2, 3], macdLine: [4, 5, 6], signal: [7, 8, 9] };
+
+    spyOn(component.chartService, 'get')
+    .withArgs(startDate, endDate)
+    .and.returnValue(Promise.resolve(historyPrices));
+    spyOn(component.chartService, 'getMACD')
+    .withArgs(startDate, endDate).and.returnValue(Promise.resolve(macdData));
+
+    // Act
+    component.obsStartDate.startDate = startDate;
+    component.obsEndDate.endDate = endDate;
+    component.initializeComponent();
+    flush();
+    tick();
+
+    // Assert
+    expect(component.chartService.get).toHaveBeenCalled();
+    expect(component.chartService.get).toHaveBeenCalledTimes(1);
+    expect(component.chartService.getMACD).toHaveBeenCalled();
+    expect(component.chartService.getMACD).toHaveBeenCalledTimes(1);
+    expect(component.chartMacdOptions).toBeDefined();
+  }));
 });
