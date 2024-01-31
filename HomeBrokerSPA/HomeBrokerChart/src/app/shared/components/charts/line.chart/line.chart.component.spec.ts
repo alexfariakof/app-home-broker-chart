@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
-import { seriesData } from '../chart.options/ohlc';
+import { seriesData } from '../chart.options/mock.chart.data';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import * as dayjs from 'dayjs';
 
@@ -83,7 +83,8 @@ describe('Test Unit LineChartComponent', () => {
   it('should create', () => {
     // Arrange & Act
     component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD")
+    component.obsEndDate.endDate = dayjs().add(30, 'days').format("YYYY-MM-DD");
+    component.ngOnInit();
 
     // Assert
     expect(component).toBeTruthy();
@@ -93,36 +94,9 @@ describe('Test Unit LineChartComponent', () => {
     // Arrange & Act
     component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
     component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
+    component.ngOnInit();
 
     // Assert
     expect(component).toBeTruthy();
   });
-
-  it('should format an array of numbers with two decimal places', () => {
-    // Arrange
-    const testData = [1.234, 5.678, 9.999];
-
-    // Act
-    const formattedData = component.formatData(testData);
-
-    // Assert
-    formattedData.forEach((value, index) => {
-      expect(value).toEqual(parseFloat(testData[index].toFixed(2)));
-    });
-  });
-
-  it('should handle an empty array', () => {
-    // Arrange
-    const emptyArray: number[] = [];
-
-    // Act
-    component.obsStartDate.startDate = dayjs().format("YYYY-MM-DD");
-    component.obsEndDate.endDate = dayjs().add(2, 'days').format("YYYY-MM-DD")
-
-    const formattedData = component.formatData(emptyArray);
-
-    // Assert
-    expect(formattedData).toEqual([]);
-  });
-
 });

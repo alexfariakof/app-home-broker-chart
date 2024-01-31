@@ -32,7 +32,7 @@ public class ChartHomeBrokerController : ControllerBase
     [HttpGet("{StartDate}/{EndDate}")]
     [ProducesResponseType((200), Type = typeof(List<MagazineLuizaHistoryPrice>))]
     [ProducesResponseType((400), Type = typeof(string))]
-    [ProducesResponseType((401))]
+    [ProducesResponseType((204))]
     public IActionResult Get([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
     {
         try

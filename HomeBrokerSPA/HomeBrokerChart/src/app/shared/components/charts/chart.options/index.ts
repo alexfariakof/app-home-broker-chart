@@ -1,3 +1,2 @@
-export * from './ChartLineOptions';
-export * from './ChartCandleOptions';
-export * from './ohlc';
+export * from './chart.common.options';
+export * from './mock.chart.data';

@@ -1,10 +1,9 @@
 import { CustomValidators } from './../../../validators/custom.validators';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent }  from "ng-apexcharts";
-import { ChartLineOptions } from '../chart.options/ChartLineOptions';
 import { ChartService } from '../../../services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
-
+import { ChartCommonOptions, ChartOptions } from '../chart.options';
 
 @Component({
   selector: 'app-line-chart',
@@ -14,7 +13,7 @@ import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shar
 
 export class LineChartComponent implements OnInit{
   @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: ChartLineOptions | any;
+  public chartOptions: ChartOptions | any;
 
   constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
 
@@ -22,80 +21,7 @@ export class LineChartComponent implements OnInit{
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString()))
       this.initializeComponent();
     else
-    this.chartOptions = {
-      series: [
-        {
-          name: "EMA 9",
-          data: []
-        },
-        {
-          name: "EMA 12",
-          data: []
-        },
-        {
-          name: "EMA 26",
-          data: []
-        },
-        {
-          name: "SMA",
-          color: "#000",
-          data:  []
-        },
-      ],
-      chart: {
-        height: (document.body.clientHeight/3)-16,
-        type: "area",
-        zoom: {
-          type: "x",
-          enabled: true,
-          autoScaleYaxis: true
-        },
-        toolbar: {
-          autoSelected: "zoom"
-        },
-        markers: {
-          size: 0
-        },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          inverseColors: false,
-          opacityFrom: 0.5,
-          opacityTo: 0,
-          stops: [1, 2, 4, 8 ]
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        width: [2],
-        curve: "straight"
-      },
-      title: {
-        text: "MAGAZINE LUIZA S.A.",
-        align: "left"
-      },
-      grid: {
-        row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-          opacity: 0.5
-        }
-      },
-      xaxis: {
-        labels: {
-          show: false,
-        },
-      },
-      yaxis: [
-        {
-          opposite: true,
-
-        },
-      ]
-    };
+      ChartCommonOptions.initializeChartOptions(this.chartOptions, (document.body.clientHeight / 3) - 16);
   }
 
   public initializeComponent = async ():Promise<void> =>{
@@ -103,26 +29,15 @@ export class LineChartComponent implements OnInit{
     const ema9Data = await this.chartService.getEMA(9,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema12Data = await this.chartService.getEMA(12,this.obsStartDate.startDate, this.obsEndDate.endDate);
     const ema26Data = await this.chartService.getEMA(26,this.obsStartDate.startDate, this.obsEndDate.endDate);
+
+    const data = [
+      { name: "EMA 9", data: ChartCommonOptions.formatData(ema9Data.values) || [] },
+      { name: "EMA 12", data: ChartCommonOptions.formatData(ema12Data.values) || [] },
+      { name: "EMA 26", data: ChartCommonOptions.formatData(ema26Data.values) || [] },
+      { name: "SMA", color: "#000", data: ChartCommonOptions.formatData(smaData.values) || [] },
+    ];
+
     this.chartOptions = {
-      series: [
-        {
-          name: "EMA 9",
-          data: this.formatData(ema9Data.values)  ?? []
-        },
-        {
-          name: "EMA 12",
-          data: this.formatData(ema12Data.values)  ?? []
-        },
-        {
-          name: "EMA 26",
-          data: this.formatData(ema26Data.values)  ?? []
-        },
-        {
-          name: "SMA",
-          color: "#000",
-          data: this.formatData(smaData.values)  ?? []
-        },
-      ],
       chart: {
         height: (document.body.clientHeight/3)-16,
         type: "area",
@@ -177,9 +92,6 @@ export class LineChartComponent implements OnInit{
         },
       ]
     };
-  }
-
-  formatData(data: number[]): number[] {
-    return data.map(value => parseFloat(value.toFixed(2)));
+    ChartCommonOptions.initializeChartData(this.chartOptions, data, []);
   }
 }
