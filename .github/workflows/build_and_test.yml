@@ -81,3 +81,4 @@ jobs:
     name: Triggered Build and Test
     uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
     secrets: inherit
+
