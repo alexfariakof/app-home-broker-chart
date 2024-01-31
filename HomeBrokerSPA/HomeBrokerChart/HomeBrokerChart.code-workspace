@@ -24,7 +24,16 @@
         "userDataDir": "${workspaceFolder}/.vscode/chrome",
         "disableNetworkCache": true,
         "diagnosticLogging": true
-      }
+      },
+      {
+        "name": "Run Debug Unit Tests",
+        "request": "launch",
+        "runtimeArgs": ["run", "test:debug"],
+        "runtimeExecutable": "npm",
+        "skipFiles": ["<node_internals>/**"],
+        "type": "node",
+        "url": "http://localhost:9876/debug.html"
+      },
     ]
   }
 }
