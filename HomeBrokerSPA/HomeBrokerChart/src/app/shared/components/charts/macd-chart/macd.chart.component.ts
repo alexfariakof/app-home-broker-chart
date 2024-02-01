@@ -1,3 +1,4 @@
+import { seriesData } from './../chart.options/chart.mock.data';
 import { Component, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';
@@ -15,13 +16,13 @@ export class MacdChartComponent {
   public chartMacdOptions: ChartOptions | any;
   public magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = [];
 
-  constructor( public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
+  constructor( public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {  }
 
   async ngOnInit(): Promise<void> {
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString())) {
       this.initializeComponent();
     } else {
-      ChartCommonOptions.initializeChartOptions(this.chartMacdOptions, (document.body.clientHeight / 3) - 16);
+      this.chartMacdOptions = ChartCommonOptions.initializeNullChartOptions((document.body.clientHeight / 3) - 16);
     }
   }
 

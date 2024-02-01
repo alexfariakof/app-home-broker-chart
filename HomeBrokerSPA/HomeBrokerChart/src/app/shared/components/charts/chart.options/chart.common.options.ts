@@ -16,10 +16,61 @@ export type ChartOptions = {
 };
 
 export class ChartCommonOptions {
-  static initializeChartOptions(chartOptions: ChartOptions, height: number): void {
-    // Lógica comum para inicializar os ChartOptions
-    // ...
-    chartOptions.chart.height = height;
+
+  static initializeNullChartOptions(height: number): ChartOptions | any{
+    return {
+      series: [
+        { name: "X", color: "#000", data:  [0, 0, 0, 0, 0 ] }
+      ],
+      chart: {
+
+        height: height,
+        type: "line",
+        zoom: {
+          type: "x",
+          enabled: false,
+          autoScaleYaxis: false
+        },
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [1, 2, 4, 8]
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        width: [2],
+        curve: "straight"
+      },
+      title: {
+        text: "Nenhuma informação encontrada...",
+        align: "left"
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5
+        }
+      },
+      xaxis: {
+        labels: {
+          show: false,
+        },
+      },
+      yaxis: [
+        {
+          opposite: true,
+
+        },
+      ]
+    };
   }
 
   static initializeChartData(chartOptions: any, data: any[], labelXAxis: any[]): void {
