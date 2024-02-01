@@ -6,10 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule } from '@angular/forms';
-import { seriesData } from '../chart.options/mock.chart.data';
+import { seriesData } from '../chart.options/chart.mock.data';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import * as dayjs from 'dayjs';
-import { ChartCommonOptions } from '../chart.options';
+
 
 describe('Test Unit LineChartComponent', () => {
   let component: LineChartComponent;

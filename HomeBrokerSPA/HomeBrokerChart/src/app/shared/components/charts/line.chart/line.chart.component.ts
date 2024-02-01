@@ -1,6 +1,7 @@
+import { seriesData } from './../chart.options/chart.mock.data';
 import { CustomValidators } from './../../../validators/custom.validators';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { ChartComponent }  from "ng-apexcharts";
+import { ChartComponent } from "ng-apexcharts";
 import { ChartService } from '../../../services';
 import { PeriodStartDateObservable, PeriodEndDateObservable } from 'src/app/shared/observables';
 import { ChartCommonOptions, ChartOptions } from '../chart.options';
@@ -11,11 +12,11 @@ import { ChartCommonOptions, ChartOptions } from '../chart.options';
   styleUrls: ['./line.chart.component.css']
 })
 
-export class LineChartComponent implements OnInit{
+export class LineChartComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: ChartOptions | any;
 
-  constructor(public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {}
+  constructor(public chartService: ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) { }
 
   ngOnInit(): void {
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString()))
@@ -24,11 +25,11 @@ export class LineChartComponent implements OnInit{
       this.chartOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
   }
 
-  public initializeComponent = async ():Promise<void> =>{
+  public initializeComponent = async (): Promise<void> => {
     const smaData = await this.chartService.getSMA(this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const ema9Data = await this.chartService.getEMA(9,this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const ema12Data = await this.chartService.getEMA(12,this.obsStartDate.startDate, this.obsEndDate.endDate);
-    const ema26Data = await this.chartService.getEMA(26,this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema9Data = await this.chartService.getEMA(9, this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema12Data = await this.chartService.getEMA(12, this.obsStartDate.startDate, this.obsEndDate.endDate);
+    const ema26Data = await this.chartService.getEMA(26, this.obsStartDate.startDate, this.obsEndDate.endDate);
 
     const data = [
       { name: "EMA 9", data: ChartCommonOptions.formatData(ema9Data.values) || [] },
@@ -39,7 +40,7 @@ export class LineChartComponent implements OnInit{
 
     this.chartOptions = {
       chart: {
-        height: (document.body.clientHeight/3)-16,
+        height: (document.body.clientHeight / 3) - 16,
         type: "area",
         zoom: {
           type: "x",
@@ -60,7 +61,7 @@ export class LineChartComponent implements OnInit{
           inverseColors: false,
           opacityFrom: 0.5,
           opacityTo: 0,
-          stops: [1, 2, 4, 8 ]
+          stops: [1, 2, 4, 8]
         }
       },
       dataLabels: {

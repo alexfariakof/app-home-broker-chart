@@ -21,5 +21,4 @@ fi
 
 # Executa Testes Unitários e gera o relatório de cobertura do Frontend
 npm run test:coverage
-
 #cd "$projectTestPath

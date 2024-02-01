@@ -1,4 +1,5 @@
 import { ChartCommonOptions, ChartOptions } from "./chart.common.options";
+
 describe('ChartCommonOptions', () => {
   let chartOptions: ChartOptions | any;
 
@@ -45,21 +46,27 @@ describe('ChartCommonOptions', () => {
   });
 
   it('should initialize chart data with given data and labelXAxis', () => {
+    // Arrange
     const data = [10, 20, 30];
     const labelXAxis = ['Jan', 'Feb', 'Mar'];
 
+    // Act
     ChartCommonOptions.initializeChartData(chartOptions, data, labelXAxis);
 
+    // Assert
     expect(chartOptions.series).toEqual(data);
     expect(chartOptions.xaxis.categories).toEqual(labelXAxis);
   });
 
   it('should format data by rounding to two decimal places', () => {
+    // Arrange
     const input = [10.123, 20.456, 30.789];
     const expectedOutput = [10.12, 20.46, 30.79];
 
+    // Act
     const result = ChartCommonOptions.formatData(input);
 
+    // Assert
     expect(result).toEqual(expectedOutput);
   });
 });

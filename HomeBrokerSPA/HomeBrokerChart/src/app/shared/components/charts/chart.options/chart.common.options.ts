@@ -78,7 +78,7 @@ export class ChartCommonOptions {
     ],
     colors: []
   };
-
+  
   static initializeChartData(chartOptions: any, data: any[], labelXAxis: any[]): void {
     chartOptions.series = data;
     chartOptions.xaxis.categories = labelXAxis;
