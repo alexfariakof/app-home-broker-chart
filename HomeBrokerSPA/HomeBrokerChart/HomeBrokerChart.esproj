@@ -5,7 +5,7 @@
 
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
     <!-- Command to run on project build  -->
-    <BuildCommand Condition=" '$(Configuration)' == 'Debug'" >npm run build"</BuildCommand> 
+    <BuildCommand> npm run build"</BuildCommand> 
     <!-- Command to create an optimized build of the project that's ready for publishing -->
     <ProductionBuildCommand>npm run build</ProductionBuildCommand>
     <!-- Folder where production build objects will be placed -->
