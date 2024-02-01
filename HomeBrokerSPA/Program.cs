@@ -10,17 +10,6 @@ var appName = "Home Broker Chart API";
 var appVersion = "v1";
 var appDescription = $"API para gerar dados históricos da variação de preços da Magazine Luiza S.A.em um determinado período.";
 
-builder.Services.AddCors(c =>
-{
-    c.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-
-    });
-});
-
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IHomeBrokerBusiness), typeof(HomeBrokerBusiness));
@@ -55,9 +44,7 @@ else if (app.Environment.IsEnvironment("Swagger"))
 else
     app.UseHttpsRedirection();
 
-app.UseCors();
 app.UseHsts();
-
 app.UseSwagger();
 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json",  $"{appName} {appVersion}"); });
 
