@@ -21,7 +21,7 @@ export class LineChartComponent implements OnInit{
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString()))
       this.initializeComponent();
     else
-      ChartCommonOptions.initializeChartOptions(this.chartOptions, (document.body.clientHeight / 3) - 16);
+      this.chartOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
   }
 
   public initializeComponent = async ():Promise<void> =>{

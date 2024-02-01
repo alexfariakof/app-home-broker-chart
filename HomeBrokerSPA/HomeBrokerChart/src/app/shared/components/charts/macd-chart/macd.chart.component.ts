@@ -21,7 +21,7 @@ export class MacdChartComponent {
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString())) {
       this.initializeComponent();
     } else {
-      ChartCommonOptions.initializeChartOptions(this.chartMacdOptions, (document.body.clientHeight / 3) - 16);
+      this.chartMacdOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
     }
   }
 

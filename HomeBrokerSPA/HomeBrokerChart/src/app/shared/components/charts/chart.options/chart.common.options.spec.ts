@@ -1,6 +1,4 @@
 import { ChartCommonOptions, ChartOptions } from "./chart.common.options";
-import { seriesData } from "./mock.chart.data";
-
 describe('ChartCommonOptions', () => {
   let chartOptions: ChartOptions | any;
 
@@ -37,10 +35,13 @@ describe('ChartCommonOptions', () => {
     };
   });
 
-  it('should initialize chart options with the provided height', () => {
-    ChartCommonOptions.initializeChartOptions(chartOptions, 500);
+  it('should initialize chart options with Default Options', () => {
+    // Arrange & Act
+    const chartOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
+    ChartCommonOptions.initializeChartData(chartOptions, [], []);
 
-    expect(chartOptions.chart.height).toEqual(500);
+    // Assert
+    expect(chartOptions).not.toBeNull();
   });
 
   it('should initialize chart data with given data and labelXAxis', () => {
