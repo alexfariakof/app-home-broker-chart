@@ -36,13 +36,13 @@ describe('ChartCommonOptions', () => {
     };
   });
 
-  it('should initialize chart options with the provided height', () => {
+  it('should initialize chart options with Default Options', () => {
     // Arrange & Act
-    const chartOptions = ChartCommonOptions.initializeNullChartOptions(500);
+    const chartOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
+    ChartCommonOptions.initializeChartData(chartOptions, [], []);
 
     // Assert
     expect(chartOptions).not.toBeNull();
-    expect(chartOptions.chart.height).toEqual(500);
   });
 
   it('should initialize chart data with given data and labelXAxis', () => {

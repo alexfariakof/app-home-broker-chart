@@ -1,4 +1,3 @@
-import { seriesData } from './../chart.options/chart.mock.data';
 import { CustomValidators } from './../../../validators/custom.validators';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent } from "ng-apexcharts";
@@ -22,7 +21,7 @@ export class LineChartComponent implements OnInit {
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString()))
       this.initializeComponent();
     else
-      this.chartOptions = ChartCommonOptions.initializeNullChartOptions((document.body.clientHeight / 3) - 16);
+      this.chartOptions = ChartCommonOptions.DEFAULT_CHART_OPTIONS;
   }
 
   public initializeComponent = async (): Promise<void> => {
