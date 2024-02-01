@@ -18,7 +18,7 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
-  yaxis: any;
+  yaxis: ApexYAxis;
   fill: ApexFill;
   stroke: ApexStroke;
   markers: ApexMarkers;
