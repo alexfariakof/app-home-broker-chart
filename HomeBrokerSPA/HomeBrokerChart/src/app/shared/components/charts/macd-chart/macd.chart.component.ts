@@ -1,4 +1,3 @@
-import { seriesData } from './../chart.options/chart.mock.data';
 import { Component, ViewChild } from '@angular/core';
 import { ChartComponent } from 'ng-apexcharts';
 import { IMagazineLuizaHistoryPrice } from 'src/app/shared/interfaces';

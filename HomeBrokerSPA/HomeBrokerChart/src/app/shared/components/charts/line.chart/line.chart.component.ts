@@ -1,4 +1,3 @@
-import { seriesData } from './../chart.options/chart.mock.data';
 import { CustomValidators } from './../../../validators/custom.validators';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ChartComponent } from "ng-apexcharts";
