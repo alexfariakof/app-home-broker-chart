@@ -1,2 +1,2 @@
 export * from './chart.common.options';
-export * from './mock.chart.data';
+export * from './chart.mock.data';
