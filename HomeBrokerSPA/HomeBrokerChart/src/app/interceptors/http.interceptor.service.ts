@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoadingComponent } from '../components';
+import { LoadingComponent } from '../shared/components';
 
 @Injectable()
 export class CustomInterceptor implements HttpInterceptor {

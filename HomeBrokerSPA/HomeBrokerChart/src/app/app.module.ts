@@ -9,8 +9,8 @@ import { HomeModule } from './pages/home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Acoesodule } from './pages/acoes/acoes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomInterceptor } from './shared/interceptors/http.interceptor.service';
 import { PeriodFilterComponent } from './shared/components';
+import { CustomInterceptor } from './interceptors/http.interceptor.service';
 
 @NgModule({
     declarations: [AppComponent, NavMenuComponent ],
