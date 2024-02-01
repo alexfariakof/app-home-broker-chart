@@ -28,7 +28,7 @@ export type ChartOptions = {
 };
 
 export class ChartCommonOptions {
-  static readonly DEFAULT_CHART_OPTIONS: ChartOptions  = {
+  static readonly DEFAULT_CHART_OPTIONS: ChartOptions | any  = {
     series: [{ name: "X", color: "#000", data: [0, 0, 0, 0, 0] }],
     chart: {
       height: (document.body.clientHeight / 3) - 16,
@@ -78,7 +78,7 @@ export class ChartCommonOptions {
     ],
     colors: []
   };
-  
+
   static initializeChartData(chartOptions: any, data: any[], labelXAxis: any[]): void {
     chartOptions.series = data;
     chartOptions.xaxis.categories = labelXAxis;
