@@ -18,7 +18,7 @@ export type ChartOptions = {
   xaxis: ApexXAxis;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
-  yaxis: ApexYAxis;
+  yaxis: any;
   fill: ApexFill;
   stroke: ApexStroke;
   markers: ApexMarkers;
@@ -28,7 +28,7 @@ export type ChartOptions = {
 };
 
 export class ChartCommonOptions {
-  static DEFAULT_CHART_OPTIONS: ChartOptions | any = {
+  static readonly DEFAULT_CHART_OPTIONS: ChartOptions  = {
     series: [{ name: "X", color: "#000", data: [0, 0, 0, 0, 0] }],
     chart: {
       height: (document.body.clientHeight / 3) - 16,
