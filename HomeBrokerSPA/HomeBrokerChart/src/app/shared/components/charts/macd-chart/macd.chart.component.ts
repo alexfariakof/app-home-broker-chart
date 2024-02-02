@@ -17,7 +17,7 @@ export class MacdChartComponent {
   public chartMacdOptions: ChartOptions | any;
   public magazineLuizaHistoryPrices: IMagazineLuizaHistoryPrice[] = [];
 
-  constructor( public chartService:ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) {  }
+  constructor(public chartService: ChartService, public obsStartDate: PeriodStartDateObservable, public obsEndDate: PeriodEndDateObservable) { }
 
   async ngOnInit(): Promise<void> {
     if (CustomValidators.IsValidPeriod(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString())) {
@@ -27,13 +27,13 @@ export class MacdChartComponent {
     }
   }
 
-  public initializeComponent = async ():Promise<void> =>{
+  public initializeComponent = async (): Promise<void> => {
     this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
     const macd = await this.chartService.getMACD(this.obsStartDate.startDate, this.obsEndDate.endDate);
     const data = [
       { name: "Histograma", type: "bar", data: macd.histogram },
-      { name: "MACD Line", type: "line", data: macd.macdLine },
-      { name: "Signal", type: "line", data: macd.signal },
+      { name: "MACD Line", type: "line", color: "#000", data: macd.macdLine },
+      { name: "Signal", type: "line", color: "#FFA500", data: macd.signal },
     ];
 
     const labelXAxis: any[] = [];
@@ -42,7 +42,7 @@ export class MacdChartComponent {
     });
     this.chartMacdOptions = {
       chart: {
-        height: (document.body.clientHeight/2)-16,
+        height: (document.body.clientHeight / 2) - 16,
         type: "line",
         selection: {
           enabled: true,
@@ -55,7 +55,8 @@ export class MacdChartComponent {
             opacity: 0.4
           },
           stroke: {
-            width: [4, 2, 4]
+            width: [4, 2, 4],
+
           }
         }
       },
@@ -65,27 +66,46 @@ export class MacdChartComponent {
       },
       plotOptions: {
         bar: {
+          //distributed: true,
           columnWidth: "80%",
+          borderRadius: 3,
           colors: {
             ranges: [
               {
-                from: -1000,
+                from: -Number.MAX_VALUE,
                 to: 0,
-                color: "#F15B46"
+                color: '#FF0000',
               },
               {
-                from: 1,
-                to: 100,
-                color: "#FEB019"
-              }
-            ]
-          }
-        }
+                from: 0,
+                to: Number.MAX_VALUE,
+                color: '#229A00',
+              },
+            ],
+          },
+        },
       },
       stroke: {
         width: [12, 2, 2],
-        curve: "straight"
-
+        curve: "straight",
+        colors: [
+          {
+            ranges: [
+              {
+                from: -Number.MAX_VALUE,
+                to: 0,
+                color: '#FF0000',
+              },
+              {
+                from: 0,
+                to: Number.MAX_VALUE,
+                color: '#229A00',
+              },
+            ],
+          },
+          '#000',
+          '#FFA500'
+        ],
       },
       grid: {
         row: {
