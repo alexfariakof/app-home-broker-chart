@@ -37,8 +37,7 @@ function Remove-TestResults {
         Start-Sleep -Seconds 10        
         if ($REPEAT_WHILE -eq 6) { break }
         $REPEAT_WHILE = $REPEAT_WHILE + 1
-    }   
-
+    }    
  } 
 
 Stop-ProcessesByName
