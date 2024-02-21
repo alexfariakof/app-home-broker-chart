@@ -1,27 +1,19 @@
-# HomeBrokerSPA
+# Home Broker Chart
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
+Este projeto foi gerado utilizando template "Angular and ASP.NET Core" do Microsoft Visual Studio 2022 como base inicial da arquitetura do projeto SPA. O projeto segue utilizando padrão "DDD" e "MVC", onde as camadas Model e Controller são desenvolvidas usando DDD com C# (Backend) e a View usando Angular (Frontend). Foi configurado para proporcionar uma forma de desenvolver testes unitários mais fluida permitindo o uso de watch e atualização dos relátorios Coverage em tempo de execução. Esta dockerizada e configurada para a realização de debug da aplicação backend em ambiente docker.
 
-## Development server
+## Cloud Application in Development 
+> Este projeto pode ser acessado em  [Home Broker Chart Development](http://alexfariakof.com:3002/)
+![image](https://github.com/alexfariakof/Home_Broker_Chart/assets/42475620/4c98b5ca-7628-4c27-b32e-556897a05c1d)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Run Local Development Server
+###### obs.: Caso seja a primeira execução pode levar alguns minutos para a aplicação iniciar pois configurações da aplicação Angular seram realizadas.
+> Com a solução ```slnHomeBroker.sln``` do projeto aberto no Visual Studio 2022 Set o projeto HomeBrokerSPA como StartUp Project e execute o projeto. 
 
-## Code scaffolding
+## Run Docker Local Development Server
+###### obs.: Este build demora um pouco seja paciente.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+> Tenha certeza de ter Docker Engine instalado, senão vá até [Install Docker Engine](https://docs.docker.com/engine/install/).
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+> Com a solução ```slnHomeBroker.sln``` do projeto aberto no Visual Studio 2022 Set o projeto docker-compose como StartUp Project e execute o projeto. 
+ 
