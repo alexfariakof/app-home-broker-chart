@@ -69,3 +69,7 @@ Run `npm run test` ou `ng test` para executar testes unitários, este é eecutad
 
 Run `generate_coverage_report.ps1` para executar testes unitários e gerar o relatório coverage, após a execução o relatório sera aberto no browser default.
 
+## Sonar Cloud
+[Overview Project in Sonar Cloud](https://sonarcloud.io/summary/new_code?id=alexfariakof_Home_Broker_Chart)
+![image](https://github.com/alexfariakof/Home_Broker_Chart/assets/42475620/f6ff3d93-46a1-43a1-a2eb-0385e4e1a17f)
+
