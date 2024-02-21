@@ -44,7 +44,7 @@ function Remove-TestResults {
 Stop-ProcessesByName
 Remove-TestResults
 dotnet clean slnPixCharge.sln > $null 2>&1
-$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
+$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "$projectTestPath/HomeBrokerXUnit.csproj", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
  Wait-TestResults
  Invoke-Item $coverageXmlPath\index.html
 $watchProcess.WaitForExit()
