@@ -5,14 +5,14 @@ namespace Repository;
 public class HomeBrokerRepositoryTest
 {
     [Fact]
-    public void Should_Returns_HistoryData_GetHistoryData()
+    public async Task Should_Returns_HistoryData_GetHistoryData()
     {
         // Arrange
         var mockHomeBrokerRepository = new HomeBrokerRepository();
         var period = new Period(new DateTime(2023, 01,01), new DateTime(2024, 01, 01));
 
         // Act
-        var result = mockHomeBrokerRepository.GetHistoryData(period).Result;
+        var result = await mockHomeBrokerRepository.GetHistoryData(period);
 
         // Assert
         Assert.NotNull(result);
