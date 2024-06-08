@@ -2,7 +2,7 @@
 using Domain.Charts.Agreggates;
 using Domain.Charts.ValueObject;
 using HomeBrokerSPA.Controllers;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -124,7 +124,7 @@ public class ChartHomeBrokerControllerTest
         Assert.NotNull(result);
         Assert.IsType<BadRequestObjectResult>(result);
         var value = Assert.IsType<BadRequestObjectResult>(result).Value;
-        var message = value.GetType().GetProperty("message").GetValue(value, null) as string;
+        var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
         Assert.Equal("Get SMA Exeption", message);
     }
 
@@ -144,7 +144,7 @@ public class ChartHomeBrokerControllerTest
         Assert.NotNull(result);
         Assert.IsType<BadRequestObjectResult>(result);
         var value = Assert.IsType<BadRequestObjectResult>(result).Value;
-        var message = value.GetType().GetProperty("message").GetValue(value, null) as string;
+        var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
         Assert.Equal("Get EMA Exeption", message);
     }
 
@@ -164,7 +164,7 @@ public class ChartHomeBrokerControllerTest
         Assert.NotNull(result);
         Assert.IsType<BadRequestObjectResult>(result);
         var value = Assert.IsType<BadRequestObjectResult>(result).Value;
-        var message = value.GetType().GetProperty("message").GetValue(value, null) as string;
+        var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
         Assert.Equal("Get MACD Exeption", message);
     }
 }

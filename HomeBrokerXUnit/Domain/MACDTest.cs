@@ -1,5 +1,5 @@
 ﻿using Domain.Charts.ValueObject;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 
 namespace Domain;
 public class MACDTest

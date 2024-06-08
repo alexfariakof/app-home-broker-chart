@@ -25,9 +25,9 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
             var sma = new Sma(this.GetHistoryData(period).Select(price => price.Close).ToList());
             return sma;
         }
-        catch (Exception ex)
+        catch 
         {
-            throw ex;
+            throw new ArgumentException("Erro ao gerar SMA.");
         }
     }
     public Ema GetEMA(int periodDays, Period period)
@@ -37,9 +37,9 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
             var ema = new Ema(this.GetHistoryData(period).Select(price => price.Close).ToList(), periodDays);
             return ema;
         }
-        catch (Exception ex)
+        catch
         {
-            throw ex;
+            throw new ArgumentException("Erro ao gerar EMA.");
         }
     }
     public MACD GetMACD(Period period)
@@ -49,9 +49,9 @@ public class HomeBrokerBusiness : IHomeBrokerBusiness
             var macd = new MACD(this.GetHistoryData(period).Select(price => price.Close).ToList());
             return macd;
         }
-        catch (Exception ex)
+        catch 
         {
-            throw ex;
+            throw new ArgumentException("Erro ao gerar MACD.");
         }
     }
 }

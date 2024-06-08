@@ -1,5 +1,5 @@
 ﻿using Domain.Charts.Agreggates;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 
 namespace Domain;
 

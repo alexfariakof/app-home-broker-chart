@@ -6,7 +6,7 @@ services:
     image: alexfariakof/homebrokerspa-prod-img
     build:
       context: .
-      dockerfile: HomeBrokerSPA/Dockerfile-Production
+      dockerfile: HomeBrokerSPA/Dockerfile.Production
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:80;https://+:443
