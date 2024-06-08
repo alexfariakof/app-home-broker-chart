@@ -1,9 +1,6 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 as base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-RUN dotnet dev-certs https -ep ${HOME}/.aspnet/https/HomeBrokerSPA.pfx -p ${HOME}/.aspnet/https
-RUN dotnet dev-certs https --trust
+EXPOSE 3002
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
@@ -16,14 +13,15 @@ RUN apt-get update && \
     apt-get install -y nodejs
 RUN npm install -g npm@10.2.5 && \
     npm install -g @angular/core@17 @angular/cli@17
+
+RUN dotnet build --restore
 RUN dotnet publish -c Release -o /app/publish  /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
 WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+80;https://+443;
-ENV ASPNETCORE_HTTPS_PORT=443
+ENV ASPNETCORE_ENVIRONMENT=Staging
+ENV ASPNETCORE_URLS=http://+3002;
+ENV ASPNETCORE_HTTP_PORT=3002
 
-COPY --from=base /root ../root
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "HomeBrokerSPA.dll"]
+ENTRYPOINT ["dotnet", "HomeBroker.SPA.dll"]

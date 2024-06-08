@@ -32,9 +32,9 @@ builder.Services.AddSwaggerGen(c => {
 
 var app = builder.Build();
 
-if (app.Environment.IsStaging()) {
+if (app.Environment.IsStaging())
+{
     app.Urls.Add("http://0.0.0.0:3002");
-    app.Urls.Add("https://0.0.0.0:3003");
 }
 else if (app.Environment.IsEnvironment("Swagger"))
 {
@@ -42,9 +42,12 @@ else if (app.Environment.IsEnvironment("Swagger"))
     app.Urls.Add("https://127.0.0.1:5001");
 }
 else
+{
     app.UseHttpsRedirection();
+    app.UseHsts();
+    app.UseAuthorization();
+}
 
-app.UseHsts();
 app.UseSwagger();
 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json",  $"{appName} {appVersion}"); });
 
@@ -54,7 +57,7 @@ if (app.Environment.IsEnvironment("Swagger"))
     option.AddRedirect("^$", "swagger");
     app.UseRewriter(option);
 }
-app.UseAuthorization();
+
 app.MapControllers();
 app.UseDefaultFiles();
 app.UseStaticFiles();

@@ -1,2 +1,0 @@
-https://apexcharts.com/docs/installation/
-npm install apexcharts --save

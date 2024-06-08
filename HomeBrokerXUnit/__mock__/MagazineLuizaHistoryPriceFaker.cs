@@ -1,7 +1,7 @@
 ﻿using Domain.Charts.Agreggates;
 using Bogus;
 
-namespace HomeBrokerXUnit.Faker;
+namespace HomeBrokerXUnit.__mock__;
 
 /// <summary>
 /// Classe responsável por gerar dados falsos (fakes) para a entidade MagazineLuizaHistoryPrice.

@@ -37,14 +37,13 @@ function Remove-TestResults {
         Start-Sleep -Seconds 10        
         if ($REPEAT_WHILE -eq 6) { break }
         $REPEAT_WHILE = $REPEAT_WHILE + 1
-    }   
-
+    }    
  } 
 
 Stop-ProcessesByName
 Remove-TestResults
 dotnet clean slnPixCharge.sln > $null 2>&1
-$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
+$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "$projectTestPath/HomeBrokerXUnit.csproj", "--project ./HomeBrokerXUnit/HomeBrokerXUnit.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
  Wait-TestResults
  Invoke-Item $coverageXmlPath\index.html
 $watchProcess.WaitForExit()

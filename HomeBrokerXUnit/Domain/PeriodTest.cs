@@ -1,7 +1,7 @@
 ﻿using Domain.Charts.ValueObject;
 
 namespace Domain;
-public class PeriodTest
+public sealed class PeriodTest
 {
     [Fact]
     public void Should_Implicit_Conversion_From_Tuple_To_Period_With_Succeess()

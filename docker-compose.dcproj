@@ -11,28 +11,25 @@
     <DockerServiceName>homebrokerspa</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include=".dockerignore" />
+    <None Include="docker-compose.yml" />
+    <None Include="docker-compose.dev.yml" />
+    <None Include="docker-compose.prod.yml" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
-    <None Include="docker-compose.dev.yml" />
-    <None Include="docker-compose.prod.yml" />        
   </ItemGroup>
-
   <ItemGroup>
     <!-- Don't publish the SPA source files and dont1t show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)/**" />
   </ItemGroup>
-  
   <PropertyGroup>
     <Build>
       DebugEnsureNodeEnv;
       DebugEnsureDist;
     </Build>
   </PropertyGroup>
-
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
@@ -42,7 +39,6 @@
     <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
-
   <Target Name="DebugEnsureDist" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
     <!-- Ensure angular project compilation -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />

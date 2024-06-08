@@ -25,8 +25,15 @@ public class HomeBrokerRepository : IHomeBrokerRepository
     public async Task<List<MagazineLuizaHistoryPrice>> GetHistoryData(Period period)
     {
         var downloadLink = $"https://query1.finance.yahoo.com/v7/finance/download/MGLU3.SA?period1={ToUnixTimestamp(period.StartDate)}&period2={ToUnixTimestamp(period.EndDate)}&interval=1d&filter=history&frequency=1d";
-        string downloadContent = await DownloadContentAsync(downloadLink);
-        return ProcessCsvData(downloadContent);
+        try
+        {
+            string downloadContent = await DownloadContentAsync(downloadLink);
+            return ProcessCsvData(downloadContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     /// <summary>
@@ -40,17 +47,42 @@ public class HomeBrokerRepository : IHomeBrokerRepository
     }
 
     /// <summary>
-    /// Baixa o conteúdo de uma URL assíncronamente usando o cliente HttpClient.
+    /// Baixa o conteúdo de uma URL assincronamente usando o cliente HttpClient.
     /// </summary>
     /// <param name="url">A URL do qual o conteúdo será baixado.</param>
-    /// <returns>Uma tarefa representando a operação assíncrona, contendo o conteúdo baixado da URL.</returns>    
+    /// <returns>Uma tarefa representando a operação assíncrona, contendo o conteúdo baixado da URL.</returns>
     private static async Task<string> DownloadContentAsync(string url)
     {
-        using (var httpClient = new HttpClient())
+        using (var httpClientHandler = new HttpClientHandler())
         {
-            // Baixa o conteúdo da URL fornecida
-            string content = await httpClient.GetStringAsync(url);
-            return content;
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+            using (var httpClient = new HttpClient(httpClientHandler))
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("*/*"));
+                httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
+                httpClient.DefaultRequestHeaders.Connection.TryParseAdd("keep-alive");
+                httpClient.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue() { NoCache = true };
+                httpClient.DefaultRequestHeaders.Pragma.TryParseAdd("no-cache");
+                httpClient.DefaultRequestHeaders.Referrer = new Uri("https://query1.finance.yahoo.com/v7/finance/download/MGLU3.SA");
+
+                int retries = 3;
+                int delay = 1000;
+                while (retries > 0)
+                {
+                    try
+                    {
+                        string content = await httpClient.GetStringAsync(url);
+                        return content;
+                    }
+                    catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.TooManyRequests && retries > 0)
+                    {
+                        await Task.Delay(delay);
+                        delay *= 2;
+                        retries--;
+                    }
+                }
+                throw new Exception("Failed to download content after multiple retries.");
+            }
         }
     }
 

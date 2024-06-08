@@ -3,10 +3,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnableHotReload>true</EnableHotReload>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="30.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>  
+    <ProjectReference Include="..\Repository\HomeBroker.Repository.csproj" />
+  </ItemGroup>
 </Project>
