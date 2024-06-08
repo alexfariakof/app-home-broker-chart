@@ -1,8 +1,8 @@
 ﻿using Domain.Charts.ValueObject;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 
 namespace Domain;
-public class MACDTest
+public sealed class MACDTest
 {
     const int MIN_AMOUNT_DATA = 34;
 

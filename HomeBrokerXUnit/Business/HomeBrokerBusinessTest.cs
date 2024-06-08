@@ -1,10 +1,10 @@
 ﻿using Domain.Charts.ValueObject;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 using Repository.Interfaces;
 using Moq;
 
 namespace Business;
-public class HomeBrokerBusinessTest
+public sealed class HomeBrokerBusinessTest
 {
 
     [Fact]
@@ -100,7 +100,7 @@ public class HomeBrokerBusinessTest
         mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetSMA_WithException_ShouldThrowException"));
 
         // Act & Assert
-        Assert.Throws<Exception>(() => business.GetSMA(fakePeriod));
+        Assert.Throws<ArgumentException>(() => business.GetSMA(fakePeriod));
     }
 
     [Fact]
@@ -113,7 +113,7 @@ public class HomeBrokerBusinessTest
         mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetEMA_WithException_ShouldThrowException"));
 
         // Act & Assert
-        Assert.Throws<Exception >(() => business.GetEMA(10, fakePeriod));
+        Assert.Throws<ArgumentException >(() => business.GetEMA(10, fakePeriod));
     }
 
     [Fact]
@@ -126,6 +126,6 @@ public class HomeBrokerBusinessTest
         mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Throws(new Exception ("GetMACD_WithException_ShouldThrowException"));
 
         // Act & Assert
-        Assert.Throws<Exception >(() => business.GetMACD(fakePeriod));
+        Assert.Throws<ArgumentException>(() => business.GetMACD(fakePeriod));
     }
 }

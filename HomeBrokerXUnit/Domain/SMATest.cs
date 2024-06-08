@@ -1,6 +1,6 @@
 ﻿using Domain.Charts.ValueObject;
 namespace Domain;
-public class SMATest
+public sealed class SMATest
 {
     [Fact]
     public void Should_Calculates_SMA_Correctly()

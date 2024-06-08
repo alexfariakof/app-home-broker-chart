@@ -1,9 +1,9 @@
 ﻿using Domain.Charts.Agreggates;
-using HomeBrokerXUnit.Faker;
+using HomeBrokerXUnit.__mock__;
 
 namespace Domain;
 
-public class MagazineLuizaHistoryPriceTest
+public sealed class MagazineLuizaHistoryPriceTest
 {
     [Fact]
     public void Should_Create_Instance_MagazineLuizaHistoryPrice()
