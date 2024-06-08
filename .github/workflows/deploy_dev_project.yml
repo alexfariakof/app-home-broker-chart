@@ -2,11 +2,9 @@ name: Deploy Development App
 on:
   push:
     branches: 
-      - staging
- 
+      - staging 
 permissions:
     contents: read 
-
 jobs:
   trigger_build_and_test:
     name: Triggered Deploy Dev
