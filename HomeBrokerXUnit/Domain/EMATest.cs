@@ -1,6 +1,6 @@
 ﻿using Domain.Charts.ValueObject;
 namespace Domain;
-public class EMATest
+public sealed class EMATest
 {
     [Fact]
     public void Should_Calculates_EMA_Correctly()

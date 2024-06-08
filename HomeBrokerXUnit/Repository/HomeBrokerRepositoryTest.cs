@@ -2,7 +2,7 @@
 using Domain.Charts.ValueObject;
 
 namespace Repository;
-public class HomeBrokerRepositoryTest
+public sealed class HomeBrokerRepositoryTest
 {
     [Fact]
     public async Task Should_Returns_HistoryData_GetHistoryData()

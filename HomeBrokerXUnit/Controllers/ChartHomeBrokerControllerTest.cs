@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 
 namespace Controllers;
-public class ChartHomeBrokerControllerTest
+public sealed class ChartHomeBrokerControllerTest
 {
     [Fact]
     public void Should_Returns_List_MagazineLuizaHistoryPrice_Get()
