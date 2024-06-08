@@ -1,20 +1,17 @@
 name: Build and Test
 on:
   workflow_call:
-
   push:
     branches: 
       - main 
       - develop
  
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened]
     branches:       
       - main
-
 permissions:
     contents: read 
-
 jobs:
   build_and_test_net:
     name: Build and Test .Net App
@@ -37,13 +34,13 @@ jobs:
         dotnet-version: 8.0.x
     
     - name: Build and Restore App 
-      run: dotnet build  ./HomeBrokerSPA/HomeBrokerSPA.csproj --restore
+      run: dotnet build  ./HomeBrokerSPA/HomeBroker.SPA.csproj --restore
       continue-on-error: false
 
     - name: Test .Net App
       run: | 
           dotnet tool install -g dotnet-reportgenerator-globaltool 
-          dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
+          dotnet test ./HomeBrokerXUnit/HomeBroker.XUnit.csproj
       continue-on-error: false
 
 
@@ -79,5 +76,5 @@ jobs:
 #  trigger_tests_sonarcloud:
 #    needs: build_and_test_angular
 #    name: Triggered Build and Test
-#    uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
+#    uses: alexfariakof/app-home-broker-chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
 #    secrets: inherit
