@@ -19,16 +19,7 @@ public sealed class MagazineLuizaHistoryPriceTest
         var volume = faker.Volume;
 
         // Act
-        var historyPrice = new MagazineLuizaHistoryPrice
-        {
-            Date = date,
-            Open = open,
-            High = high,
-            Low = low,
-            Close = close,
-            AdjClose = adjClose,
-            Volume = volume
-        };
+        var historyPrice = new MagazineLuizaHistoryPrice(date, open, high, low, close, adjClose, volume);
 
         // Assert
         Assert.NotNull(historyPrice);

@@ -1,5 +1,7 @@
 using Business;
 using Business.Interfaces;
+using Domain.Charts.Agreggates.Factory;
+using HomeBroker.Domain.Charts.Agreggates.Factory;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.OpenApi.Models;
 using Repository;
@@ -12,8 +14,11 @@ var appDescription = $"API para gerar dados históricos da variação de preços da 
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
-builder.Services.AddScoped(typeof(IHomeBrokerBusiness), typeof(HomeBrokerBusiness));
+builder.Services.AddSingleton<IMagazineLuizaHistoryPriceFactory>(new MagazineLuizaHistoryPriceFactory());
 builder.Services.AddScoped(typeof(IHomeBrokerRepository), typeof(HomeBrokerRepository));
+builder.Services.AddSingleton<IHomeBrokerBusiness>(new HomeBrokerBusiness(
+    builder.Services.BuildServiceProvider().GetService<IMagazineLuizaHistoryPriceFactory>(),
+    builder.Services.BuildServiceProvider().GetService<IHomeBrokerRepository>()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc(appVersion,
@@ -58,7 +63,13 @@ if (app.Environment.IsEnvironment("Swagger"))
     app.UseRewriter(option);
 }
 
-app.MapControllers();
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("index.html");
+});
+
 app.Run();

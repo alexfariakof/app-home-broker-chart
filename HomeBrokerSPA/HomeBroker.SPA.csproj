@@ -45,7 +45,7 @@
   </Target>
 
 
-  <Target Name="DockerDebuggeeProgram" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
+  <Target Name="DockerDebuggeeProgram" BeforeTargets="Build" Condition=" '$(Configuration)' != 'Debug'">
     <!-- Ensure angular project compilation -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
   </Target>
