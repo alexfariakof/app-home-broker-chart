@@ -1,6 +1,7 @@
 using CsvHelper;
 using Domain.Charts.Agreggates;
 using Domain.Charts.ValueObject;
+using HomeBroker.Domain.Charts.Agreggates.Factory;
 using Repository.Interfaces;
 using System.Globalization;
 using System.Text;
@@ -12,10 +13,14 @@ namespace Repository;
 /// </summary>
 public class HomeBrokerRepository : IHomeBrokerRepository
 {
+    private readonly IMagazineLuizaHistoryPriceFactory _historyPriceFactory;
     /// <summary>
     /// Inicializa uma nova instância do repositório <see cref="HomeBrokerRepository"/>.
     /// </summary>
-    public HomeBrokerRepository() { }
+    public HomeBrokerRepository(IMagazineLuizaHistoryPriceFactory magazineLuizaHistoryPriceFactory) 
+    {
+        _historyPriceFactory = magazineLuizaHistoryPriceFactory;
+    }
 
     /// <summary>
     /// Obtém os dados históricos de preço do Magazine Luiza para o período especificado.
@@ -28,7 +33,8 @@ public class HomeBrokerRepository : IHomeBrokerRepository
         try
         {
             string downloadContent = await DownloadContentAsync(downloadLink);
-            return ProcessCsvData(downloadContent);
+            var processData = ProcessCsvData(downloadContent);
+            return processData.Select(price => _historyPriceFactory.GetHistoryPrice(price.Date, price.Open, price.High, price.Low, price.Close, price.AdjClose, price.Volume)).ToList();
         }
         catch (Exception ex)
         {

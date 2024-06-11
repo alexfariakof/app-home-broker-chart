@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <ProjectReference Include="..\Business\HomeBroker.Business.csproj" />
@@ -44,8 +45,7 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
 
-
-  <Target Name="DockerDebuggeeProgram" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug'">
+  <Target Name="DockerDebuggeeProgram" BeforeTargets="Build" Condition="'$(Configuration)' != 'Debug' And '$(Configuration)' != 'Staging'">
     <!-- Ensure angular project compilation -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
   </Target>

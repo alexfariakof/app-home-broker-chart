@@ -1,10 +1,12 @@
-
-<h2 class=" mx-2 m-0 fs-4">
-  <a href="https://br.financas.yahoo.com/quote/MGLU3.SA/history?interval=1d&filter=history&frequency=1d" target="_blank" rel="" >Magazine Luiza S.A. (MGLU3.SA)</a>
-</h2>
+<div class="input-group mt-0 d-flex flex-row ">
+  <h2 class=" mx-2 m-0 fs-4">
+    <a href="https://br.financas.yahoo.com/quote/MGLU3.SA/history?interval=1d&filter=history&frequency=1d" target="_blank" rel="">Magazine Luiza S.A. (MGLU3.SA)</a>
+  </h2>
+  <button (click)="downloadHistory()" class="btn btn-primary ">Download Excel</button>
+</div>
 <div class="table-content">
-  <table  class="table table-bordered table-sm table-responsive table-striped w-100" *ngIf="magazineLuizaHistoryPrices">
-    <thead >
+  <table class="table table-bordered table-sm table-responsive table-striped w-100" *ngIf="magazineLuizaHistoryPrices">
+    <thead>
       <tr class="table-dark">
         <th scope="col">Data</th>
         <th scope="col">Abertura</th>
@@ -15,39 +17,59 @@
         <th scope="col">Volume</th>
       </tr>
     </thead>
-    <tbody  >
+    <tbody>
       <tr class="d-table-row" *ngFor="let magazineLuizaHistoryPrice of magazineLuizaHistoryPrices">
         <td>{{ formatCustomDate(magazineLuizaHistoryPrice.date) }}</td>
-        <td>{{ magazineLuizaHistoryPrice.open.toLocaleString('pt-BR', {
+        <td>
+          {{
+ magazineLuizaHistoryPrice.open.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) }}</td>
-        <td>{{ magazineLuizaHistoryPrice.high.toLocaleString('pt-BR', {
+          maximumFractionDigits: 3
+        })
+          }}
+        </td>
+        <td>
+          {{
+ magazineLuizaHistoryPrice.high.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) }}</td>
-        <td>{{ magazineLuizaHistoryPrice.low.toLocaleString('pt-BR', {
+          maximumFractionDigits: 3
+        })
+          }}
+        </td>
+        <td>
+          {{
+ magazineLuizaHistoryPrice.low.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) }}</td>
-        <td>{{ magazineLuizaHistoryPrice.close.toLocaleString('pt-BR', {
+          maximumFractionDigits: 3
+        })
+          }}
+        </td>
+        <td>
+          {{
+ magazineLuizaHistoryPrice.close.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) }}</td>
-        <td>{{ magazineLuizaHistoryPrice.adjClose.toLocaleString('pt-BR', {
+          maximumFractionDigits: 3
+        })
+          }}
+        </td>
+        <td>
+          {{
+ magazineLuizaHistoryPrice.adjClose.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) }}</td>
+          maximumFractionDigits: 3
+        })
+          }}
+        </td>
         <td>{{ magazineLuizaHistoryPrice.volume.toLocaleString('pt-BR') }}</td>
       </tr>
     </tbody>

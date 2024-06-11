@@ -4,8 +4,10 @@ using Domain.Charts.ValueObject;
 namespace Business.Interfaces;
 public interface IHomeBrokerBusiness
 {
-    public List<MagazineLuizaHistoryPrice> GetHistoryData(Period period);
-    public Sma GetSMA(Period period);    
-    public Ema GetEMA(int periodDays, Period period);
-    public MACD GetMACD(Period period);
+    public Task<List<MagazineLuizaHistoryPrice>> GetHistoryData(Period period);
+    public Task<Sma> GetSMA(Period period);    
+    public Task<Ema> GetEMA(int periodDays, Period period);
+    public Task<MACD> GetMACD(Period period);
+    public Task<MemoryStream> GenerateExcelHistory(Period period);
+
 }

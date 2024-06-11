@@ -5,7 +5,7 @@ import { AcoesComponent } from './pages/acoes/acoes.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'acoes', component: AcoesComponent },
+  { path: 'acoes', component: AcoesComponent, pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

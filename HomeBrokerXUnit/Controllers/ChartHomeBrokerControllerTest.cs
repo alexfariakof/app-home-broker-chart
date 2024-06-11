@@ -15,11 +15,11 @@ public sealed class ChartHomeBrokerControllerTest
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
         var expectedData = MagazineLuizaHistoryPriceFaker.GetListFaker(150);
-        businessMock.Setup(business => business.GetHistoryData(It.IsAny<Period>())).Returns(expectedData);
+        businessMock.Setup(business => business.GetHistoryData(It.IsAny<Period>())).Returns(Task.FromResult(expectedData));
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.Get(DateTime.Now.AddYears(-1), DateTime.Now) as ObjectResult;
+        var result = controller.Get(DateTime.Now.AddYears(-1), DateTime.Now).Result as ObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -36,11 +36,11 @@ public sealed class ChartHomeBrokerControllerTest
         var businessMock = new Mock<IHomeBrokerBusiness>();
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
         var expectedSMA = new Sma(MagazineLuizaHistoryPriceFaker.GetListFaker(100).Select(price => price.Close).ToList(), 10);
-        businessMock.Setup(business => business.GetSMA(fakePeriod)).Returns(expectedSMA);
+        businessMock.Setup(business => business.GetSMA(fakePeriod)).Returns(Task.FromResult(expectedSMA));
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetSMA(fakePeriod.StartDate, fakePeriod.EndDate) as ObjectResult;
+        var result = controller.GetSMA(fakePeriod.StartDate, fakePeriod.EndDate).Result as ObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -50,17 +50,17 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Returns_EMA_GetEMA()
+    public async Task Should_Returns_EMA_GetEMA()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
         var expectedEMA = new Ema(MagazineLuizaHistoryPriceFaker.GetListFaker(200).Select(price => price.Close).ToList(), 10);
-        businessMock.Setup(business => business.GetEMA(It.IsAny<int>(), It.IsAny<Period>())).Returns(expectedEMA);
+        businessMock.Setup(business => business.GetEMA(It.IsAny<int>(), It.IsAny<Period>())).Returns(Task.FromResult(expectedEMA));
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetEMA(10, fakePeriod.StartDate, fakePeriod.EndDate) as OkObjectResult;
+        var result = await controller.GetEMA(10, fakePeriod.StartDate, fakePeriod.EndDate) as OkObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -70,17 +70,17 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Returns_MACD_GETMACD()
+    public async Task Should_Returns_MACD_GETMACD()
     {
         // Arrange
         var businessMock = new Mock<IHomeBrokerBusiness>();
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
         var expectedMACD = new MACD(MagazineLuizaHistoryPriceFaker.GetListFaker(200).Select(price => price.Close).ToList());
-        businessMock.Setup(business => business.GetMACD(It.IsAny<Period>())).Returns(expectedMACD);
+        businessMock.Setup(business => business.GetMACD(It.IsAny<Period>())).Returns(Task.FromResult(expectedMACD));
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetMACD(fakePeriod.StartDate, fakePeriod.EndDate) as OkObjectResult;
+        var result = await controller.GetMACD(fakePeriod.StartDate, fakePeriod.EndDate)  as OkObjectResult;
 
         // Assert
         Assert.NotNull(result);
@@ -92,7 +92,7 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Return_NoContentResult_Get()
+    public async Task Should_Return_NoContentResult_Get()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -101,7 +101,7 @@ public sealed class ChartHomeBrokerControllerTest
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.Get(fakePeriod.StartDate, fakePeriod.EndDate);
+        var result = await controller.Get(fakePeriod.StartDate, fakePeriod.EndDate);
 
         // Assert
         Assert.NotNull(result);
@@ -109,7 +109,7 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Return_BadRequest_GetSMA()
+    public async Task Should_Return_BadRequest_GetSMA()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -118,7 +118,7 @@ public sealed class ChartHomeBrokerControllerTest
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetSMA(fakePeriod.StartDate, fakePeriod.EndDate);
+        var result = await controller.GetSMA(fakePeriod.StartDate, fakePeriod.EndDate);
 
         // Assert
         Assert.NotNull(result);
@@ -129,7 +129,7 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Return_BadRequest_GetEMA()
+    public async Task Should_Return_BadRequest_GetEMA()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -138,7 +138,7 @@ public sealed class ChartHomeBrokerControllerTest
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetEMA(default, fakePeriod.StartDate, fakePeriod.EndDate);
+        var result = await controller.GetEMA(default, fakePeriod.StartDate, fakePeriod.EndDate);
 
         // Assert
         Assert.NotNull(result);
@@ -149,7 +149,7 @@ public sealed class ChartHomeBrokerControllerTest
     }
 
     [Fact]
-    public void Should_Return_BadRequest_GetMACD()
+    public async Task Should_Return_BadRequest_GetMACD()
     {
         // Arrange
         var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -158,7 +158,7 @@ public sealed class ChartHomeBrokerControllerTest
         var controller = new ChartHomeBrokerController(businessMock.Object);
 
         // Act
-        var result = controller.GetMACD(fakePeriod.StartDate, fakePeriod.EndDate);
+        var result = await controller.GetMACD(fakePeriod.StartDate, fakePeriod.EndDate);
 
         // Assert
         Assert.NotNull(result);
@@ -166,5 +166,55 @@ public sealed class ChartHomeBrokerControllerTest
         var value = Assert.IsType<BadRequestObjectResult>(result).Value;
         var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
         Assert.Equal("Get MACD Exeption", message);
+    }
+
+    [Fact]
+    public async Task Should_Returns_FileResult_DownloadHistory()
+    {
+        // Arrange
+        var businessMock = new Mock<IHomeBrokerBusiness>();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var expectedStream = new MemoryStream();
+        var expectedContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        var expectedFileName = $"History_{fakePeriod.StartDate:yyyyMMdd}_{fakePeriod.EndDate:yyyyMMdd}.xlsx";
+
+        businessMock.Setup(business => business.GenerateExcelHistory(It.IsAny<Period>())).Returns(Task.FromResult<MemoryStream>(expectedStream));
+
+        var controller = new ChartHomeBrokerController(businessMock.Object);
+
+        // Act
+        var result = await controller.DownloadHistory(fakePeriod.StartDate, fakePeriod.EndDate);
+
+        // Assert
+        Assert.NotNull(result);
+        var file =  Assert.IsType<FileStreamResult>(result);
+        Assert.Equal(expectedContentType, file.ContentType);
+        Assert.Equal(expectedFileName, file.FileDownloadName);
+        Assert.Equal(expectedStream, file.FileStream);
+    }
+
+    [Fact]
+    public async Task Should_Return_BadRequest_DownloadHistory()
+    {
+        // Arrange
+        var businessMock = new Mock<IHomeBrokerBusiness>();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var expectedExceptionMessage = "Generate Excel History Exception";
+
+        businessMock.Setup(business => business.GenerateExcelHistory(It.IsAny<Period>()))
+                    .Throws(new Exception(expectedExceptionMessage));
+
+        var controller = new ChartHomeBrokerController(businessMock.Object);
+
+        // Act
+        var result = await controller.DownloadHistory(fakePeriod.StartDate, fakePeriod.EndDate);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestObjectResult>(result);
+
+        var value = Assert.IsType<BadRequestObjectResult>(result).Value;
+        var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
+        Assert.Equal(expectedExceptionMessage, message);
     }
 }

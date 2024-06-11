@@ -41,4 +41,17 @@ public class MagazineLuizaHistoryPrice
     /// Obtém ou define o volume de negociação na data registrada.
     /// </summary>
     public long Volume { get; set; }
+
+    public MagazineLuizaHistoryPrice() { }
+
+    public MagazineLuizaHistoryPrice(DateTime date, decimal open, decimal high, decimal low, decimal close, double adjClose, long volume)
+    {
+        Date = date;
+        Open = open;
+        High = high;
+        Low = low;
+        Close = close;
+        AdjClose = adjClose;
+        Volume = volume;
+    }
 }
