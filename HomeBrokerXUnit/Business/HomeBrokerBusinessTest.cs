@@ -4,6 +4,9 @@ using Repository.Interfaces;
 using Moq;
 using Domain.Charts.Agreggates.Factory;
 using Repository;
+using OfficeOpenXml;
+using Domain.Charts.Agreggates;
+using HomeBroker.Business.Cache;
 
 namespace Business;
 public sealed class HomeBrokerBusinessTest
@@ -159,4 +162,130 @@ public sealed class HomeBrokerBusinessTest
         // Act & Assert
         Assert.Throws<AggregateException>(() => business.GetMACD(fakePeriod).Result);
     }
+
+    [Fact]
+    public async Task Should_Generate_Excel_History()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var mockFactory = new MagazineLuizaHistoryPriceFactory();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var fakeHistoryData = MagazineLuizaHistoryPriceFaker.GetListFaker(10);
+
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Returns(Task.FromResult(fakeHistoryData));
+        var business = new HomeBrokerBusiness(mockFactory, mockRepository.Object);
+
+        // Act
+        var result = await business.GenerateExcelHistory(fakePeriod);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<MemoryStream>(result);
+
+        result.Position = 0;
+        using (var package = new ExcelPackage(result))
+        {
+            var worksheet = package.Workbook.Worksheets["Histórico"];
+            Assert.NotNull(worksheet);
+
+            // Verifica cabeçalhos
+            Assert.Equal("Data", worksheet.Cells["A1"].Value);
+            Assert.Equal("Preço de Abertura", worksheet.Cells["B1"].Value);
+            Assert.Equal("Preço Mais Alto", worksheet.Cells["C1"].Value);
+            Assert.Equal("Preço Mais Baixo", worksheet.Cells["D1"].Value);
+            Assert.Equal("Preço de Fechamento", worksheet.Cells["E1"].Value);
+            Assert.Equal("Preço de Fechamento Ajustado", worksheet.Cells["F1"].Value);
+            Assert.Equal("Volume", worksheet.Cells["G1"].Value);
+
+            // Verifica dados
+            for (int i = 0; i < fakeHistoryData.Count; i++)
+            {
+                var item = fakeHistoryData[i];
+                Assert.Equal(item.Date.ToShortDateString(), worksheet.Cells[i + 2, 1].GetValue<DateTime>().ToShortDateString());
+                Assert.Equal(item.Open, worksheet.Cells[i + 2, 2].GetValue<decimal>());
+                Assert.Equal(item.High, worksheet.Cells[i + 2, 3].GetValue<decimal>());
+                Assert.Equal(item.Low, worksheet.Cells[i + 2, 4].GetValue<decimal>());
+                Assert.Equal(item.Close, worksheet.Cells[i + 2, 5].GetValue<decimal>());
+                Assert.Equal(item.AdjClose, worksheet.Cells[i + 2, 6].GetValue<double>());
+                Assert.Equal(item.Volume, worksheet.Cells[i + 2, 7].GetValue<long>());
+            }
+        }
+    }
+
+    [Fact]
+    public async Task Should_Returns_HistoryData_FromCache()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var mockFactory = new MagazineLuizaHistoryPriceFactory();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var fakeHistoryData = MagazineLuizaHistoryPriceFaker.GetListFaker(10);
+        var cacheEntry = new CacheEntry<List<MagazineLuizaHistoryPrice>>(fakeHistoryData, DateTime.UtcNow, TimeSpan.FromMinutes(20));
+
+        var business = new HomeBrokerBusiness(mockFactory, mockRepository.Object);
+        business.GetType().GetField("_historyCache", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(business, new Dictionary<Period, CacheEntry<List<MagazineLuizaHistoryPrice>>> { { fakePeriod, cacheEntry } });
+
+        // Act
+        var result = await business.GetHistoryData(fakePeriod);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(fakeHistoryData.Count, result.Count);
+        Assert.Equivalent(fakeHistoryData, result);
+    }
+
+    [Fact]
+    public async Task Should_Returns_HistoryData_FromRepository_And_UpdateCache()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var mockFactory = new MagazineLuizaHistoryPriceFactory();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var fakeHistoryData = MagazineLuizaHistoryPriceFaker.GetListFaker(10);
+
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Returns(Task.FromResult(fakeHistoryData));
+        var business = new HomeBrokerBusiness(mockFactory, mockRepository.Object);
+
+        // Act
+        var result = await business.GetHistoryData(fakePeriod);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(fakeHistoryData.Count, result.Count);
+        Assert.Equivalent(fakeHistoryData, result);
+
+        // Verify cache update
+        var cache = business?.GetType()?.GetField("_historyCache", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.GetValue(business) as Dictionary<Period, CacheEntry<List<MagazineLuizaHistoryPrice>>>;
+        Assert.True(cache?.ContainsKey(fakePeriod));
+        Assert.Equivalent(fakeHistoryData, cache[fakePeriod].Data);
+    }
+
+    [Fact]
+    public async Task Should_Returns_HistoryData_FromRepository_After_CacheExpiry()
+    {
+        // Arrange
+        var mockRepository = new Mock<IHomeBrokerRepository>();
+        var mockFactory = new MagazineLuizaHistoryPriceFactory();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var fakeHistoryData = MagazineLuizaHistoryPriceFaker.GetListFaker(10);
+        var expiredCacheEntry = new CacheEntry<List<MagazineLuizaHistoryPrice>>(fakeHistoryData, DateTime.UtcNow.AddMinutes(-30), TimeSpan.FromMinutes(20));
+
+        var business = new HomeBrokerBusiness(mockFactory, mockRepository.Object);
+        business?.GetType()?.GetField("_historyCache", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(business, new Dictionary<Period, CacheEntry<List<MagazineLuizaHistoryPrice>>> { { fakePeriod, expiredCacheEntry } });
+        mockRepository.Setup(repo => repo.GetHistoryData(It.IsAny<Period>())).Returns(Task.FromResult(fakeHistoryData));
+
+        // Act
+        var result = await business.GetHistoryData(fakePeriod);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(fakeHistoryData.Count, result.Count);
+        Assert.Equivalent(fakeHistoryData, result);
+
+        // Verify cache update
+        var cache = business?.GetType()?.GetField("_historyCache", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.GetValue(business) as Dictionary<Period, CacheEntry<List<MagazineLuizaHistoryPrice>>>;
+        Assert.True(cache?.ContainsKey(fakePeriod));
+        Assert.Equivalent(fakeHistoryData, cache[fakePeriod].Data);
+    }
+
 }

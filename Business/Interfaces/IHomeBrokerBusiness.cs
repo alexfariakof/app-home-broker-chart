@@ -8,4 +8,6 @@ public interface IHomeBrokerBusiness
     public Task<Sma> GetSMA(Period period);    
     public Task<Ema> GetEMA(int periodDays, Period period);
     public Task<MACD> GetMACD(Period period);
+    public Task<MemoryStream> GenerateExcelHistory(Period period);
+
 }

@@ -41,7 +41,7 @@ public class ChartHomeBrokerController : ControllerBase
             var result = await _homeBrokerBusiness.GetHistoryData(period);
             return Ok(result);
         }
-        catch 
+        catch
         {
             return NoContent();
         }
@@ -106,10 +106,37 @@ public class ChartHomeBrokerController : ControllerBase
     public async Task<IActionResult> GetMACD([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
     {
         try
-        {            
+        {
             var period = new Period(StartDate, EndDate);
             var result = await _homeBrokerBusiness.GetMACD(period);
             return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+    
+    /// <summary>
+    /// Gera e baixa um arquivo Excel com dados históricos de preço para o período especificado.
+    /// </summary>
+    /// <param name="StartDate">A data de início do período.</param>
+    /// <param name="EndDate">A data de término do período.</param>
+    /// <returns>O arquivo Excel com os dados históricos de preço.</returns>
+    [HttpGet("DownloadHistory/{StartDate}/{EndDate}")]
+    [ProducesResponseType(200, Type = typeof(FileResult))]
+    [ProducesResponseType(400, Type = typeof(object))]
+    public async Task<IActionResult> DownloadHistory([FromRoute] DateTime StartDate, [FromRoute] DateTime EndDate)
+    {
+        try
+        {
+            var period = new Period(StartDate, EndDate);
+            var stream = await _homeBrokerBusiness.GenerateExcelHistory(period);
+
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = $"History_{StartDate:yyyyMMdd}_{EndDate:yyyyMMdd}.xlsx";
+
+            return File(stream, contentType, fileName);
         }
         catch (Exception ex)
         {

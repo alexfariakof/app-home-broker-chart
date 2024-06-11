@@ -167,4 +167,54 @@ public sealed class ChartHomeBrokerControllerTest
         var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
         Assert.Equal("Get MACD Exeption", message);
     }
+
+    [Fact]
+    public async Task Should_Returns_FileResult_DownloadHistory()
+    {
+        // Arrange
+        var businessMock = new Mock<IHomeBrokerBusiness>();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var expectedStream = new MemoryStream();
+        var expectedContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        var expectedFileName = $"History_{fakePeriod.StartDate:yyyyMMdd}_{fakePeriod.EndDate:yyyyMMdd}.xlsx";
+
+        businessMock.Setup(business => business.GenerateExcelHistory(It.IsAny<Period>())).Returns(Task.FromResult<MemoryStream>(expectedStream));
+
+        var controller = new ChartHomeBrokerController(businessMock.Object);
+
+        // Act
+        var result = await controller.DownloadHistory(fakePeriod.StartDate, fakePeriod.EndDate);
+
+        // Assert
+        Assert.NotNull(result);
+        var file =  Assert.IsType<FileStreamResult>(result);
+        Assert.Equal(expectedContentType, file.ContentType);
+        Assert.Equal(expectedFileName, file.FileDownloadName);
+        Assert.Equal(expectedStream, file.FileStream);
+    }
+
+    [Fact]
+    public async Task Should_Return_BadRequest_DownloadHistory()
+    {
+        // Arrange
+        var businessMock = new Mock<IHomeBrokerBusiness>();
+        var fakePeriod = new Period(DateTime.Now.AddYears(-1), DateTime.Now);
+        var expectedExceptionMessage = "Generate Excel History Exception";
+
+        businessMock.Setup(business => business.GenerateExcelHistory(It.IsAny<Period>()))
+                    .Throws(new Exception(expectedExceptionMessage));
+
+        var controller = new ChartHomeBrokerController(businessMock.Object);
+
+        // Act
+        var result = await controller.DownloadHistory(fakePeriod.StartDate, fakePeriod.EndDate);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.IsType<BadRequestObjectResult>(result);
+
+        var value = Assert.IsType<BadRequestObjectResult>(result).Value;
+        var message = value?.GetType()?.GetProperty("message")?.GetValue(value, null) as string;
+        Assert.Equal(expectedExceptionMessage, message);
+    }
 }

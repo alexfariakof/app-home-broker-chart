@@ -19,6 +19,22 @@ export class AcoesComponent {
       this.magazineLuizaHistoryPrices = await this.chartService.get(this.obsStartDate.startDate, this.obsEndDate.endDate);
   }
 
+  downloadHistory = async () => {
+    try {
+      const blob = await this.chartService.downloadHistory(this.obsStartDate.startDate.toString(), this.obsEndDate.endDate.toString());
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `historico_${this.obsStartDate.startDate.toString()}_${this.obsEndDate.endDate.toString()}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+    catch (error) {
+      console.error('Erro ao fazer o download do arquivo Excel:', error);
+    }
+  }
+
   formatCustomDate(date: any): string {
     return dayjs(date).locale('pt-Br').format('DD/MM/YYYY');
   }

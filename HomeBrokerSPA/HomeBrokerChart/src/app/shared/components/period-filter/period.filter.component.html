@@ -1,45 +1,40 @@
-<form class="d-flex flex-row-reverse  justify-content-around" [formGroup]="periodForm" (ngSubmit)="onUpdateClick()" no-validate >
+<form class="d-flex flex-row-reverse  justify-content-around" [formGroup]="periodForm" (ngSubmit)="onUpdateClick()" no-validate>
   <div class="input-group mt-0 d-flex flex-column align-items-center justify-content-center">
-    <button type="submit"class="btn btn-primary " >Atualizar</button>
+    <button type="submit" class="btn btn-primary ">Atualizar</button>
   </div>
   <mdb-form-control class="h-25 p-0 mx-2 ">
     <label class="form-label" for="filterEnd" class=" m-0 p-0 px-2">Data Final</label>
-    <input
-      autofocus
-      id="filterEnd"
-      name="filterEnd"
-      type="date"
-      min="2011"
-      mask="DD/MM/YYYY"
-      class="form-control m-0 p-2 pt-0"
-      formControlName="filterEnd"
-      [ngClass]="{
+    <input autofocus
+           id="filterEnd"
+           name="filterEnd"
+           type="date"
+           min="2011"
+           mask="DD/MM/YYYY"
+           class="form-control m-0 p-2 pt-0"
+           formControlName="filterEnd"
+           [ngClass]="{
         'is-invalid': periodForm.errors,
         '': !periodForm.errors
       }"
-      mdbValidate
-      mdbInput
-
-    />
+           mdbValidate
+           mdbInput />
   </mdb-form-control>
-  <mdb-form-control class="h-25 p-0 m-0 " >
+  <mdb-form-control class="h-25 p-0 m-0 ">
     <label class="form-label" for="filterStart" class=" m-0 p-0 px-2">Data Inicial</label>
-    <input
-      autofocus
-      id="filterStart"
-      name="filterStart"
-      formControlName="filterStart"
-      type="date"
-      min="2011"
-      mask="DD/MM/YYYY"
-      class="form-control m-0 p-2 pt-0"
-      [ngClass]="{
+    <input autofocus
+           id="filterStart"
+           name="filterStart"
+           formControlName="filterStart"
+           type="date"
+           min="2011"
+           mask="DD/MM/YYYY"
+           class="form-control m-0 p-2 pt-0"
+           [ngClass]="{
         'is-invalid': periodForm.errors,
         '': !periodForm.errors
       }"
-      mdbValidate
-      mdbInput
-    />
+           mdbValidate
+           mdbInput />
   </mdb-form-control>
 </form>
 <span class="text-danger position-relative top-0 start-0">

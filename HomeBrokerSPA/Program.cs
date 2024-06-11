@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.OpenApi.Models;
 using Repository;
 using Repository.Interfaces;
+using OfficeOpenXml;
+
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var builder = WebApplication.CreateBuilder(args);
 var appName = "Home Broker Chart API";

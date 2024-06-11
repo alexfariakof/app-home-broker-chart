@@ -6,6 +6,9 @@
     <EnableHotReload>true</EnableHotReload>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.1.3" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Repository\HomeBroker.Repository.csproj" />
   </ItemGroup>
 </Project>

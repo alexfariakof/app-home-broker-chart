@@ -37,4 +37,10 @@ export class ChartService {
     const result = await lastValueFrom(getMACD$);
     return result;
   }
+
+  async downloadHistory(startDate: Dayjs | string, endDate: Dayjs | string): Promise<Blob> {
+    const downloadHistory$ = this.http.get(`${this.routeUrl}/DownloadHistory/${startDate}/${endDate}`, { responseType: 'blob' });
+    const result = await lastValueFrom(downloadHistory$);
+    return result;
+  }
 }
