@@ -1,4 +1,5 @@
 # Home Broker Chart
+O projeto tem apenas um propósito didático, sem qualquer intenção de obtenção financeira. Comprometemo-nos a respeitar sempre as leis brasileiras e o trabalho alheio.
 
 ## Descrição 
 
@@ -18,7 +19,6 @@ O MCAD é um indicador de momentum que compara duas médias móveis de um ativo.
 
 
 ## Cloud Application in Development 
-> Este projeto pode ser acessado em  [Home Broker Chart Development](http://alexfariakof.com:3002/)
 ![image](https://github.com/alexfariakof/Home_Broker_Chart/assets/42475620/4c98b5ca-7628-4c27-b32e-556897a05c1d)
 
 ## Local Development
