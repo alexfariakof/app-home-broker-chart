@@ -6,6 +6,12 @@
 public record Period
 {
     private readonly DateTime MINIMUM_DATE = new DateTime(2011, 5, 2);
+
+    /// <summary>
+    /// Método Privado que inicializa uma nova instância da classe <see cref="Period"/>.
+    /// </summary>
+    private Period() { }
+
     /// <summary>
     /// Converte implicitamente um valor de tupla (Data de início, Data de término) para um objeto Periodo.
     /// </summary>
@@ -25,11 +31,6 @@ public record Period
     /// Obtém a quantidade de dias no período.
     /// </summary>
     public int Days => (int)(EndDate - StartDate).TotalDays;
-
-    /// <summary>
-    /// Método Privado que inicializa uma nova instância da classe <see cref="Period"/>.
-    /// </summary>
-    private Period() { }
 
     /// <summary>
     /// Inicializa uma nova instância da classe <see cref="Period"/>.
@@ -55,5 +56,4 @@ public record Period
         StartDate = startDate;
         EndDate = endDate;
     }
-
 }
