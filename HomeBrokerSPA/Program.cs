@@ -19,9 +19,11 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IMagazineLuizaHistoryPriceFactory>(new MagazineLuizaHistoryPriceFactory());
 builder.Services.AddScoped(typeof(IHomeBrokerRepository), typeof(HomeBrokerRepository));
+
 builder.Services.AddSingleton<IHomeBrokerBusiness>(new HomeBrokerBusiness(
-    builder.Services.BuildServiceProvider().GetService<IMagazineLuizaHistoryPriceFactory>(),
-    builder.Services.BuildServiceProvider().GetService<IHomeBrokerRepository>()));
+    builder?.Services?.BuildServiceProvider().GetService<IMagazineLuizaHistoryPriceFactory>() ?? throw new(),
+    builder?.Services?.BuildServiceProvider().GetService<IHomeBrokerRepository>() ?? throw new()));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc(appVersion,
@@ -40,20 +42,10 @@ builder.Services.AddSwaggerGen(c => {
 
 var app = builder.Build();
 
-if (app.Environment.IsStaging())
-{
-    app.Urls.Add("http://0.0.0.0:3002");
-}
-else if (app.Environment.IsEnvironment("Swagger"))
+if (app.Environment.IsEnvironment("Swagger"))
 {
     app.Urls.Add("http://127.0.0.1:5000");
     app.Urls.Add("https://127.0.0.1:5001");
-}
-else
-{
-    app.UseHttpsRedirection();
-    app.UseHsts();
-    app.UseAuthorization();
 }
 
 app.UseSwagger();
@@ -69,10 +61,16 @@ if (app.Environment.IsEnvironment("Swagger"))
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseRouting();
+
+//app.UseHttpsRedirection();
+app.UseHsts();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers();
-    endpoints.MapFallbackToFile("index.html");
+    endpoints?.MapControllers();
+    endpoints?.MapFallbackToFile("index.html");
 });
 
 app.Run();
