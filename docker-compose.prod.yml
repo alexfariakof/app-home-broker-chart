@@ -9,9 +9,8 @@ services:
       dockerfile: HomeBrokerSPA/Dockerfile.Production
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: http://+:80;https://+:443
+      ASPNETCORE_URLS: http://+3002;https://+3003;
     ports:
-       - 80:80
-       - 443:443
-
+       - 3002:3002      
+       - 3003:3003
 

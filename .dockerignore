@@ -23,6 +23,12 @@
 LICENSE
 README.md
 ./HomeBrokerXUnit
+**/HomeBrokerXUnit
 **/.angular
 ./.documents
 ./.github
+**/TestResults
+**/*.ps1
+**/*.sh
+**/coverage
+**/dist

@@ -396,3 +396,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+**.angular
+**/.vscode
+**/coverage
+**/dist
+*.pem
+*.csr
+*gencert.sh

@@ -18,18 +18,13 @@
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <!-- Don't publish the SPA source files and dont1t show them in the project files list -->
-    <Content Remove="$(SpaRoot)**" />
-    <None Remove="$(SpaRoot)**" />
-    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)/**" />
-  </ItemGroup>
-  <PropertyGroup>
+  <<PropertyGroup>
     <Build>
       DebugEnsureNodeEnv;
-      DebugEnsureDist;
+      DockerDebuggeeProgram;
     </Build>
   </PropertyGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
@@ -39,7 +34,8 @@
     <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
-  <Target Name="DebugEnsureDist" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
+
+  <Target Name="DockerDebuggeeProgram" BeforeTargets="Build" Condition="'$(Configuration)' != 'Debug' And '$(Configuration)' != 'Staging'">
     <!-- Ensure angular project compilation -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
   </Target>
