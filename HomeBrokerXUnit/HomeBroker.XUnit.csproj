@@ -7,7 +7,7 @@
     <IsTestProject>true</IsTestProject>
     <Watch>true</Watch>
   </PropertyGroup>
- 
+
   <ItemGroup>
     <ProjectReference Include="..\Business\HomeBroker.Business.csproj" />
     <ProjectReference Include="..\Domain\HomeBroker.Domain.csproj" />
@@ -30,7 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  
+
   <PropertyGroup>
     <TestDependsOn>
       AfterTest;
@@ -39,9 +39,9 @@
 
   <Target Name="Test" AfterTargets="Build;Rebuild" DependsOnTargets="$(TestDependsOn)" />
   <Target Name="AfterTest">
-    <!-- Check if OS is Windows -->
+    <!-- Check if OS is Windows 
     <Exec Condition=" '$(Configuration)' == 'Debug' And '$(OS)' == 'Windows_NT'" Command="powershell -File ./coverage_report.ps1" />
-    <!-- Check if OS is Linux 
+     Check if OS is Linux 
     <Exec Condition="'$(OS)' != 'Windows_NT'" Command="bash ./coverage_report.sh" /> 
     -->
   </Target>

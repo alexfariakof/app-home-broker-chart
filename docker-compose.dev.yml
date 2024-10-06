@@ -7,7 +7,8 @@ services:
       context: .
       dockerfile: HomeBrokerSPA/Dockerfile.Development
     environment:
-      ASPNETCORE_ENVIRONMENT: Staging
-      ASPNETCORE_URLS: http://+3002;
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+3002;https://+3003;
     ports:
        - 3002:3002      
+       - 3003:3003

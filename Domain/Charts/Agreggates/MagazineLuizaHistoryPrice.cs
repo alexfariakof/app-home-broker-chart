@@ -1,6 +1,7 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
 namespace Domain.Charts.Agreggates;
+
 /// <summary>
 /// Representa os dados históricos de preço para a Magazine Luiza.
 /// </summary>
