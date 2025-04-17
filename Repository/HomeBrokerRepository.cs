@@ -44,7 +44,7 @@ public class HomeBrokerRepository : IHomeBrokerRepository
                 httpClient.DefaultRequestHeaders.Connection.TryParseAdd("keep-alive");
                 httpClient.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue() { NoCache = true };
                 httpClient.DefaultRequestHeaders.Pragma.TryParseAdd("no-cache");
-                httpClient.DefaultRequestHeaders.Referrer = new Uri("https://br.financas.yahoo.com/quote/MGLU3.SA");
+                httpClient.DefaultRequestHeaders.Referrer = new Uri("https://finance.yahoo.com/quote/MGLU3.SA/");
 
                 int retries = 3;
                 int delay = 1000;
@@ -117,11 +117,11 @@ public class HomeBrokerRepository : IHomeBrokerRepository
             if (cells != null && cells.Count == 7)
             {
                 var date = DateTime.Parse(cells[0].InnerText.Trim(), new CultureInfo("pt-BR"));
-                var open = decimal.Parse(cells[1].InnerText.Trim(), CultureInfo.InvariantCulture);
-                var high = decimal.Parse(cells[2].InnerText.Trim(), CultureInfo.InvariantCulture);
-                var low = decimal.Parse(cells[3].InnerText.Trim(), CultureInfo.InvariantCulture);
-                var close = decimal.Parse(cells[4].InnerText.Trim(), CultureInfo.InvariantCulture);
-                var adjClose = double.Parse(cells[5].InnerText.Trim(), CultureInfo.InvariantCulture);
+                var open = decimal.Parse(cells[1].InnerText.Trim(), new CultureInfo("pt-BR"));
+                var high = decimal.Parse(cells[2].InnerText.Trim(), new CultureInfo("pt-BR"));
+                var low = decimal.Parse(cells[3].InnerText.Trim(), new CultureInfo("pt-BR"));
+                var close = decimal.Parse(cells[4].InnerText.Trim(), new CultureInfo("pt-BR"));
+                var adjClose = double.Parse(cells[5].InnerText.Trim(), new CultureInfo("pt-BR"));
                 long.TryParse(cells[6].InnerText.Trim().Replace(".", string.Empty), CultureInfo.InvariantCulture, out var volume);
 
                 prices.Add(new MagazineLuizaHistoryPrice(date, open, high, low, close, adjClose, volume));
